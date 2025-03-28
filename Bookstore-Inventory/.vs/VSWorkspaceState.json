@@ -4,6 +4,6 @@
     "\\Bookstore.Domain",
     "\\Bookstore.Domain\\Entities"
   ],
-  "SelectedNode": "\\Bookstore-Inventory.sln",
+  "SelectedNode": "\\Bookstore.Domain\\Entities\\Book.cs",
   "PreviewInSolutionExplorer": false
 }
