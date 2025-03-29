@@ -3,68 +3,76 @@
   "WorkspaceRootPath": "E:\\SOA_KienTrucPM\\DOAN\\backend\\Bookstore-Inventory\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|E:\\SOA_KienTrucPM\\DOAN\\backend\\Bookstore-Inventory\\Bookstore.Domain\\Entities\\WarehouseImport.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Bookstore.Domain\\Entities\\WarehouseImport.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{E7876633-0EBB-4AA4-BE2B-E84BE54D5B6C}|Bookstore.Domain\\Bookstore.Domain.csproj|e:\\soa_kientrucpm\\doan\\backend\\bookstore-inventory\\bookstore.domain\\entities\\staff.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E7876633-0EBB-4AA4-BE2B-E84BE54D5B6C}|Bookstore.Domain\\Bookstore.Domain.csproj|solutionrelative:bookstore.domain\\entities\\staff.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|E:\\SOA_KienTrucPM\\DOAN\\backend\\Bookstore-Inventory\\Bookstore.Domain\\Entities\\WarehouseExport.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Bookstore.Domain\\Entities\\WarehouseExport.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{E7876633-0EBB-4AA4-BE2B-E84BE54D5B6C}|Bookstore.Domain\\Bookstore.Domain.csproj|e:\\soa_kientrucpm\\doan\\backend\\bookstore-inventory\\bookstore.domain\\entities\\warehouseimportbook.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E7876633-0EBB-4AA4-BE2B-E84BE54D5B6C}|Bookstore.Domain\\Bookstore.Domain.csproj|solutionrelative:bookstore.domain\\entities\\warehouseimportbook.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|E:\\SOA_KienTrucPM\\DOAN\\backend\\Bookstore-Inventory\\Bookstore.Domain\\Entities\\UserRole.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Bookstore.Domain\\Entities\\UserRole.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{E7876633-0EBB-4AA4-BE2B-E84BE54D5B6C}|Bookstore.Domain\\Bookstore.Domain.csproj|e:\\soa_kientrucpm\\doan\\backend\\bookstore-inventory\\bookstore.domain\\entities\\warehouseexportbook.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E7876633-0EBB-4AA4-BE2B-E84BE54D5B6C}|Bookstore.Domain\\Bookstore.Domain.csproj|solutionrelative:bookstore.domain\\entities\\warehouseexportbook.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|E:\\SOA_KienTrucPM\\DOAN\\backend\\Bookstore-Inventory\\Bookstore.Domain\\Entities\\User.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Bookstore.Domain\\Entities\\User.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{E7876633-0EBB-4AA4-BE2B-E84BE54D5B6C}|Bookstore.Domain\\Bookstore.Domain.csproj|e:\\soa_kientrucpm\\doan\\backend\\bookstore-inventory\\bookstore.domain\\entities\\userrole.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E7876633-0EBB-4AA4-BE2B-E84BE54D5B6C}|Bookstore.Domain\\Bookstore.Domain.csproj|solutionrelative:bookstore.domain\\entities\\userrole.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|E:\\SOA_KienTrucPM\\DOAN\\backend\\Bookstore-Inventory\\Bookstore.Domain\\Entities\\Staff.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Bookstore.Domain\\Entities\\Staff.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{E7876633-0EBB-4AA4-BE2B-E84BE54D5B6C}|Bookstore.Domain\\Bookstore.Domain.csproj|e:\\soa_kientrucpm\\doan\\backend\\bookstore-inventory\\bookstore.domain\\entities\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E7876633-0EBB-4AA4-BE2B-E84BE54D5B6C}|Bookstore.Domain\\Bookstore.Domain.csproj|solutionrelative:bookstore.domain\\entities\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|E:\\SOA_KienTrucPM\\DOAN\\backend\\Bookstore-Inventory\\Bookstore.Domain\\Entities\\Category.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Bookstore.Domain\\Entities\\Category.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{E7876633-0EBB-4AA4-BE2B-E84BE54D5B6C}|Bookstore.Domain\\Bookstore.Domain.csproj|e:\\soa_kientrucpm\\doan\\backend\\bookstore-inventory\\bookstore.domain\\entities\\category.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E7876633-0EBB-4AA4-BE2B-E84BE54D5B6C}|Bookstore.Domain\\Bookstore.Domain.csproj|solutionrelative:bookstore.domain\\entities\\category.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|E:\\SOA_KienTrucPM\\DOAN\\backend\\Bookstore-Inventory\\Bookstore.Domain\\Entities\\Book.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Bookstore.Domain\\Entities\\Book.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{E7876633-0EBB-4AA4-BE2B-E84BE54D5B6C}|Bookstore.Domain\\Bookstore.Domain.csproj|e:\\soa_kientrucpm\\doan\\backend\\bookstore-inventory\\bookstore.domain\\entities\\book.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E7876633-0EBB-4AA4-BE2B-E84BE54D5B6C}|Bookstore.Domain\\Bookstore.Domain.csproj|solutionrelative:bookstore.domain\\entities\\book.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|E:\\SOA_KienTrucPM\\DOAN\\backend\\Bookstore-Inventory\\Bookstore.Domain\\Entities\\Admin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Bookstore.Domain\\Entities\\Admin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{E7876633-0EBB-4AA4-BE2B-E84BE54D5B6C}|Bookstore.Domain\\Bookstore.Domain.csproj|e:\\soa_kientrucpm\\doan\\backend\\bookstore-inventory\\bookstore.domain\\entities\\admin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E7876633-0EBB-4AA4-BE2B-E84BE54D5B6C}|Bookstore.Domain\\Bookstore.Domain.csproj|solutionrelative:bookstore.domain\\entities\\admin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|E:\\SOA_KienTrucPM\\DOAN\\backend\\Bookstore-Inventory\\Bookstore.Domain\\Entities\\Account.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Bookstore.Domain\\Entities\\Account.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{E7876633-0EBB-4AA4-BE2B-E84BE54D5B6C}|Bookstore.Domain\\Bookstore.Domain.csproj|e:\\soa_kientrucpm\\doan\\backend\\bookstore-inventory\\bookstore.domain\\entities\\account.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E7876633-0EBB-4AA4-BE2B-E84BE54D5B6C}|Bookstore.Domain\\Bookstore.Domain.csproj|solutionrelative:bookstore.domain\\entities\\account.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|E:\\SOA_KienTrucPM\\DOAN\\backend\\Bookstore-Inventory\\Bookstore.API\\Program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Bookstore.API\\Program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{E7876633-0EBB-4AA4-BE2B-E84BE54D5B6C}|Bookstore.Domain\\Bookstore.Domain.csproj|e:\\soa_kientrucpm\\doan\\backend\\bookstore-inventory\\bookstore.domain\\entities\\warehouseexport.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E7876633-0EBB-4AA4-BE2B-E84BE54D5B6C}|Bookstore.Domain\\Bookstore.Domain.csproj|solutionrelative:bookstore.domain\\entities\\warehouseexport.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|E:\\SOA_KienTrucPM\\DOAN\\backend\\Bookstore-Inventory\\Bookstore.Infrastructure\\Data\\MongoDbContext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Bookstore.Infrastructure\\Data\\MongoDbContext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{E7876633-0EBB-4AA4-BE2B-E84BE54D5B6C}|Bookstore.Domain\\Bookstore.Domain.csproj|e:\\soa_kientrucpm\\doan\\backend\\bookstore-inventory\\bookstore.domain\\entities\\warehouseimport.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E7876633-0EBB-4AA4-BE2B-E84BE54D5B6C}|Bookstore.Domain\\Bookstore.Domain.csproj|solutionrelative:bookstore.domain\\entities\\warehouseimport.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|E:\\SOA_KienTrucPM\\DOAN\\backend\\Bookstore-Inventory\\Bookstore.Infrastructure\\Data\\SeedData.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Bookstore.Infrastructure\\Data\\SeedData.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{9DE006D5-A31A-4563-BEBC-A9E64F7899DA}|Bookstore.Infrastructure\\Bookstore.Infrastructure.csproj|e:\\soa_kientrucpm\\doan\\backend\\bookstore-inventory\\bookstore.infrastructure\\data\\mongodbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9DE006D5-A31A-4563-BEBC-A9E64F7899DA}|Bookstore.Infrastructure\\Bookstore.Infrastructure.csproj|solutionrelative:bookstore.infrastructure\\data\\mongodbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|E:\\SOA_KienTrucPM\\DOAN\\backend\\Bookstore-Inventory\\Bookstore.Infrastructure\\Repositories\\CategoryRepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Bookstore.Infrastructure\\Repositories\\CategoryRepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{8A02E70B-8A3E-4E12-987E-6C8A801B59E2}|Bookstore.API\\Bookstore.API.csproj|e:\\soa_kientrucpm\\doan\\backend\\bookstore-inventory\\bookstore.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8A02E70B-8A3E-4E12-987E-6C8A801B59E2}|Bookstore.API\\Bookstore.API.csproj|solutionrelative:bookstore.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|E:\\SOA_KienTrucPM\\DOAN\\backend\\Bookstore-Inventory\\Bookstore.Infrastructure\\Interfaces\\Repositories\\IUserRepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Bookstore.Infrastructure\\Interfaces\\Repositories\\IUserRepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{9DE006D5-A31A-4563-BEBC-A9E64F7899DA}|Bookstore.Infrastructure\\Bookstore.Infrastructure.csproj|e:\\soa_kientrucpm\\doan\\backend\\bookstore-inventory\\bookstore.infrastructure\\data\\seeddata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9DE006D5-A31A-4563-BEBC-A9E64F7899DA}|Bookstore.Infrastructure\\Bookstore.Infrastructure.csproj|solutionrelative:bookstore.infrastructure\\data\\seeddata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|E:\\SOA_KienTrucPM\\DOAN\\backend\\Bookstore-Inventory\\Bookstore.Infrastructure\\Interfaces\\Repositories\\ICategoryRepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Bookstore.Infrastructure\\Interfaces\\Repositories\\ICategoryRepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{9DE006D5-A31A-4563-BEBC-A9E64F7899DA}|Bookstore.Infrastructure\\Bookstore.Infrastructure.csproj|e:\\soa_kientrucpm\\doan\\backend\\bookstore-inventory\\bookstore.infrastructure\\repositories\\categoryrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9DE006D5-A31A-4563-BEBC-A9E64F7899DA}|Bookstore.Infrastructure\\Bookstore.Infrastructure.csproj|solutionrelative:bookstore.infrastructure\\repositories\\categoryrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|E:\\SOA_KienTrucPM\\DOAN\\backend\\Bookstore-Inventory\\Bookstore.Infrastructure\\Interfaces\\Repositories\\IBookRepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Bookstore.Infrastructure\\Interfaces\\Repositories\\IBookRepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{9DE006D5-A31A-4563-BEBC-A9E64F7899DA}|Bookstore.Infrastructure\\Bookstore.Infrastructure.csproj|e:\\soa_kientrucpm\\doan\\backend\\bookstore-inventory\\bookstore.infrastructure\\interfaces\\repositories\\iuserrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9DE006D5-A31A-4563-BEBC-A9E64F7899DA}|Bookstore.Infrastructure\\Bookstore.Infrastructure.csproj|solutionrelative:bookstore.infrastructure\\interfaces\\repositories\\iuserrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9DE006D5-A31A-4563-BEBC-A9E64F7899DA}|Bookstore.Infrastructure\\Bookstore.Infrastructure.csproj|e:\\soa_kientrucpm\\doan\\backend\\bookstore-inventory\\bookstore.infrastructure\\interfaces\\repositories\\icategoryrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9DE006D5-A31A-4563-BEBC-A9E64F7899DA}|Bookstore.Infrastructure\\Bookstore.Infrastructure.csproj|solutionrelative:bookstore.infrastructure\\interfaces\\repositories\\icategoryrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9DE006D5-A31A-4563-BEBC-A9E64F7899DA}|Bookstore.Infrastructure\\Bookstore.Infrastructure.csproj|e:\\soa_kientrucpm\\doan\\backend\\bookstore-inventory\\bookstore.infrastructure\\interfaces\\repositories\\ibookrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9DE006D5-A31A-4563-BEBC-A9E64F7899DA}|Bookstore.Infrastructure\\Bookstore.Infrastructure.csproj|solutionrelative:bookstore.infrastructure\\interfaces\\repositories\\ibookrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -74,11 +82,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 11,
               "Title": "MongoDbContext.cs",
               "DocumentMoniker": "E:\\SOA_KienTrucPM\\DOAN\\backend\\Bookstore-Inventory\\Bookstore.Infrastructure\\Data\\MongoDbContext.cs",
               "RelativeDocumentMoniker": "Bookstore.Infrastructure\\Data\\MongoDbContext.cs",
@@ -91,33 +99,46 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "WarehouseImport.cs",
-              "DocumentMoniker": "E:\\SOA_KienTrucPM\\DOAN\\backend\\Bookstore-Inventory\\Bookstore.Domain\\Entities\\WarehouseImport.cs",
-              "RelativeDocumentMoniker": "Bookstore.Domain\\Entities\\WarehouseImport.cs",
-              "ToolTip": "E:\\SOA_KienTrucPM\\DOAN\\backend\\Bookstore-Inventory\\Bookstore.Domain\\Entities\\WarehouseImport.cs",
-              "RelativeToolTip": "Bookstore.Domain\\Entities\\WarehouseImport.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAvAAAAAAAAAA==",
+              "DocumentIndex": 1,
+              "Title": "WarehouseImportBook.cs",
+              "DocumentMoniker": "E:\\SOA_KienTrucPM\\DOAN\\backend\\Bookstore-Inventory\\Bookstore.Domain\\Entities\\WarehouseImportBook.cs",
+              "RelativeDocumentMoniker": "Bookstore.Domain\\Entities\\WarehouseImportBook.cs",
+              "ToolTip": "E:\\SOA_KienTrucPM\\DOAN\\backend\\Bookstore-Inventory\\Bookstore.Domain\\Entities\\WarehouseImportBook.cs",
+              "RelativeToolTip": "Bookstore.Domain\\Entities\\WarehouseImportBook.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-29T11:09:51.554Z",
+              "WhenOpened": "2025-03-29T11:12:04.171Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "WarehouseExport.cs",
-              "DocumentMoniker": "E:\\SOA_KienTrucPM\\DOAN\\backend\\Bookstore-Inventory\\Bookstore.Domain\\Entities\\WarehouseExport.cs",
-              "RelativeDocumentMoniker": "Bookstore.Domain\\Entities\\WarehouseExport.cs",
-              "ToolTip": "E:\\SOA_KienTrucPM\\DOAN\\backend\\Bookstore-Inventory\\Bookstore.Domain\\Entities\\WarehouseExport.cs",
-              "RelativeToolTip": "Bookstore.Domain\\Entities\\WarehouseExport.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 0,
+              "Title": "Staff.cs",
+              "DocumentMoniker": "E:\\SOA_KienTrucPM\\DOAN\\backend\\Bookstore-Inventory\\Bookstore.Domain\\Entities\\Staff.cs",
+              "RelativeDocumentMoniker": "Bookstore.Domain\\Entities\\Staff.cs",
+              "ToolTip": "E:\\SOA_KienTrucPM\\DOAN\\backend\\Bookstore-Inventory\\Bookstore.Domain\\Entities\\Staff.cs",
+              "RelativeToolTip": "Bookstore.Domain\\Entities\\Staff.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-29T11:09:45.486Z",
+              "WhenOpened": "2025-03-29T11:09:26.679Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
+              "Title": "WarehouseExportBook.cs",
+              "DocumentMoniker": "E:\\SOA_KienTrucPM\\DOAN\\backend\\Bookstore-Inventory\\Bookstore.Domain\\Entities\\WarehouseExportBook.cs",
+              "RelativeDocumentMoniker": "Bookstore.Domain\\Entities\\WarehouseExportBook.cs",
+              "ToolTip": "E:\\SOA_KienTrucPM\\DOAN\\backend\\Bookstore-Inventory\\Bookstore.Domain\\Entities\\WarehouseExportBook.cs",
+              "RelativeToolTip": "Bookstore.Domain\\Entities\\WarehouseExportBook.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-29T11:11:42.54Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "UserRole.cs",
               "DocumentMoniker": "E:\\SOA_KienTrucPM\\DOAN\\backend\\Bookstore-Inventory\\Bookstore.Domain\\Entities\\UserRole.cs",
               "RelativeDocumentMoniker": "Bookstore.Domain\\Entities\\UserRole.cs",
@@ -130,7 +151,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "User.cs",
               "DocumentMoniker": "E:\\SOA_KienTrucPM\\DOAN\\backend\\Bookstore-Inventory\\Bookstore.Domain\\Entities\\User.cs",
               "RelativeDocumentMoniker": "Bookstore.Domain\\Entities\\User.cs",
@@ -139,19 +160,6 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-29T11:09:34.153Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Staff.cs",
-              "DocumentMoniker": "E:\\SOA_KienTrucPM\\DOAN\\backend\\Bookstore-Inventory\\Bookstore.Domain\\Entities\\Staff.cs",
-              "RelativeDocumentMoniker": "Bookstore.Domain\\Entities\\Staff.cs",
-              "ToolTip": "E:\\SOA_KienTrucPM\\DOAN\\backend\\Bookstore-Inventory\\Bookstore.Domain\\Entities\\Staff.cs",
-              "RelativeToolTip": "Bookstore.Domain\\Entities\\Staff.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-29T11:09:26.679Z",
               "EditorCaption": ""
             },
             {
@@ -165,6 +173,19 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-29T11:09:18.371Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Book.cs",
+              "DocumentMoniker": "E:\\SOA_KienTrucPM\\DOAN\\backend\\Bookstore-Inventory\\Bookstore.Domain\\Entities\\Book.cs",
+              "RelativeDocumentMoniker": "Bookstore.Domain\\Entities\\Book.cs",
+              "ToolTip": "E:\\SOA_KienTrucPM\\DOAN\\backend\\Bookstore-Inventory\\Bookstore.Domain\\Entities\\Book.cs",
+              "RelativeToolTip": "Bookstore.Domain\\Entities\\Book.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-29T07:15:54.579Z",
               "EditorCaption": ""
             },
             {
@@ -194,6 +215,32 @@
               "EditorCaption": ""
             },
             {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "WarehouseExport.cs",
+              "DocumentMoniker": "E:\\SOA_KienTrucPM\\DOAN\\backend\\Bookstore-Inventory\\Bookstore.Domain\\Entities\\WarehouseExport.cs",
+              "RelativeDocumentMoniker": "Bookstore.Domain\\Entities\\WarehouseExport.cs",
+              "ToolTip": "E:\\SOA_KienTrucPM\\DOAN\\backend\\Bookstore-Inventory\\Bookstore.Domain\\Entities\\WarehouseExport.cs",
+              "RelativeToolTip": "Bookstore.Domain\\Entities\\WarehouseExport.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-29T11:09:45.486Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "WarehouseImport.cs",
+              "DocumentMoniker": "E:\\SOA_KienTrucPM\\DOAN\\backend\\Bookstore-Inventory\\Bookstore.Domain\\Entities\\WarehouseImport.cs",
+              "RelativeDocumentMoniker": "Bookstore.Domain\\Entities\\WarehouseImport.cs",
+              "ToolTip": "E:\\SOA_KienTrucPM\\DOAN\\backend\\Bookstore-Inventory\\Bookstore.Domain\\Entities\\WarehouseImport.cs",
+              "RelativeToolTip": "Bookstore.Domain\\Entities\\WarehouseImport.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-29T11:09:51.554Z",
+              "EditorCaption": ""
+            },
+            {
               "$type": "Bookmark",
               "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
             },
@@ -203,20 +250,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "Book.cs",
-              "DocumentMoniker": "E:\\SOA_KienTrucPM\\DOAN\\backend\\Bookstore-Inventory\\Bookstore.Domain\\Entities\\Book.cs",
-              "RelativeDocumentMoniker": "Bookstore.Domain\\Entities\\Book.cs",
-              "ToolTip": "E:\\SOA_KienTrucPM\\DOAN\\backend\\Bookstore-Inventory\\Bookstore.Domain\\Entities\\Book.cs",
-              "RelativeToolTip": "Bookstore.Domain\\Entities\\Book.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABoAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-29T07:15:54.579Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 12,
               "Title": "Program.cs",
               "DocumentMoniker": "E:\\SOA_KienTrucPM\\DOAN\\backend\\Bookstore-Inventory\\Bookstore.API\\Program.cs",
               "RelativeDocumentMoniker": "Bookstore.API\\Program.cs",
@@ -224,12 +258,11 @@
               "RelativeToolTip": "Bookstore.API\\Program.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-29T07:18:13.426Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-29T07:18:13.426Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 13,
               "Title": "SeedData.cs",
               "DocumentMoniker": "E:\\SOA_KienTrucPM\\DOAN\\backend\\Bookstore-Inventory\\Bookstore.Infrastructure\\Data\\SeedData.cs",
               "RelativeDocumentMoniker": "Bookstore.Infrastructure\\Data\\SeedData.cs",
@@ -241,7 +274,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 14,
               "Title": "CategoryRepository.cs",
               "DocumentMoniker": "E:\\SOA_KienTrucPM\\DOAN\\backend\\Bookstore-Inventory\\Bookstore.Infrastructure\\Repositories\\CategoryRepository.cs",
               "RelativeDocumentMoniker": "Bookstore.Infrastructure\\Repositories\\CategoryRepository.cs",
@@ -253,7 +286,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 15,
               "Title": "IUserRepository.cs",
               "DocumentMoniker": "E:\\SOA_KienTrucPM\\DOAN\\backend\\Bookstore-Inventory\\Bookstore.Infrastructure\\Interfaces\\Repositories\\IUserRepository.cs",
               "RelativeDocumentMoniker": "Bookstore.Infrastructure\\Interfaces\\Repositories\\IUserRepository.cs",
@@ -265,7 +298,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 16,
               "Title": "ICategoryRepository.cs",
               "DocumentMoniker": "E:\\SOA_KienTrucPM\\DOAN\\backend\\Bookstore-Inventory\\Bookstore.Infrastructure\\Interfaces\\Repositories\\ICategoryRepository.cs",
               "RelativeDocumentMoniker": "Bookstore.Infrastructure\\Interfaces\\Repositories\\ICategoryRepository.cs",
@@ -277,7 +310,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 17,
               "Title": "IBookRepository.cs",
               "DocumentMoniker": "E:\\SOA_KienTrucPM\\DOAN\\backend\\Bookstore-Inventory\\Bookstore.Infrastructure\\Interfaces\\Repositories\\IBookRepository.cs",
               "RelativeDocumentMoniker": "Bookstore.Infrastructure\\Interfaces\\Repositories\\IBookRepository.cs",
