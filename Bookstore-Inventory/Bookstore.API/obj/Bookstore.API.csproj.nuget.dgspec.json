@@ -273,7 +273,11 @@
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "C:\\Users\\Huynh Ngoc\\source\\repos\\GROUP4-SOA\\backend\\Bookstore-Inventory\\Bookstore.Domain\\Bookstore.Domain.csproj": {
+                "projectPath": "C:\\Users\\Huynh Ngoc\\source\\repos\\GROUP4-SOA\\backend\\Bookstore-Inventory\\Bookstore.Domain\\Bookstore.Domain.csproj"
+              }
+            }
           }
         },
         "warningProperties": {

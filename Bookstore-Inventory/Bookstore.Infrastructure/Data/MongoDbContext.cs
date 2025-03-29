@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using MongoDB.Driver;
 using Microsoft.Extensions.Configuration;
 
@@ -11,12 +7,22 @@ namespace Bookstore.Infrastructure.Data
     public class MongoDbContext
     {
         private readonly IMongoDatabase _database;
+
         public MongoDbContext(IConfiguration configuration)
         {
             var settings = configuration.GetSection("DatabaseSettings");
-            var client = new MongoClient(settings["ConnectionString"]);
-            _database = client.GetDatabase(settings["DatabaseName"]);
+            var connectionString = settings["ConnectionString"];
+            var databaseName = settings["DatabaseName"];
+
+            if (string.IsNullOrEmpty(connectionString) || string.IsNullOrEmpty(databaseName))
+            {
+                throw new ArgumentException("Database settings are not configured properly.");
+            }
+
+            var client = new MongoClient(connectionString);
+            _database = client.GetDatabase(databaseName);
         }
-        public IMongoCollection<T> GetCollection<T>(string name) => _database.GetCollection<T>(name); 
+
+        public IMongoCollection<T> GetCollection<T>(string name) => _database.GetCollection<T>(name);
     }
 }

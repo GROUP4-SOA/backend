@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Interfaces\Repositories\" />
+    <ProjectReference Include="..\Bookstore.Domain\Bookstore.Domain.csproj" />
   </ItemGroup>
 
 </Project>
