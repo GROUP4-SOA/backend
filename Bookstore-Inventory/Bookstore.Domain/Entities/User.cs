@@ -1,18 +1,24 @@
-﻿using System;
+﻿using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Bookstore.Domain.Entities
 {
     public class User
     {
-        public int UserId { get; set; }
+        [BsonId]
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string UserId { get; set; } = ObjectId.GenerateNewId().ToString();
+
         public string Username { get; set; }
         public string Email { get; set; }
         public string PhoneNo { get; set; }
-        public int AccountId { get; set; }
-        public Account Account { get; set; }
+
+        // Liên kết với Account bằng ObjectId thay vì lưu trực tiếp đối tượng Account
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string? AccountId { get; set; }
+        [BsonRepresentation(BsonType.String)]
+        public UserRole Role { get; set; }
     }
 }
