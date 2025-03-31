@@ -10,8 +10,9 @@ using Microsoft.Extensions.Options;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+var mongoDbSettings = builder.Configuration.GetSection("MongoDBSettings");
+builder.Services.Configure<MongoDatabaseSettings>(mongoDbSettings);
 builder.Services.AddSingleton<MongoDbContext>();
-builder.Configuration.GetSection("DatabaseSettings");
 builder.Services.AddSingleton<IBookRepository, BookRepository>();
 builder.Services.AddSingleton<BookService>();
 
