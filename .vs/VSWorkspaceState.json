@@ -1,0 +1,10 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\Bookstore-Inventory",
+    "\\Bookstore-Inventory\\Bookstore.Domain",
+    "\\Bookstore-Inventory\\Bookstore.Domain\\Entities"
+  ],
+  "SelectedNode": "\\Bookstore-Inventory\\Bookstore.Domain\\Entities\\UserRole.cs",
+  "PreviewInSolutionExplorer": false
+}

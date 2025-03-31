@@ -10,6 +10,6 @@ namespace Bookstore.Domain.Entities
     {
         public string WarehouseImportId { get; set; }
         public string BookId { get; set; }
-        public int Quantity { get; set; }
+        public int ImportQuantity { get; set; }
     }
 }
