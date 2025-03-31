@@ -19,7 +19,7 @@ namespace Bookstore.Infrastructure.Repositories
             await _books.Find(book => true).ToListAsync();
 
         public async Task<Book> GetBookByIdAsync(string id) =>
-            await _books.Find(book => book.BookId == int.Parse(id)).FirstOrDefaultAsync();
+            await _books.Find(book => book.BookId == id).FirstOrDefaultAsync();
 
         public async Task AddBookAsync(Book book) =>
             await _books.InsertOneAsync(book);
@@ -28,6 +28,6 @@ namespace Bookstore.Infrastructure.Repositories
             await _books.ReplaceOneAsync(b => b.BookId == book.BookId, book);
 
         public async Task DeleteBookAsync(string id) =>
-            await _books.DeleteOneAsync(book => book.BookId == int.Parse(id));
+            await _books.DeleteOneAsync(book => book.BookId == id);
     }
 }

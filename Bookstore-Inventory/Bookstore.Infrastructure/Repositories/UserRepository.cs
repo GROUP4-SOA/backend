@@ -22,7 +22,7 @@ namespace Bookstore.Infrastructure.Repositories
 
 
         public async Task<User> GetUserByIdAsync(string id) =>
-            await _users.Find(user => user.UserId == int.Parse(id)).FirstOrDefaultAsync();
+            await _users.Find(user => user.UserId == id).FirstOrDefaultAsync();
 
         public async Task AddUserAsync(User user) =>
             await _users.InsertOneAsync(user);
@@ -31,6 +31,6 @@ namespace Bookstore.Infrastructure.Repositories
             await _users.ReplaceOneAsync(u => u.UserId == user.UserId, user);
 
         public async Task DeleteUserAsync(string id) =>
-            await _users.DeleteOneAsync(user => user.UserId == int.Parse(id));
+            await _users.DeleteOneAsync(user => user.UserId == id);
     }
 }

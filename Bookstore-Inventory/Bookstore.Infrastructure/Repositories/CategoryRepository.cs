@@ -22,7 +22,7 @@ namespace Bookstore.Infrastructure.Repositories
 
 
         public async Task<Category> GetCategoryByIdAsync(string id) =>
-            await _categorys.Find(category => category.CategoryId == int.Parse(id)).FirstOrDefaultAsync();
+            await _categorys.Find(category => category.CategoryId == id).FirstOrDefaultAsync();
 
         public async Task AddCategoryAsync(Category category) =>
             await _categorys.InsertOneAsync(category);
@@ -31,7 +31,7 @@ namespace Bookstore.Infrastructure.Repositories
             await _categorys.ReplaceOneAsync(c => c.CategoryId == category.CategoryId, category);
 
         public async Task DeleteCategoryAsync(string id) =>
-            await _categorys.DeleteOneAsync(category => category.CategoryId == int.Parse(id));
+            await _categorys.DeleteOneAsync(category => category.CategoryId == id);
     }
 }
 
