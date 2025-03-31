@@ -14,11 +14,9 @@ namespace Bookstore.Domain.Entities
         public string Username { get; set; }
         public string Email { get; set; }
         public string PhoneNo { get; set; }
-
-        // Liên kết với Account bằng ObjectId thay vì lưu trực tiếp đối tượng Account
-        [BsonRepresentation(BsonType.ObjectId)]
-        public string? AccountId { get; set; }
-        [BsonRepresentation(BsonType.String)]
+        public string Password { get; set; }
         public UserRole Role { get; set; }
+        public bool IsActive { get; set; }
+
     }
 }

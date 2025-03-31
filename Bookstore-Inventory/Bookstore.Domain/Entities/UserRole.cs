@@ -6,6 +6,6 @@ namespace Bookstore.Domain.Entities
     public enum UserRole
     {
         ADMINISTRATOR,
-        WAREHOUSE_KEEPER
+        STAFF
     }
 }
