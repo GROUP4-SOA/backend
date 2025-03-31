@@ -13,10 +13,7 @@ namespace Bookstore.Domain.Entities
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
         public string WarehouseImportId { get; set; }
-
-        [BsonRepresentation(BsonType.ObjectId)]
-        public string ImportId { get; set; }
-
+        
         [BsonRepresentation(BsonType.ObjectId)]
         public string BookId { get; set; }
         public int ImportQuantity { get; set; }

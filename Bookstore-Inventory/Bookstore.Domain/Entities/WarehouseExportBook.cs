@@ -15,9 +15,6 @@ namespace Bookstore.Domain.Entities
         public string WarehouseExportId { get; set; }
 
         [BsonRepresentation(BsonType.ObjectId)]
-        public string ExportId { get; set; }
-
-        [BsonRepresentation(BsonType.ObjectId)]
         public string BookId { get; set; }
         public int ExportQuantity { get; set; }
         public decimal Price { get; set; }
