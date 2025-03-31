@@ -18,7 +18,6 @@ namespace Bookstore.Domain.Entities
         public string Author { get; set; }
         public decimal Price { get; set; }
         public int Quantity { get; set; }
-        public string ISBN { get; set; }
         [BsonRepresentation(BsonType.ObjectId)]
         public string CategoryId { get; set; } = null!;
 
