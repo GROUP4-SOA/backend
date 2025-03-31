@@ -35,7 +35,7 @@ namespace Bookstore.Application.Services
             return bookDtos;
         }
 
-        public async Task<BookDto> GetBookByIdAsync(int bookId)
+        public async Task<BookDto> GetBookByIdAsync(string bookId)
         {
             var book = await _bookRepository.GetBookByIdAsync(bookId.ToString());
             if (book == null)
@@ -57,7 +57,7 @@ namespace Bookstore.Application.Services
         {
             var book = new Book
             {
-                BookId = 0,
+                BookId = "ABC",
                 Title = bookCreateDto.Title,
                 Author = bookCreateDto.Author,
                 Price = bookCreateDto.Price,
@@ -76,7 +76,7 @@ namespace Bookstore.Application.Services
             };
         }
 
-        public async Task<BookDto> UpdateBookAsync(int bookId, BookUpdateDto bookUpdateDto)
+        public async Task<BookDto> UpdateBookAsync(string bookId, BookUpdateDto bookUpdateDto)
         {
             var existingBook = await _bookRepository.GetBookByIdAsync(bookId.ToString());
             if (existingBook == null)
@@ -101,7 +101,7 @@ namespace Bookstore.Application.Services
             };
         }
 
-        public async Task<bool> DeleteBookAsync(int bookId)
+        public async Task<bool> DeleteBookAsync(string bookId)
         {
             var book = await _bookRepository.GetBookByIdAsync(bookId.ToString());
             if (book == null)

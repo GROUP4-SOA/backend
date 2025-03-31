@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Nam3\\SOA\\Do_an\\Do_an4\\backend\\Bookstore-Inventory\\Bookstore.Domain\\Bookstore.Domain.csproj": {}
+    "C:\\Nam3\\SOA\\Do_an\\Do_an7\\backend\\Bookstore-Inventory\\Bookstore.Domain\\Bookstore.Domain.csproj": {}
   },
   "projects": {
-    "C:\\Nam3\\SOA\\Do_an\\Do_an4\\backend\\Bookstore-Inventory\\Bookstore.Domain\\Bookstore.Domain.csproj": {
+    "C:\\Nam3\\SOA\\Do_an\\Do_an7\\backend\\Bookstore-Inventory\\Bookstore.Domain\\Bookstore.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Nam3\\SOA\\Do_an\\Do_an4\\backend\\Bookstore-Inventory\\Bookstore.Domain\\Bookstore.Domain.csproj",
+        "projectUniqueName": "C:\\Nam3\\SOA\\Do_an\\Do_an7\\backend\\Bookstore-Inventory\\Bookstore.Domain\\Bookstore.Domain.csproj",
         "projectName": "Bookstore.Domain",
-        "projectPath": "C:\\Nam3\\SOA\\Do_an\\Do_an4\\backend\\Bookstore-Inventory\\Bookstore.Domain\\Bookstore.Domain.csproj",
+        "projectPath": "C:\\Nam3\\SOA\\Do_an\\Do_an7\\backend\\Bookstore-Inventory\\Bookstore.Domain\\Bookstore.Domain.csproj",
         "packagesPath": "C:\\Users\\Truc\\.nuget\\packages\\",
-        "outputPath": "C:\\Nam3\\SOA\\Do_an\\Do_an4\\backend\\Bookstore-Inventory\\Bookstore.Domain\\obj\\",
+        "outputPath": "C:\\Nam3\\SOA\\Do_an\\Do_an7\\backend\\Bookstore-Inventory\\Bookstore.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

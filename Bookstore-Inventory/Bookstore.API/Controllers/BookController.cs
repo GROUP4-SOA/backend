@@ -30,7 +30,7 @@ namespace Bookstore.API.Controllers
         }
 
         [HttpGet("{bookId}")]
-        public async Task<IActionResult> GetBookById(int bookId)
+        public async Task<IActionResult> GetBookById(string bookId)
         {
             try
             {
@@ -67,7 +67,7 @@ namespace Bookstore.API.Controllers
         }
 
         [HttpPut("{bookId}")]
-        public async Task<IActionResult> UpdateBook(int bookId, [FromBody] BookUpdateDto bookUpdateDto)
+        public async Task<IActionResult> UpdateBook(string bookId, [FromBody] BookUpdateDto bookUpdateDto)
         {
             if (!ModelState.IsValid)
             {
@@ -90,7 +90,7 @@ namespace Bookstore.API.Controllers
         }
 
         [HttpDelete("{bookId}")]
-        public async Task<IActionResult> DeleteBook(int bookId)
+        public async Task<IActionResult> DeleteBook(string bookId)
         {
             try
             {

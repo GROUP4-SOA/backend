@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "gWQbx4JUx6s=",
+  "dgSpecHash": "1OtrjcCU1MQ=",
   "success": true,
-  "projectFilePath": "C:\\Nam3\\SOA\\Do_an\\Do_an4\\backend\\Bookstore-Inventory\\Bookstore.Domain\\Bookstore.Domain.csproj",
+  "projectFilePath": "C:\\Nam3\\SOA\\Do_an\\Do_an7\\backend\\Bookstore-Inventory\\Bookstore.Domain\\Bookstore.Domain.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Truc\\.nuget\\packages\\dnsclient\\1.6.1\\dnsclient.1.6.1.nupkg.sha512",
     "C:\\Users\\Truc\\.nuget\\packages\\microsoft.extensions.configuration\\9.0.3\\microsoft.extensions.configuration.9.0.3.nupkg.sha512",

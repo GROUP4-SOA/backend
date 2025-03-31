@@ -30,7 +30,7 @@ namespace Bookstore.API.Controllers
         }
 
         [HttpGet("{categoryId}")]
-        public async Task<IActionResult> GetCategoryById(int categoryId)
+        public async Task<IActionResult> GetCategoryById(string categoryId)
         {
             try
             {
@@ -67,7 +67,7 @@ namespace Bookstore.API.Controllers
         }
 
         [HttpPut("{categoryId}")]
-        public async Task<IActionResult> UpdateCategory(int categoryId, [FromBody] CategoryDto categoryDto)
+        public async Task<IActionResult> UpdateCategory(string categoryId, [FromBody] CategoryDto categoryDto)
         {
             if (!ModelState.IsValid)
             {
@@ -90,7 +90,7 @@ namespace Bookstore.API.Controllers
         }
 
         [HttpDelete("{categoryId}")]
-        public async Task<IActionResult> DeleteCategory(int categoryId)
+        public async Task<IActionResult> DeleteCategory(string categoryId)
         {
             try
             {

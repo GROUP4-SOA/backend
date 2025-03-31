@@ -15,8 +15,8 @@ namespace Bookstore.Infrastructure.Data
             {
                 var sampleBooks = new List<Book>
                 {
-                    new Book { BookId = 1, Title = "C# Programming", Author = "Author A", Price = 29.99M, Isbn = DateTime.Now, CategoryId = 1, Quantity = 10 },
-                    new Book { BookId = 2, Title = "MongoDB Basics", Author = "Author B", Price = 24.99M, Isbn = DateTime.Now, CategoryId = 2, Quantity = 15 }
+                    new Book { BookId = "A1B", Title = "C# Programming", Author = "Author A", Price = 29.99M, ISBN = "1A2B3C", CategoryId = "1A", Quantity = 10 },
+                    new Book { BookId = "32C", Title = "MongoDB Basics", Author = "Author B", Price = 24.99M, ISBN = "4A5B6C", CategoryId = "2B", Quantity = 15 }
                 };
                 books.InsertMany(sampleBooks);
             }

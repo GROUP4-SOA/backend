@@ -27,7 +27,7 @@ namespace Bookstore.Application.Services
 
             return new UserDto
             {
-                UserId = int.Parse(user.UserId),
+                UserId = user.UserId,
                 Username = user.Username,
                 Role = user.Role.ToString()
             };

@@ -33,9 +33,9 @@ namespace Bookstore.Application.Services
             return categoryDtos;
         }
 
-        public async Task<CategoryDto> GetCategoryByIdAsync(int categoryId)
+        public async Task<CategoryDto> GetCategoryByIdAsync(string categoryId)
         {
-            var category = await _categoryRepository.GetCategoryByIdAsync(categoryId.ToString());
+            var category = await _categoryRepository.GetCategoryByIdAsync(categoryId);
             if (category == null)
             {
                 return null;
@@ -53,7 +53,7 @@ namespace Bookstore.Application.Services
         {
             var category = new Category
             {
-                CategoryId = 0,
+                CategoryId = "ABC",
                 Name = categoryDto.Name,
                 Description = categoryDto.Description
             };
@@ -68,9 +68,9 @@ namespace Bookstore.Application.Services
             };
         }
 
-        public async Task<CategoryDto> UpdateCategoryAsync(int categoryId, CategoryDto categoryDto)
+        public async Task<CategoryDto> UpdateCategoryAsync(string categoryId, CategoryDto categoryDto)
         {
-            var existingCategory = await _categoryRepository.GetCategoryByIdAsync(categoryId.ToString());
+            var existingCategory = await _categoryRepository.GetCategoryByIdAsync(categoryId);
             if (existingCategory == null)
             {
                 return null;
@@ -89,15 +89,15 @@ namespace Bookstore.Application.Services
             };
         }
 
-        public async Task<bool> DeleteCategoryAsync(int categoryId)
+        public async Task<bool> DeleteCategoryAsync(string categoryId)
         {
-            var category = await _categoryRepository.GetCategoryByIdAsync(categoryId.ToString());
+            var category = await _categoryRepository.GetCategoryByIdAsync(categoryId);
             if (category == null)
             {
                 return false;
             }
 
-            await _categoryRepository.DeleteCategoryAsync(categoryId.ToString());
+            await _categoryRepository.DeleteCategoryAsync(categoryId);
             return true;
         }
     }
