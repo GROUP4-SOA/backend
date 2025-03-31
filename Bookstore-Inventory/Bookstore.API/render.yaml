@@ -2,7 +2,7 @@ services:
   - type: web
     name: bookstore-api
     env: docker
-    dockerfilePath: ./Dockerfile
+    dockerfilePath: ./Bookstore.API/Dockerfile
     plan: free
     envVars:
       - key: ASPNETCORE_ENVIRONMENT
