@@ -21,14 +21,16 @@ namespace Bookstore.API.Controllers
         public async Task<IActionResult> CreateImport([FromBody] WarehouseImportDto importDto)
         {
             if (!ModelState.IsValid)
-            {
                 return BadRequest(ModelState);
-            }
 
             try
             {
                 var createdImport = await _importService.CreateImportAsync(importDto);
                 return CreatedAtAction(nameof(GetAllImports), new { importId = createdImport.ImportId }, createdImport);
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(new { message = ex.Message });
             }
             catch (Exception ex)
             {

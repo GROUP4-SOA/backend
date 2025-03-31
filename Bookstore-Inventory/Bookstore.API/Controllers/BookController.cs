@@ -1,6 +1,8 @@
 ﻿using Bookstore.Application.Dtos;
 using Bookstore.Application.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Threading.Tasks;
 
 namespace Bookstore.API.Controllers
 {
@@ -25,7 +27,7 @@ namespace Bookstore.API.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(500, new { message = "An error occurred while retrieving books", error = ex.Message });
+                return StatusCode(500, new { message = "Lỗi khi lấy danh sách sách", error = ex.Message });
             }
         }
 
@@ -35,15 +37,15 @@ namespace Bookstore.API.Controllers
             try
             {
                 var book = await _bookService.GetBookByIdAsync(bookId);
-                if (book == null)
-                {
-                    return NotFound(new { message = "Book not found" });
-                }
                 return Ok(book);
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(new { message = ex.Message });
             }
             catch (Exception ex)
             {
-                return StatusCode(500, new { message = "An error occurred while retrieving the book", error = ex.Message });
+                return StatusCode(500, new { message = "Lỗi khi lấy sách", error = ex.Message });
             }
         }
 
@@ -51,18 +53,20 @@ namespace Bookstore.API.Controllers
         public async Task<IActionResult> CreateBook([FromBody] BookCreateDto bookCreateDto)
         {
             if (!ModelState.IsValid)
-            {
                 return BadRequest(ModelState);
-            }
 
             try
             {
                 var createdBook = await _bookService.CreateBookAsync(bookCreateDto);
                 return CreatedAtAction(nameof(GetBookById), new { bookId = createdBook.BookId }, createdBook);
             }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
             catch (Exception ex)
             {
-                return StatusCode(500, new { message = "An error occurred while creating the book", error = ex.Message });
+                return StatusCode(500, new { message = "Lỗi khi tạo sách", error = ex.Message });
             }
         }
 
@@ -70,22 +74,20 @@ namespace Bookstore.API.Controllers
         public async Task<IActionResult> UpdateBook(string bookId, [FromBody] BookUpdateDto bookUpdateDto)
         {
             if (!ModelState.IsValid)
-            {
                 return BadRequest(ModelState);
-            }
 
             try
             {
                 var updatedBook = await _bookService.UpdateBookAsync(bookId, bookUpdateDto);
-                if (updatedBook == null)
-                {
-                    return NotFound(new { message = "Book not found" });
-                }
                 return Ok(updatedBook);
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(new { message = ex.Message });
             }
             catch (Exception ex)
             {
-                return StatusCode(500, new { message = "An error occurred while updating the book", error = ex.Message });
+                return StatusCode(500, new { message = "Lỗi khi cập nhật sách", error = ex.Message });
             }
         }
 
@@ -96,14 +98,17 @@ namespace Bookstore.API.Controllers
             {
                 var result = await _bookService.DeleteBookAsync(bookId);
                 if (!result)
-                {
-                    return NotFound(new { message = "Book not found" });
-                }
+                    return NotFound(new { message = $"Sách với ID {bookId} không tồn tại" });
+
                 return NoContent();
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(new { message = ex.Message });
             }
             catch (Exception ex)
             {
-                return StatusCode(500, new { message = "An error occurred while deleting the book", error = ex.Message });
+                return StatusCode(500, new { message = "Lỗi khi xóa sách", error = ex.Message });
             }
         }
     }

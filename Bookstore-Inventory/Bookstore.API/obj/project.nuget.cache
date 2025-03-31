@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "t6HUC19xmL8=",
+  "dgSpecHash": "eNgUCXGR6+Q=",
   "success": true,
-  "projectFilePath": "C:\\Nam3\\SOA\\Do_an\\Do_an9\\backend\\Bookstore-Inventory\\Bookstore.API\\Bookstore.API.csproj",
+  "projectFilePath": "C:\\Nam3\\SOA\\Do_an\\Do_an11\\backend\\Bookstore-Inventory\\Bookstore.API\\Bookstore.API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Truc\\.nuget\\packages\\castle.core\\5.1.1\\castle.core.5.1.1.nupkg.sha512",
     "C:\\Users\\Truc\\.nuget\\packages\\dnsclient\\1.6.1\\dnsclient.1.6.1.nupkg.sha512",

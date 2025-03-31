@@ -21,14 +21,16 @@ namespace Bookstore.API.Controllers
         public async Task<IActionResult> CreateExport([FromBody] WarehouseExportDto exportDto)
         {
             if (!ModelState.IsValid)
-            {
                 return BadRequest(ModelState);
-            }
 
             try
             {
                 var createdExport = await _exportService.CreateExportAsync(exportDto);
                 return CreatedAtAction(nameof(GetAllExports), new { exportId = createdExport.ExportId }, createdExport);
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(new { message = ex.Message });
             }
             catch (Exception ex)
             {

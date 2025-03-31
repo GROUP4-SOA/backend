@@ -13,20 +13,24 @@ namespace Bookstore.Application.Services
     {
         private readonly IMongoCollection<WarehouseExport> _exportsCollection;
         private readonly IMongoCollection<Book> _booksCollection;
+        private readonly IMongoCollection<User> _usersCollection;
 
         public ExportService(IMongoDatabase database)
         {
             _exportsCollection = database.GetCollection<WarehouseExport>("WarehouseExports");
             _booksCollection = database.GetCollection<Book>("Books");
+            _usersCollection = database.GetCollection<User>("Users");
         }
 
         public async Task<WarehouseExportDto> CreateExportAsync(WarehouseExportDto exportDto)
         {
-            // Kiểm tra dữ liệu đầu vào
             if (exportDto.WarehouseExportBooks == null || !exportDto.WarehouseExportBooks.Any())
                 throw new ArgumentException("Danh sách sách xuất không được để trống");
 
-            // Tạo phiếu xuất kho
+            var user = await _usersCollection.Find(u => u.UserId == exportDto.UserId).FirstOrDefaultAsync();
+            if (user == null)
+                throw new ArgumentException($"Người dùng với UserId {exportDto.UserId} không tồn tại");
+
             var export = new WarehouseExport
             {
                 ExportDate = exportDto.ExportDate,
@@ -39,9 +43,11 @@ namespace Bookstore.Application.Services
                 }).ToList()
             };
 
-            // Kiểm tra và cập nhật số lượng tồn kho
             foreach (var exportBook in export.WarehouseExportBooks)
             {
+                if (string.IsNullOrEmpty(exportBook.BookId))
+                    throw new ArgumentException("BookId không được để trống");
+
                 var bookFilter = Builders<Book>.Filter.Eq(b => b.BookId, exportBook.BookId);
                 var book = await _booksCollection.Find(bookFilter).FirstOrDefaultAsync();
                 if (book == null)
@@ -54,10 +60,8 @@ namespace Bookstore.Application.Services
                 await _booksCollection.UpdateOneAsync(bookFilter, update);
             }
 
-            // Lưu phiếu xuất kho vào MongoDB
             await _exportsCollection.InsertOneAsync(export);
 
-            // Cập nhật ExportId trong DTO
             exportDto.ExportId = export.ExportId;
             return exportDto;
         }

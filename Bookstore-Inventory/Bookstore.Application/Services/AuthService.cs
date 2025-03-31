@@ -1,35 +1,33 @@
 ﻿using Bookstore.Application.Dtos;
 using Bookstore.Application.Interfaces.Services;
 using Bookstore.Domain.Entities;
-using Bookstore.Infrastructure.Interfaces;
-using Bookstore.Infrastructure.Interfaces.Repositories;
+using MongoDB.Driver;
+using System.Threading.Tasks;
 
 namespace Bookstore.Application.Services
 {
     public class AuthService : IAuthService
     {
-        private readonly IUserRepository _userRepository;
+        private readonly IMongoCollection<User> _usersCollection;
 
-        public AuthService(IUserRepository userRepository)
+        public AuthService(IMongoDatabase database)
         {
-            _userRepository = userRepository;
+            _usersCollection = database.GetCollection<User>("Users");
         }
 
         public async Task<UserDto> LoginAsync(LoginRequestDto loginRequest)
         {
-            var users = await _userRepository.GetAllUsersAsync();
-            var user = users.FirstOrDefault(u => u.Username == loginRequest.Username);
-
+            var user = await _usersCollection.Find(u => u.Username == loginRequest.Username && u.Password == loginRequest.Password).FirstOrDefaultAsync();
             if (user == null)
-            {
-                return null;
-            }
+                throw new ArgumentException("Tên đăng nhập hoặc mật khẩu không đúng");
 
             return new UserDto
             {
                 UserId = user.UserId,
                 Username = user.Username,
-                Role = user.Role.ToString()
+                Password = user.Password,
+                Email = user.Email,
+                Role = user.Role,
             };
         }
     }

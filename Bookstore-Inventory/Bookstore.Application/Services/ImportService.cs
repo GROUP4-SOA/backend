@@ -13,20 +13,24 @@ namespace Bookstore.Application.Services
     {
         private readonly IMongoCollection<WarehouseImport> _importsCollection;
         private readonly IMongoCollection<Book> _booksCollection;
+        private readonly IMongoCollection<User> _usersCollection;
 
         public ImportService(IMongoDatabase database)
         {
             _importsCollection = database.GetCollection<WarehouseImport>("WarehouseImports");
             _booksCollection = database.GetCollection<Book>("Books");
+            _usersCollection = database.GetCollection<User>("Users");
         }
 
         public async Task<WarehouseImportDto> CreateImportAsync(WarehouseImportDto importDto)
         {
-            // Kiểm tra dữ liệu đầu vào
             if (importDto.WarehouseImportBooks == null || !importDto.WarehouseImportBooks.Any())
                 throw new ArgumentException("Danh sách sách nhập không được để trống");
 
-            // Tạo phiếu nhập kho
+            var user = await _usersCollection.Find(u => u.UserId == importDto.UserId).FirstOrDefaultAsync();
+            if (user == null)
+                throw new ArgumentException($"Người dùng với UserId {importDto.UserId} không tồn tại");
+
             var import = new WarehouseImport
             {
                 ImportDate = importDto.ImportDate,
@@ -39,9 +43,11 @@ namespace Bookstore.Application.Services
                 }).ToList()
             };
 
-            // Cập nhật số lượng tồn kho
             foreach (var importBook in import.WarehouseImportBooks)
             {
+                if (string.IsNullOrEmpty(importBook.BookId))
+                    throw new ArgumentException("BookId không được để trống");
+
                 var bookFilter = Builders<Book>.Filter.Eq(b => b.BookId, importBook.BookId);
                 var book = await _booksCollection.Find(bookFilter).FirstOrDefaultAsync();
                 if (book == null)
@@ -51,10 +57,8 @@ namespace Bookstore.Application.Services
                 await _booksCollection.UpdateOneAsync(bookFilter, update);
             }
 
-            // Lưu phiếu nhập kho vào MongoDB
             await _importsCollection.InsertOneAsync(import);
 
-            // Cập nhật ImportId trong DTO
             importDto.ImportId = import.ImportId;
             return importDto;
         }
