@@ -2,9 +2,12 @@
   "ExpandedNodes": [
     "",
     "\\Bookstore-Inventory",
+    "\\Bookstore-Inventory\\Bookstore.API",
+    "\\Bookstore-Inventory\\Bookstore.Application",
     "\\Bookstore-Inventory\\Bookstore.Domain",
-    "\\Bookstore-Inventory\\Bookstore.Domain\\Entities"
+    "\\Bookstore-Inventory\\Bookstore.Domain\\Entities",
+    "\\Bookstore-Inventory\\Bookstore.Infrastructure"
   ],
-  "SelectedNode": "\\Bookstore-Inventory\\Bookstore.Domain\\Entities\\UserRole.cs",
+  "SelectedNode": "\\Bookstore-Inventory\\Bookstore.Domain\\Entities\\Book.cs",
   "PreviewInSolutionExplorer": false
 }

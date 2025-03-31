@@ -13,7 +13,7 @@ namespace Bookstore.Domain.Entities
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
         public string StaffId { get; set; } = ObjectId.GenerateNewId().ToString();
-
-        public string UserId { get; set; }
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string UserId { get; set; } = null!;
     }
 }

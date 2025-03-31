@@ -14,6 +14,7 @@ namespace Bookstore.Domain.Entities
         [BsonRepresentation(BsonType.ObjectId)]
         public string AdminId { get; set; } = ObjectId.GenerateNewId().ToString();
 
-        public string UserId { get; set; }
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string UserId { get; set; } = null!;
     }
 }

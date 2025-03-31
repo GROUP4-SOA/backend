@@ -15,6 +15,8 @@ namespace Bookstore.Domain.Entities
         public string ImportId { get; set; } = ObjectId.GenerateNewId().ToString();
 
         public DateTime ImportDate { get; set; }
+
+        [BsonRepresentation(BsonType.ObjectId)]
         public string UserId { get; set; }
 
         public List<WarehouseImportBook> WarehouseImportBooks { get; set; } = new();

@@ -15,6 +15,7 @@ namespace Bookstore.Domain.Entities
         public string ExportId { get; set; } = ObjectId.GenerateNewId().ToString();
 
         public DateTime ExportDate { get; set; }
+        [BsonRepresentation(BsonType.ObjectId)]
         public string UserId { get; set; }
 
         public List<WarehouseExportBook> WarehouseExportBooks { get; set; } = new();
