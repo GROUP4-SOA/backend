@@ -1,6 +1,4 @@
-﻿// Bookstore.API/Middlewares/ExceptionMiddleware.cs
-using Microsoft.AspNetCore.Http;
-using System;
+﻿using Microsoft.AspNetCore.Http;
 using System.Threading.Tasks;
 
 namespace Bookstore.API.Middlewares
@@ -23,13 +21,17 @@ namespace Bookstore.API.Middlewares
             catch (Exception ex)
             {
                 context.Response.StatusCode = 500;
-                context.Response.ContentType = "application/json";
-                await context.Response.WriteAsync(new
-                {
-                    StatusCode = 500,
-                    Message = "Có lỗi xảy ra: " + ex.Message
-                }.ToString());
+                await context.Response.WriteAsync($"Internal Server Error: {ex.Message}");
+                // Log exception here
             }
+        }
+    }
+
+    public static class ExceptionMiddlewareExtensions
+    {
+        public static IApplicationBuilder UseExceptionMiddleware(this IApplicationBuilder builder)
+        {
+            return builder.UseMiddleware<ExceptionMiddleware>();
         }
     }
 }

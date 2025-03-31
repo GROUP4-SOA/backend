@@ -1,8 +1,8 @@
-﻿// Bookstore.Application/Services/CategoryService.cs
-using Bookstore.Application.DTOs;
+﻿using Bookstore.Application.Dtos;
 using Bookstore.Application.Interfaces.Services;
-using Bookstore.Infrastructure.Interfaces.Repositories;
 using Bookstore.Domain.Entities;
+using Bookstore.Infrastructure.Interfaces;
+using Bookstore.Infrastructure.Interfaces.Repositories;
 
 namespace Bookstore.Application.Services
 {
@@ -17,22 +17,35 @@ namespace Bookstore.Application.Services
 
         public async Task<List<CategoryDto>> GetAllCategoriesAsync()
         {
-            var categories = await _categoryRepository.GetAllAsync();
-            return categories.Select(c => new CategoryDto
+            var categories = await _categoryRepository.GetAllCategoriesAsync();
+            var categoryDtos = new List<CategoryDto>();
+
+            foreach (var category in categories)
             {
-                Id = c.Id,
-                Name = c.Name
-            }).ToList();
+                categoryDtos.Add(new CategoryDto
+                {
+                    CategoryId = category.CategoryId,
+                    Name = category.Name,
+                    Description = category.Description
+                });
+            }
+
+            return categoryDtos;
         }
 
-        public async Task<CategoryDto> GetCategoryByIdAsync(string id)
+        public async Task<CategoryDto> GetCategoryByIdAsync(int categoryId)
         {
-            var category = await _categoryRepository.GetByIdAsync(id);
-            if (category == null) return null;
+            var category = await _categoryRepository.GetCategoryByIdAsync(categoryId.ToString());
+            if (category == null)
+            {
+                return null;
+            }
+
             return new CategoryDto
             {
-                Id = category.Id,
-                Name = category.Name
+                CategoryId = category.CategoryId,
+                Name = category.Name,
+                Description = category.Description
             };
         }
 
@@ -40,31 +53,52 @@ namespace Bookstore.Application.Services
         {
             var category = new Category
             {
-                Id = Guid.NewGuid().ToString(),
-                Name = categoryDto.Name
+                CategoryId = 0,
+                Name = categoryDto.Name,
+                Description = categoryDto.Description
             };
-            await _categoryRepository.AddAsync(category);
+
+            await _categoryRepository.AddCategoryAsync(category);
+
             return new CategoryDto
             {
-                Id = category.Id,
-                Name = category.Name
+                CategoryId = category.CategoryId,
+                Name = category.Name,
+                Description = category.Description
             };
         }
 
-        public async Task UpdateCategoryAsync(string id, CategoryDto categoryDto)
+        public async Task<CategoryDto> UpdateCategoryAsync(int categoryId, CategoryDto categoryDto)
         {
-            var category = await _categoryRepository.GetByIdAsync(id);
-            if (category == null) throw new Exception("Category not found");
+            var existingCategory = await _categoryRepository.GetCategoryByIdAsync(categoryId.ToString());
+            if (existingCategory == null)
+            {
+                return null;
+            }
 
-            category.Name = categoryDto.Name;
-            await _categoryRepository.UpdateAsync(category);
+            existingCategory.Name = categoryDto.Name;
+            existingCategory.Description = categoryDto.Description;
+
+            await _categoryRepository.UpdateCategoryAsync(existingCategory);
+
+            return new CategoryDto
+            {
+                CategoryId = existingCategory.CategoryId,
+                Name = existingCategory.Name,
+                Description = existingCategory.Description
+            };
         }
 
-        public async Task DeleteCategoryAsync(string id)
+        public async Task<bool> DeleteCategoryAsync(int categoryId)
         {
-            var category = await _categoryRepository.GetByIdAsync(id);
-            if (category == null) throw new Exception("Category not found");
-            await _categoryRepository.DeleteAsync(id);
+            var category = await _categoryRepository.GetCategoryByIdAsync(categoryId.ToString());
+            if (category == null)
+            {
+                return false;
+            }
+
+            await _categoryRepository.DeleteCategoryAsync(categoryId.ToString());
+            return true;
         }
     }
 }

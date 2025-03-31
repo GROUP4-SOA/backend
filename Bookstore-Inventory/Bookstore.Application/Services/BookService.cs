@@ -1,8 +1,8 @@
-﻿// Bookstore.Application/Services/BookService.cs
-using Bookstore.Application.DTOs;
+﻿using Bookstore.Application.Dtos;
 using Bookstore.Application.Interfaces.Services;
-using Bookstore.Infrastructure.Interfaces.Repositories;
 using Bookstore.Domain.Entities;
+using Bookstore.Infrastructure.Interfaces;
+using Bookstore.Infrastructure.Interfaces.Repositories;
 
 namespace Bookstore.Application.Services
 {
@@ -17,64 +17,100 @@ namespace Bookstore.Application.Services
 
         public async Task<List<BookDto>> GetAllBooksAsync()
         {
-            var books = await _bookRepository.GetAllAsync();
-            return books.Select(b => new BookDto
+            var books = await _bookRepository.GetAllBooksAsync();
+            var bookDtos = new List<BookDto>();
+
+            foreach (var book in books)
             {
-                Id = b.Id,
-                Title = b.Title,
-                Price = b.Price,
-                CategoryId = b.CategoryId
-            }).ToList();
+                bookDtos.Add(new BookDto
+                {
+                    BookId = book.BookId,
+                    Title = book.Title,
+                    Author = book.Author,
+                    Price = book.Price,
+                    CategoryId = book.CategoryId
+                });
+            }
+
+            return bookDtos;
         }
 
-        public async Task<BookDto> GetBookByIdAsync(string id)
+        public async Task<BookDto> GetBookByIdAsync(int bookId)
         {
-            var book = await _bookRepository.GetByIdAsync(id);
-            if (book == null) return null;
+            var book = await _bookRepository.GetBookByIdAsync(bookId.ToString());
+            if (book == null)
+            {
+                return null;
+            }
+
             return new BookDto
             {
-                Id = book.Id,
+                BookId = book.BookId,
                 Title = book.Title,
+                Author = book.Author,
                 Price = book.Price,
                 CategoryId = book.CategoryId
             };
         }
 
-        public async Task<BookDto> CreateBookAsync(BookCreateDto bookDto)
+        public async Task<BookDto> CreateBookAsync(BookCreateDto bookCreateDto)
         {
             var book = new Book
             {
-                Id = Guid.NewGuid().ToString(),
-                Title = bookDto.Title,
-                Price = bookDto.Price,
-                CategoryId = bookDto.CategoryId
+                BookId = 0,
+                Title = bookCreateDto.Title,
+                Author = bookCreateDto.Author,
+                Price = bookCreateDto.Price,
+                CategoryId = bookCreateDto.CategoryId
             };
-            await _bookRepository.AddAsync(book);
+
+            await _bookRepository.AddBookAsync(book);
+
             return new BookDto
             {
-                Id = book.Id,
+                BookId = book.BookId,
                 Title = book.Title,
+                Author = book.Author,
                 Price = book.Price,
                 CategoryId = book.CategoryId
             };
         }
 
-        public async Task UpdateBookAsync(string id, BookUpdateDto bookDto)
+        public async Task<BookDto> UpdateBookAsync(int bookId, BookUpdateDto bookUpdateDto)
         {
-            var book = await _bookRepository.GetByIdAsync(id);
-            if (book == null) throw new Exception("Book not found");
+            var existingBook = await _bookRepository.GetBookByIdAsync(bookId.ToString());
+            if (existingBook == null)
+            {
+                return null;
+            }
 
-            book.Title = bookDto.Title;
-            book.Price = bookDto.Price;
-            book.CategoryId = bookDto.CategoryId;
-            await _bookRepository.UpdateAsync(book);
+            existingBook.Title = bookUpdateDto.Title;
+            existingBook.Author = bookUpdateDto.Author;
+            existingBook.Price = bookUpdateDto.Price;
+            existingBook.CategoryId = bookUpdateDto.CategoryId;
+
+            await _bookRepository.UpdateBookAsync(existingBook);
+
+            return new BookDto
+            {
+                BookId = existingBook.BookId,
+                Title = existingBook.Title,
+                Author = existingBook.Author,
+                Price = existingBook.Price,
+                CategoryId = existingBook.CategoryId
+            };
         }
 
-        public async Task DeleteBookAsync(string id)
+        public async Task<bool> DeleteBookAsync(int bookId)
         {
-            var book = await _bookRepository.GetByIdAsync(id);
-            if (book == null) throw new Exception("Book not found");
-            await _bookRepository.DeleteAsync(id);
+            var book = await _bookRepository.GetBookByIdAsync(bookId.ToString());
+            if (book == null)
+            {
+                return false;
+            }
+
+            await _bookRepository.DeleteBookAsync(bookId.ToString());
+            return true;
         }
     }
 }

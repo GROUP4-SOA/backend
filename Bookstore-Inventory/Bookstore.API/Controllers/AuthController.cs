@@ -1,11 +1,11 @@
-﻿using Bookstore.Application.DTOs;
+﻿using Bookstore.Application.Dtos;
 using Bookstore.Application.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Bookstore.API.Controllers
 {
-    [ApiController]
     [Route("api/[controller]")]
+    [ApiController]
     public class AuthController : ControllerBase
     {
         private readonly IAuthService _authService;
@@ -16,17 +16,27 @@ namespace Bookstore.API.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> Login([FromBody] LoginRequestDto loginDto)
+        public async Task<IActionResult> Login([FromBody] LoginRequestDto loginRequest)
         {
-            var user = await _authService.LoginAsync(loginDto);
-            return Ok(user);
-        }
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
-        [HttpPost("register")]
-        public async Task<IActionResult> Register([FromBody] UserDto userDto)
-        {
-            var user = await _authService.RegisterAsync(userDto);
-            return Ok(user);
+            try
+            {
+                var user = await _authService.LoginAsync(loginRequest);
+                if (user == null)
+                {
+                    return Unauthorized(new { message = "Invalid username or password" });
+                }
+
+                return Ok(user);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = "An error occurred while processing your request", error = ex.Message });
+            }
         }
     }
 }

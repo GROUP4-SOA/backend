@@ -12,7 +12,7 @@ namespace Bookstore.Domain.Entities
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
-        public string CategoryId { get; set; } = ObjectId.GenerateNewId().ToString();
+        public int CategoryId { get; set; }
 
         public string Name { get; set; }
         public string Description { get; set; }

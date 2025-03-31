@@ -1,8 +1,4 @@
-﻿// Bookstore.API/Middlewares/AuthMiddleware.cs
-using Microsoft.AspNetCore.Http;
-using Microsoft.IdentityModel.Tokens;
-using System.IdentityModel.Tokens.Jwt;
-using System.Text;
+﻿using Microsoft.AspNetCore.Http;
 using System.Threading.Tasks;
 
 namespace Bookstore.API.Middlewares
@@ -10,7 +6,6 @@ namespace Bookstore.API.Middlewares
     public class AuthMiddleware
     {
         private readonly RequestDelegate _next;
-        private readonly string _jwtSecret = "YourSecretKeyHere1234567890"; // Thay bằng secret key trong appsettings.json
 
         public AuthMiddleware(RequestDelegate next)
         {
@@ -19,44 +14,23 @@ namespace Bookstore.API.Middlewares
 
         public async Task InvokeAsync(HttpContext context)
         {
-            var token = context.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
+            var token = context.Request.Headers["Authorization"].ToString().Replace("Bearer ", "");
             if (string.IsNullOrEmpty(token))
             {
-                if (context.Request.Path.StartsWithSegments("/api/auth"))
-                {
-                    await _next(context);
-                    return;
-                }
-
                 context.Response.StatusCode = 401;
-                await context.Response.WriteAsync("Chưa đăng nhập");
+                await context.Response.WriteAsync("Unauthorized");
                 return;
             }
-
-            try
-            {
-                var tokenHandler = new JwtSecurityTokenHandler();
-                var key = Encoding.ASCII.GetBytes(_jwtSecret);
-                tokenHandler.ValidateToken(token, new TokenValidationParameters
-                {
-                    ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(key),
-                    ValidateIssuer = false,
-                    ValidateAudience = false,
-                    ClockSkew = TimeSpan.Zero
-                }, out SecurityToken validatedToken);
-
-                var jwtToken = (JwtSecurityToken)validatedToken;
-                context.Items["User"] = jwtToken.Claims;
-            }
-            catch
-            {
-                context.Response.StatusCode = 401;
-                await context.Response.WriteAsync("Token không hợp lệ");
-                return;
-            }
-
+            // Xác thực token và đặt context người dùng (cần triển khai logic thực tế)
             await _next(context);
+        }
+    }
+
+    public static class AuthMiddlewareExtensions
+    {
+        public static IApplicationBuilder UseAuthMiddleware(this IApplicationBuilder builder)
+        {
+            return builder.UseMiddleware<AuthMiddleware>();
         }
     }
 }
