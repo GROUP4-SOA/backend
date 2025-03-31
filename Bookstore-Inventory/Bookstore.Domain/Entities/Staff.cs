@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MongoDB.Bson.Serialization.Attributes;
+using MongoDB.Bson;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,8 +10,10 @@ namespace Bookstore.Domain.Entities
 {
     public class Staff
     {
-        public int StaffId { get; set; }
-        public int UserId { get; set; }
-        public User User { get; set; }
+        [BsonId]
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string StaffId { get; set; } = ObjectId.GenerateNewId().ToString();
+
+        public string UserId { get; set; }
     }
 }

@@ -18,7 +18,7 @@ namespace Bookstore.Infrastructure.Repositories
         public async Task<IEnumerable<Admin>> GetAllAsync()
             => await _collection.Find(_ => true).ToListAsync();
 
-        public async Task<Admin> GetByIdAsync(int id)
+        public async Task<Admin> GetByIdAsync(string id)
             => await _collection.Find(x => x.AdminId == id).FirstOrDefaultAsync();
 
         public async Task AddAsync(Admin admin)
@@ -27,7 +27,7 @@ namespace Bookstore.Infrastructure.Repositories
         public async Task UpdateAsync(Admin admin)
             => await _collection.ReplaceOneAsync(x => x.AdminId == admin.AdminId, admin);
 
-        public async Task DeleteAsync(int id)
+        public async Task DeleteAsync(string id)
             => await _collection.DeleteOneAsync(x => x.AdminId == id);
     }
 }

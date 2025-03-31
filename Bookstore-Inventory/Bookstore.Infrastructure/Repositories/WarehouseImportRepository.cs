@@ -18,7 +18,7 @@ namespace Bookstore.Infrastructure.Repositories
         public async Task<IEnumerable<WarehouseImport>> GetAllAsync()
             => await _collection.Find(_ => true).ToListAsync();
 
-        public async Task<WarehouseImport> GetByIdAsync(int id)
+        public async Task<WarehouseImport> GetByIdAsync(string id)
             => await _collection.Find(x => x.ImportId == id).FirstOrDefaultAsync();
 
         public async Task AddAsync(WarehouseImport warehouseImport)
@@ -27,7 +27,7 @@ namespace Bookstore.Infrastructure.Repositories
         public async Task UpdateAsync(WarehouseImport warehouseImport)
             => await _collection.ReplaceOneAsync(x => x.ImportId == warehouseImport.ImportId, warehouseImport);
 
-        public async Task DeleteAsync(int id)
+        public async Task DeleteAsync(string id)
             => await _collection.DeleteOneAsync(x => x.ImportId == id);
     }
 }

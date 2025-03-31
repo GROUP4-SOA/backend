@@ -7,9 +7,9 @@ namespace Bookstore.Application.Interfaces
     public interface IWarehouseImportRepository
     {
         Task<IEnumerable<WarehouseImport>> GetAllAsync();
-        Task<WarehouseImport> GetByIdAsync(int id);
+        Task<WarehouseImport> GetByIdAsync(string id);
         Task AddAsync(WarehouseImport warehouseImport);
         Task UpdateAsync(WarehouseImport warehouseImport);
-        Task DeleteAsync(int id);
+        Task DeleteAsync(string id);
     }
 }

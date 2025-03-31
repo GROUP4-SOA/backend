@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MongoDB.Bson.Serialization.Attributes;
+using MongoDB.Bson;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,13 +10,15 @@ namespace Bookstore.Domain.Entities
 {
     public class Book
     {
-        public int BookId { get; set; }
+        [BsonId]
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string BookId { get; set; } = ObjectId.GenerateNewId().ToString();
+
         public string Title { get; set; }
         public string Author { get; set; }
         public decimal Price { get; set; }
-        public DateTime Isbn { get; set; }
-        public int CategoryId { get; set; }
-        public Category Category { get; set; }
+        public string ISBN { get; set; }
+        public string CategoryId { get; set; }
         public int Quantity { get; set; }
     }
 }
