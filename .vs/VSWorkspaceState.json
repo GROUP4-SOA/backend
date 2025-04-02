@@ -6,6 +6,6 @@
     "\\Bookstore-Inventory\\Bookstore.Application",
     "\\Bookstore-Inventory\\Bookstore.Application\\Services"
   ],
-  "SelectedNode": "\\Bookstore-Inventory\\Bookstore.API\\appsettings.json",
+  "SelectedNode": "\\Bookstore-Inventory\\Bookstore.API\\Program.cs",
   "PreviewInSolutionExplorer": false
 }

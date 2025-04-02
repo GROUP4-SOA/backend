@@ -15,5 +15,6 @@ namespace Bookstore.Application.Dtos
     {
         public string BookId { get; set; }
         public int ExportQuantity { get; set; } // Đồng bộ với WarehouseExportBook
+        public decimal Price { get; set; }
     }
 }

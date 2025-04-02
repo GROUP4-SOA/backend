@@ -346,6 +346,10 @@
           "exportQuantity": {
             "type": "integer",
             "format": "int32"
+          },
+          "price": {
+            "type": "number",
+            "format": "double"
           }
         },
         "additionalProperties": false
