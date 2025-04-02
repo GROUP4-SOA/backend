@@ -12,7 +12,7 @@ namespace Bookstore.Infrastructure.Repositories
 
         public AdminRepository(IMongoDatabase database)
         {
-            _collection = database.GetCollection<Admin>("Admins");
+            _collection = database.GetCollection<Admin>("Admin");
         }
 
         public async Task<IEnumerable<Admin>> GetAllAsync()

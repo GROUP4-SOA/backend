@@ -2,37 +2,31 @@
 using Bookstore.Infrastructure.Data;
 using Bookstore.Infrastructure.Interfaces.Repositories;
 using MongoDB.Driver;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Bookstore.Infrastructure.Repositories
 {
     public class CategoryRepository : ICategoryRepository
     {
-        private readonly IMongoCollection<Category> _categorys;
+        private readonly IMongoCollection<Category> _categories;
+
         public CategoryRepository(MongoDbContext dbContext)
         {
-            _categorys = dbContext.GetCollection<Category>("Categorys");
+            _categories = dbContext.GetCollection<Category>("Category");
         }
-        public async Task<List<Category>> GetAllCategoriesAsync() =>
-            await _categorys.Find(category => true).ToListAsync();
 
+        public async Task<List<Category>> GetAllCategoriesAsync() =>
+            await _categories.Find(_ => true).ToListAsync();
 
         public async Task<Category> GetCategoryByIdAsync(string id) =>
-            await _categorys.Find(category => category.CategoryId == id).FirstOrDefaultAsync();
+            await _categories.Find(category => category.Id == id).FirstOrDefaultAsync();
 
         public async Task AddCategoryAsync(Category category) =>
-            await _categorys.InsertOneAsync(category);
+            await _categories.InsertOneAsync(category);
 
         public async Task UpdateCategoryAsync(Category category) =>
-            await _categorys.ReplaceOneAsync(c => c.CategoryId == category.CategoryId, category);
+            await _categories.ReplaceOneAsync(c => c.Id == category.Id, category);
 
         public async Task DeleteCategoryAsync(string id) =>
-            await _categorys.DeleteOneAsync(category => category.CategoryId == id);
+            await _categories.DeleteOneAsync(category => category.Id == id);
     }
 }
-
-

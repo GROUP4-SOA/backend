@@ -17,9 +17,9 @@ namespace Bookstore.Application.Services
 
         public ExportService(IMongoDatabase database)
         {
-            _exportsCollection = database.GetCollection<WarehouseExport>("WarehouseExports");
-            _booksCollection = database.GetCollection<Book>("Books");
-            _usersCollection = database.GetCollection<User>("Users");
+            _exportsCollection = database.GetCollection<WarehouseExport>("WarehouseExport");
+            _booksCollection = database.GetCollection<Book>("Book");
+            _usersCollection = database.GetCollection<User>("User");
         }
 
         public async Task<WarehouseExportDto> CreateExportAsync(WarehouseExportDto exportDto)

@@ -15,7 +15,7 @@ namespace Bookstore.Infrastructure.Repositories
         private readonly IMongoCollection<User> _users;
         public UserRepository(MongoDbContext dbContext)
         {
-            _users = dbContext.GetCollection<User>("Users");
+            _users = dbContext.GetCollection<User>("User");
         }
         public async Task<List<User>> GetAllUsersAsync() =>
             await _users.Find(user => true).ToListAsync();

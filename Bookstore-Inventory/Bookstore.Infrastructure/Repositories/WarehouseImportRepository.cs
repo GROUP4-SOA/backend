@@ -12,7 +12,7 @@ namespace Bookstore.Infrastructure.Repositories
 
         public WarehouseImportRepository(IMongoDatabase database)
         {
-            _collection = database.GetCollection<WarehouseImport>("WarehouseImports");
+            _collection = database.GetCollection<WarehouseImport>("WarehouseImport");
         }
 
         public async Task<IEnumerable<WarehouseImport>> GetAllAsync()

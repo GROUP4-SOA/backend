@@ -12,7 +12,7 @@ namespace Bookstore.Infrastructure.Repositories
 
         public StaffRepository(IMongoDatabase database)
         {
-            _collection = database.GetCollection<Staff>("Staffs");
+            _collection = database.GetCollection<Staff>("Staff");
         }
 
         public async Task<IEnumerable<Staff>> GetAllAsync()

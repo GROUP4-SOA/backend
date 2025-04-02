@@ -12,7 +12,7 @@ namespace Bookstore.Application.Services
 
         public AuthService(IMongoDatabase database)
         {
-            _usersCollection = database.GetCollection<User>("Users");
+            _usersCollection = database.GetCollection<User>("User");
         }
 
         public async Task<UserDto> LoginAsync(LoginRequestDto loginRequest)

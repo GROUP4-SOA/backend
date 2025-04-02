@@ -17,9 +17,9 @@ namespace Bookstore.Application.Services
 
         public ImportService(IMongoDatabase database)
         {
-            _importsCollection = database.GetCollection<WarehouseImport>("WarehouseImports");
-            _booksCollection = database.GetCollection<Book>("Books");
-            _usersCollection = database.GetCollection<User>("Users");
+            _importsCollection = database.GetCollection<WarehouseImport>("WarehouseImport");
+            _booksCollection = database.GetCollection<Book>("Book");
+            _usersCollection = database.GetCollection<User>("User");
         }
 
         public async Task<WarehouseImportDto> CreateImportAsync(WarehouseImportDto importDto)

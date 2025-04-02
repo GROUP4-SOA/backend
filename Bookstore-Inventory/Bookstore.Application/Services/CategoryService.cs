@@ -1,104 +1,101 @@
 ﻿using Bookstore.Application.Dtos;
 using Bookstore.Application.Interfaces.Services;
 using Bookstore.Domain.Entities;
-using Bookstore.Infrastructure.Interfaces;
-using Bookstore.Infrastructure.Interfaces.Repositories;
+using MongoDB.Driver;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using MongoDB.Bson;
 
 namespace Bookstore.Application.Services
 {
-    public class CategoryService : ICategoryService
+            public class CategoryService : ICategoryService
     {
-        private readonly ICategoryRepository _categoryRepository;
+        private readonly IMongoCollection<Category> _categoriesCollection;
 
-        public CategoryService(ICategoryRepository categoryRepository)
+        public CategoryService(IMongoDatabase database)
         {
-            _categoryRepository = categoryRepository;
+            _categoriesCollection = database.GetCollection<Category>("Categories");
         }
 
-        public async Task<List<CategoryDto>> GetAllCategoriesAsync()
+        public async Task<IEnumerable<CategoryDto>> GetAllCategoriesAsync()
         {
-            var categories = await _categoryRepository.GetAllCategoriesAsync();
-            var categoryDtos = new List<CategoryDto>();
-
-            foreach (var category in categories)
+            var categories = await _categoriesCollection.Find(_ => true).ToListAsync();
+            return categories.Select(c => new CategoryDto
             {
-                categoryDtos.Add(new CategoryDto
-                {
-                    CategoryId = category.CategoryId,
-                    Name = category.Name,
-                    Description = category.Description
-                });
-            }
-
-            return categoryDtos;
+                CategoryId = c.Id,
+                Name = c.Name,
+                Description = c.Description
+            });
         }
 
         public async Task<CategoryDto> GetCategoryByIdAsync(string categoryId)
         {
-            var category = await _categoryRepository.GetCategoryByIdAsync(categoryId);
+            if (string.IsNullOrEmpty(categoryId))
+                throw new ArgumentException("CategoryId không được để trống");
+
+            var category = await _categoriesCollection.Find(c => c.Id == categoryId).FirstOrDefaultAsync();
             if (category == null)
-            {
-                return null;
-            }
+                throw new ArgumentException($"Danh mục với ID {categoryId} không tồn tại");
 
             return new CategoryDto
             {
-                CategoryId = category.CategoryId,
+                CategoryId = category.Id,
                 Name = category.Name,
                 Description = category.Description
             };
         }
 
-        public async Task<CategoryDto> CreateCategoryAsync(CategoryDto categoryDto)
+        public async Task<CategoryDto> CreateCategoryAsync(CategoryCreateDto categoryCreateDto)
         {
             var category = new Category
             {
-                CategoryId = "ABC",
-                Name = categoryDto.Name,
-                Description = categoryDto.Description
+                Id = ObjectId.GenerateNewId().ToString(),
+                Name = categoryCreateDto.Name,
+                Description = categoryCreateDto.Description
             };
 
-            await _categoryRepository.AddCategoryAsync(category);
+            await _categoriesCollection.InsertOneAsync(category);
 
             return new CategoryDto
             {
-                CategoryId = category.CategoryId,
+                CategoryId = category.Id,
                 Name = category.Name,
                 Description = category.Description
             };
         }
 
-        public async Task<CategoryDto> UpdateCategoryAsync(string categoryId, CategoryDto categoryDto)
+        public async Task<CategoryDto> UpdateCategoryAsync(string categoryId, CategoryUpdateDto categoryUpdateDto)
         {
-            var existingCategory = await _categoryRepository.GetCategoryByIdAsync(categoryId);
-            if (existingCategory == null)
-            {
-                return null;
-            }
+            if (string.IsNullOrEmpty(categoryId))
+                throw new ArgumentException("CategoryId không được để trống");
 
-            existingCategory.Name = categoryDto.Name;
-            existingCategory.Description = categoryDto.Description;
+            var category = await _categoriesCollection
+                .Find(c => c.Id == categoryId).FirstOrDefaultAsync();
+            if (category == null)
+                throw new ArgumentException($"Danh mục với ID {categoryId} không tồn tại");
 
-            await _categoryRepository.UpdateCategoryAsync(existingCategory);
+            category.Name = categoryUpdateDto.Name;
+            category.Description = categoryUpdateDto.Description;
+
+            await _categoriesCollection.ReplaceOneAsync(c => c.Id == categoryId, category);
 
             return new CategoryDto
             {
-                CategoryId = existingCategory.CategoryId,
-                Name = existingCategory.Name,
-                Description = existingCategory.Description
+                CategoryId = category.Id,
+                Name = category.Name,
+                Description = category.Description
             };
         }
 
         public async Task<bool> DeleteCategoryAsync(string categoryId)
         {
-            var category = await _categoryRepository.GetCategoryByIdAsync(categoryId);
-            if (category == null)
-            {
-                return false;
-            }
+            if (string.IsNullOrEmpty(categoryId))
+                throw new ArgumentException("CategoryId không được để trống");
 
-            await _categoryRepository.DeleteCategoryAsync(categoryId);
-            return true;
+            var result = await _categoriesCollection.DeleteOneAsync(c => c.Id == categoryId);
+            return result.DeletedCount > 0;
         }
     }
 }

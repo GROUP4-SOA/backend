@@ -111,3 +111,8 @@ C:/Nam3/SOA/Do_an/Do_an7/backend/Bookstore-Inventory/Bookstore.API/obj/Debug/net
 /Users/ngochuynh/RiderProjects/backend/Bookstore-Inventory/Bookstore.API/obj/Debug/net8.0/ref/Bookstore.API.dll
 /Users/ngochuynh/RiderProjects/backend/Bookstore-Inventory/Bookstore.API/bin/Debug/net8.0/Castle.Core.dll
 /Users/ngochuynh/RiderProjects/backend/Bookstore-Inventory/Bookstore.API/bin/Debug/net8.0/Moq.dll
+/Users/ngochuynh/RiderProjects/backend/Bookstore-Inventory/Bookstore.API/bin/Debug/net8.0/Microsoft.OpenApi.dll
+/Users/ngochuynh/RiderProjects/backend/Bookstore-Inventory/Bookstore.API/bin/Debug/net8.0/Swashbuckle.AspNetCore.Swagger.dll
+/Users/ngochuynh/RiderProjects/backend/Bookstore-Inventory/Bookstore.API/bin/Debug/net8.0/Swashbuckle.AspNetCore.SwaggerGen.dll
+/Users/ngochuynh/RiderProjects/backend/Bookstore-Inventory/Bookstore.API/bin/Debug/net8.0/Swashbuckle.AspNetCore.SwaggerUI.dll
+/Users/ngochuynh/RiderProjects/backend/Bookstore-Inventory/Bookstore.API/obj/Debug/net8.0/Bookstore.API.MvcApplicationPartsAssemblyInfo.cs

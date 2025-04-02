@@ -4,10 +4,10 @@ namespace Bookstore.Application.Interfaces.Services
 {
     public interface ICategoryService
     {
-        Task<List<CategoryDto>> GetAllCategoriesAsync();
-        Task<CategoryDto> GetCategoryByIdAsync(string categoryId);
-        Task<CategoryDto> CreateCategoryAsync(CategoryDto categoryDto);
-        Task<CategoryDto> UpdateCategoryAsync(string categoryId, CategoryDto categoryDto);
-        Task<bool> DeleteCategoryAsync(string categoryId);
+        Task<IEnumerable<CategoryDto>> GetAllCategoriesAsync();
+        Task<CategoryDto> GetCategoryByIdAsync(string id);
+        Task<CategoryDto> CreateCategoryAsync(CategoryCreateDto createDto);
+        Task<CategoryDto> UpdateCategoryAsync(string id, CategoryUpdateDto updateDto);
+        Task<bool> DeleteCategoryAsync(string id);
     }
 }

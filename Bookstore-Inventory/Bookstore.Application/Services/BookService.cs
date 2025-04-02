@@ -15,7 +15,7 @@ namespace Bookstore.Application.Services
 
         public BookService(IMongoDatabase database)
         {
-            _booksCollection = database.GetCollection<Book>("Books");
+            _booksCollection = database.GetCollection<Book>("Book");
         }
 
         public async Task<List<BookDto>> GetAllBooksAsync()

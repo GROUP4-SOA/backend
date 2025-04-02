@@ -12,7 +12,7 @@ namespace Bookstore.Infrastructure.Repositories
         private readonly IMongoCollection<Book> _books;
         public BookRepository(MongoDbContext dbContext)
         {
-            _books = dbContext.GetCollection<Book>("Books");
+            _books = dbContext.GetCollection<Book>("Book");
         }
 
         public async Task<List<Book>> GetAllBooksAsync() =>
