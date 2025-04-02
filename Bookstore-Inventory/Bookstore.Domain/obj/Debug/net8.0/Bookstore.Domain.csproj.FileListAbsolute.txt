@@ -24,3 +24,16 @@ C:/Nam3/SOA/Do_an/Do_an7/backend/Bookstore-Inventory/Bookstore.Domain/obj/Debug/
 /Users/ngochuynh/RiderProjects/backend/Bookstore-Inventory/Bookstore.Domain/obj/Debug/net8.0/refint/Bookstore.Domain.dll
 /Users/ngochuynh/RiderProjects/backend/Bookstore-Inventory/Bookstore.Domain/obj/Debug/net8.0/Bookstore.Domain.pdb
 /Users/ngochuynh/RiderProjects/backend/Bookstore-Inventory/Bookstore.Domain/obj/Debug/net8.0/ref/Bookstore.Domain.dll
+E:\SOA_KienTrucPM\Backend\backend\Bookstore-Inventory\Bookstore.Domain\bin\Debug\net8.0\Bookstore.Domain.deps.json
+E:\SOA_KienTrucPM\Backend\backend\Bookstore-Inventory\Bookstore.Domain\bin\Debug\net8.0\Bookstore.Domain.dll
+E:\SOA_KienTrucPM\Backend\backend\Bookstore-Inventory\Bookstore.Domain\bin\Debug\net8.0\Bookstore.Domain.pdb
+E:\SOA_KienTrucPM\Backend\backend\Bookstore-Inventory\Bookstore.Domain\obj\Debug\net8.0\Bookstore.Domain.csproj.AssemblyReference.cache
+E:\SOA_KienTrucPM\Backend\backend\Bookstore-Inventory\Bookstore.Domain\obj\Debug\net8.0\Bookstore.Domain.GeneratedMSBuildEditorConfig.editorconfig
+E:\SOA_KienTrucPM\Backend\backend\Bookstore-Inventory\Bookstore.Domain\obj\Debug\net8.0\Bookstore.Domain.AssemblyInfoInputs.cache
+E:\SOA_KienTrucPM\Backend\backend\Bookstore-Inventory\Bookstore.Domain\obj\Debug\net8.0\Bookstore.Domain.AssemblyInfo.cs
+E:\SOA_KienTrucPM\Backend\backend\Bookstore-Inventory\Bookstore.Domain\obj\Debug\net8.0\Bookstore.Domain.csproj.CoreCompileInputs.cache
+E:\SOA_KienTrucPM\Backend\backend\Bookstore-Inventory\Bookstore.Domain\obj\Debug\net8.0\Bookstore.Domain.sourcelink.json
+E:\SOA_KienTrucPM\Backend\backend\Bookstore-Inventory\Bookstore.Domain\obj\Debug\net8.0\Bookstore.Domain.dll
+E:\SOA_KienTrucPM\Backend\backend\Bookstore-Inventory\Bookstore.Domain\obj\Debug\net8.0\refint\Bookstore.Domain.dll
+E:\SOA_KienTrucPM\Backend\backend\Bookstore-Inventory\Bookstore.Domain\obj\Debug\net8.0\Bookstore.Domain.pdb
+E:\SOA_KienTrucPM\Backend\backend\Bookstore-Inventory\Bookstore.Domain\obj\Debug\net8.0\ref\Bookstore.Domain.dll

@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using MongoDB.Driver;
 using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
+using Microsoft.AspNetCore.Mvc;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -30,6 +31,9 @@ builder.Services.AddSingleton<IBookRepository, BookRepository>();
 builder.Services.AddSingleton<BookService>();
 builder.Services.AddSingleton<ICategoryRepository, CategoryRepository>();
 builder.Services.AddSingleton<CategoryService>();
+builder.Services.AddSingleton<IWarehouseExportRepository, WarehouseExportRepository>();
+builder.Services.AddSingleton<ExportService>();
+
 
 // Add CORS policy
 builder.Services.AddCors(options =>
@@ -283,4 +287,48 @@ app.MapDelete("/api/categories/{categoryId}", async (string categoryId, Category
         );
     }
 });
+// API Endpoints
+// Warehouse Export
+app.MapGet("/api/warehouse-exports", async (ExportService service) =>
+{
+    try
+    {
+        var exports = await service.GetAllExportsAsync();
+        return Results.Ok(exports);
+    }
+    catch (Exception ex)
+    {
+        return Results.Problem(
+            statusCode: 500,
+            detail: ex.Message,
+            title: "Lỗi khi lấy danh sách đơn xuất kho"
+        );
+    }
+});
+
+app.MapPost("/api/warehouse-exports", async (
+    [FromBody] WarehouseExportDto exportDto,
+    [FromServices] ExportService service) =>
+{
+    try
+    {
+        var createdExport = await service.CreateExportAsync(exportDto);
+        return Results.Created($"/api/warehouse-exports/{createdExport.ExportId}", createdExport);
+    }
+    catch (ArgumentException ex)
+    {
+        return Results.BadRequest(new { message = ex.Message });
+    }
+    catch (Exception ex)
+    {
+        return Results.Problem(
+            statusCode: 500,
+            detail: ex.Message,
+            title: "Lỗi khi tạo đơn xuất kho"
+        );
+    }
+});
+
+
+
 app.Run();

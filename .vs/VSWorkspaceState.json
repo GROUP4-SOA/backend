@@ -2,9 +2,10 @@
   "ExpandedNodes": [
     "",
     "\\Bookstore-Inventory",
+    "\\Bookstore-Inventory\\Bookstore.API",
     "\\Bookstore-Inventory\\Bookstore.Application",
     "\\Bookstore-Inventory\\Bookstore.Application\\Services"
   ],
-  "SelectedNode": "\\Bookstore-Inventory\\Bookstore.Application\\Services\\ImportService.cs",
+  "SelectedNode": "\\Bookstore-Inventory\\Bookstore.API\\appsettings.json",
   "PreviewInSolutionExplorer": false
 }
