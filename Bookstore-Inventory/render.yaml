@@ -2,18 +2,17 @@ services:
   - type: web
     name: bookstore-api
     env: docker
-    dockerfilePath: ./Bookstore.API/Dockerfile  # Đường dẫn tới Dockerfile trong thư mục API
-    buildCommand: docker build -t bookstore-api ./Bookstore.API
-    startCommand: docker run -p $PORT:80 bookstore-api
-    rootDir: ./Bookstore.API  # Chỉ định thư mục gốc
+    dockerfilePath: Dockerfile  # Sửa lại đường dẫn
+    buildCommand: docker build -t bookstore-api .
+    startCommand: docker run -p $PORT:8080 bookstore-api  # Đổi port thành 8080
     envVars:
       - key: PORT
-        value: 80
+        value: 8080
       - key: ASPNETCORE_ENVIRONMENT
         value: Production
+      - key: APP_UID  # Thêm biến môi trường APP_UID
+        value: "1000"
     healthCheckPath: /health
     autoDeploy: true
     plan: free
     region: singapore
-    numInstances: 1
-    pullRequestPreviewsEnabled: true
