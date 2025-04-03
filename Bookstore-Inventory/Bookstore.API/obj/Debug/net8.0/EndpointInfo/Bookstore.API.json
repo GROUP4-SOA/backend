@@ -77,7 +77,7 @@
         }
       }
     },
-    "/api/Auth/{userId}": {
+    "/api/Auth/deactivate/{userId}": {
       "delete": {
         "tags": [
           "Auth"
@@ -91,6 +91,18 @@
               "type": "string"
             }
           }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Auth/all-users": {
+      "get": {
+        "tags": [
+          "Auth"
         ],
         "responses": {
           "200": {
@@ -527,6 +539,18 @@
               "type": "string"
             }
           }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/auth/all-users": {
+      "get": {
+        "tags": [
+          "Bookstore.API"
         ],
         "responses": {
           "200": {
@@ -992,6 +1016,19 @@
         },
         "additionalProperties": false
       }
+    },
+    "securitySchemes": {
+      "currentUserId": {
+        "type": "apiKey",
+        "description": "Nhập userId của người thực hiện thao tác",
+        "name": "currentUserId",
+        "in": "header"
+      }
     }
-  }
+  },
+  "security": [
+    {
+      "currentUserId": [ ]
+    }
+  ]
 }

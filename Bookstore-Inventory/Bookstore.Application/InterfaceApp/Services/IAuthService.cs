@@ -7,6 +7,9 @@ namespace Bookstore.Application.Interfaces.Services
     {
         Task<UserDto> LoginAsync(LoginRequestDto loginRequest);
         Task<UserDto> UpdateUserAsync(string userId, UpdateUserDto updateUser, string currentUsername);
-        Task DeleteUserAsync(string userId, string currentUsername);
+        Task DeactivateUserAsync(string userId, string currentUserId);
+        Task<List<UserDto>> GetAllUsersAsync(string currentUserId);
+
+
     }
 }
