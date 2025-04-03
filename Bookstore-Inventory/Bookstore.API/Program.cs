@@ -9,10 +9,7 @@ using Microsoft.OpenApi.Models;
 using MongoDB.Driver;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.WebHost.ConfigureKestrel(options =>
-{
-    options.ListenAnyIP(10000); // Chỉ để port 10000
-});
+
 
 // Load MongoDB settings from configuration
 var mongoDbSettings = builder.Configuration.GetSection("DatabaseSettings").Get<MongoDbSettings>();
@@ -36,8 +33,7 @@ builder.Services.AddSingleton<CategoryService>();
 builder.Services.AddSingleton<IWarehouseExportRepository, WarehouseExportRepository>();
 builder.Services.AddSingleton<ExportService>();
 builder.Services.AddSingleton<IImportService, ImportService>();  // Import Service
-builder.Services.AddScoped<IAuthService, AuthService>();  // Auth Service
-
+builder.Services.AddSingleton<IAuthService, AuthService>();
 // Add CORS policy
 builder.Services.AddCors(options =>
 {
@@ -61,7 +57,6 @@ builder.Services.AddSwaggerGen(c =>
 });
 
 // Add Controllers
-builder.Services.AddControllers();
 
 var app = builder.Build();
 
@@ -144,19 +139,6 @@ app.MapDelete("/api/categories/{categoryId}", async (string categoryId, Category
     return result ? Results.NoContent() : Results.NotFound();
 });
 
-// Warehouse Export
-app.MapGet("/api/warehouse-exports", async (ExportService service) =>
-{
-    var exports = await service.GetAllExportsAsync();
-    return Results.Ok(exports);
-});
-
-app.MapPost("/api/warehouse-exports", async (WarehouseExportDto exportDto, ExportService service) =>
-{
-    var createdExport = await service.CreateExportAsync(exportDto);
-    return Results.Created($"/api/warehouse-exports/{createdExport.ExportId}", createdExport);
-});
-
 // ===== AUTH ENDPOINTS =====
 app.MapPost("/api/auth/login", async (LoginRequestDto loginRequest, IAuthService authService) =>
 {
@@ -198,7 +180,18 @@ app.MapDelete("/api/auth/{userId}", async (string userId, IAuthService authServi
         return Results.BadRequest(new { message = ex.Message });
     }
 });
+// Warehouse Export
+app.MapGet("/api/warehouse-exports", async (ExportService service) =>
+{
+    var exports = await service.GetAllExportsAsync();
+    return Results.Ok(exports);
+});
 
+app.MapPost("/api/warehouse-exports", async (WarehouseExportDto exportDto, ExportService service) =>
+{
+    var createdExport = await service.CreateExportAsync(exportDto);
+    return Results.Created($"/api/warehouse-exports/{createdExport.ExportId}", createdExport);
+});
 // ===== IMPORT ENDPOINTS =====
 app.MapPost("/api/imports", async (WarehouseImportDto importDto, IImportService importService) =>
 {
@@ -218,8 +211,5 @@ app.MapGet("/api/imports", async (IImportService importService) =>
     var imports = await importService.GetAllImportsAsync();
     return Results.Ok(imports);
 });
-
-// Map Controllers
-app.MapControllers();
 
 app.Run();
