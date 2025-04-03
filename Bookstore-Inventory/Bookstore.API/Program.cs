@@ -9,6 +9,7 @@ using Microsoft.OpenApi.Models;
 using MongoDB.Driver;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.WebHost.UseUrls($"http://0.0.0.0:{Environment.GetEnvironmentVariable("PORT") ?? "80"}");
 
 // Load MongoDB settings from configuration
 var mongoDbSettings = builder.Configuration.GetSection("DatabaseSettings").Get<MongoDbSettings>();
