@@ -66,15 +66,15 @@ namespace Bookstore.API.Controllers
 
             try
             {
-                var currentUsername = Request.Headers["X-Username"];
-                Console.WriteLine($"X-Username: {currentUsername}");
-                if (string.IsNullOrEmpty(currentUsername))
+                var currentUserId = Request.Headers["currentUserId"].ToString(); // Thay X-Username thành currentUserId
+                Console.WriteLine($"currentUserId: {currentUserId}");
+                if (string.IsNullOrEmpty(currentUserId))
                 {
-                    Console.WriteLine("X-Username is missing.");
-                    return BadRequest(new { message = "Yêu cầu cung cấp X-Username trong header." });
+                    Console.WriteLine("currentUserId is missing.");
+                    return BadRequest(new { message = "Yêu cầu cung cấp currentUserId trong header." });
                 }
 
-                var user = await _authService.UpdateUserAsync(userId, updateUser, currentUsername);
+                var user = await _authService.UpdateUserAsync(userId, updateUser, currentUserId); // Dùng currentUserId
                 Console.WriteLine("User updated successfully.");
                 return Ok(user);
             }
@@ -90,10 +90,10 @@ namespace Bookstore.API.Controllers
             }
         }
 
-        [HttpDelete("{userId}")]
-        public async Task<IActionResult> Delete(string userId)
+        [HttpDelete("deactivate/{userId}")]
+        public async Task<IActionResult> DeactivateUser(string userId)
         {
-            Console.WriteLine($"Received request to delete userId: {userId}");
+            Console.WriteLine($"Received request to deactivate userId: {userId}");
             try
             {
                 var currentUsername = Request.Headers["X-Username"];
@@ -104,18 +104,49 @@ namespace Bookstore.API.Controllers
                     return BadRequest(new { message = "Yêu cầu cung cấp X-Username trong header." });
                 }
 
-                await _authService.DeleteUserAsync(userId, currentUsername);
-                Console.WriteLine("User deleted successfully.");
+                await _authService.DeactivateUserAsync(userId, currentUsername);
+                Console.WriteLine("User deactivated successfully.");
                 return NoContent();
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                return Forbid();
             }
             catch (ArgumentException ex)
             {
-                Console.WriteLine($"ArgumentException in Delete: {ex.Message}");
-                return BadRequest(new { message = ex.Message });
+                return NotFound(new { message = ex.Message });
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Exception in Delete: {ex.Message}");
+                Console.WriteLine($"Lỗi khi vô hiệu hóa user: {ex.Message}");
+                return StatusCode(500, new { message = "Đã xảy ra lỗi khi vô hiệu hóa user." });
+            }
+        }
+        [HttpGet("all-users")]
+        public async Task<IActionResult> GetAllUsers()
+        {
+            Console.WriteLine("Received request to get all users.");
+
+            // Lấy userId của người gọi từ header
+            var currentUsername = Request.Headers["X-Username"].ToString();
+            if (string.IsNullOrEmpty(currentUsername))
+            {
+                Console.WriteLine("X-Username is missing.");
+                return BadRequest(new { message = "Yêu cầu cung cấp X-Username trong header." });
+            }
+
+            try
+            {
+                var users = await _authService.GetAllUsersAsync(currentUsername);
+                return Ok(users);
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                return Forbid();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Lỗi khi lấy danh sách user: {ex.Message}");
                 return StatusCode(500, new { message = "Lỗi hệ thống", error = ex.Message });
             }
         }

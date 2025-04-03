@@ -9,10 +9,6 @@ using Microsoft.OpenApi.Models;
 using MongoDB.Driver;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.WebHost.ConfigureKestrel(options =>
-{
-    options.ListenAnyIP(10000); // Chỉ để port 10000
-});
 
 // Load MongoDB settings from configuration
 var mongoDbSettings = builder.Configuration.GetSection("DatabaseSettings").Get<MongoDbSettings>();
@@ -58,7 +54,31 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "Bookstore API", Version = "v1" });
+    c.AddSecurityDefinition("currentUserId", new OpenApiSecurityScheme
+    {
+        In = ParameterLocation.Header,
+        Name = "currentUserId", // Phải trùng với tên header trong API
+        Type = SecuritySchemeType.ApiKey,
+        Description = "Nhập userId của người thực hiện thao tác"
+    });
+
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement
+{
+    {
+        new OpenApiSecurityScheme
+        {
+            Reference = new OpenApiReference
+            {
+                Type = ReferenceType.SecurityScheme,
+                Id = "currentUserId" // Phải trùng với SecurityDefinition ở trên
+            }
+        },
+        new List<string>()
+    }
 });
+
+});
+
 
 // Add Controllers
 builder.Services.AddControllers();
@@ -173,10 +193,16 @@ app.MapPost("/api/auth/login", async (LoginRequestDto loginRequest, IAuthService
 
 app.MapPut("/api/auth/{userId}", async (string userId, UpdateUserDto updateUser, IAuthService authService, HttpContext httpContext) =>
 {
-    var currentUsername = httpContext.User.Identity?.Name ?? "admin"; // Thay thế bằng cách lấy username thực tế
+    var currentUserId = httpContext.Request.Headers["currentUserId"].ToString();
+
+    if (string.IsNullOrEmpty(currentUserId))
+    {
+        return Results.BadRequest(new { message = "Thiếu userId của người thực hiện thao tác!" });
+    }
+
     try
     {
-        var updatedUser = await authService.UpdateUserAsync(userId, updateUser, currentUsername);
+        var updatedUser = await authService.UpdateUserAsync(userId, updateUser, currentUserId);
         return Results.Ok(updatedUser);
     }
     catch (ArgumentException ex)
@@ -185,19 +211,61 @@ app.MapPut("/api/auth/{userId}", async (string userId, UpdateUserDto updateUser,
     }
 });
 
+
 app.MapDelete("/api/auth/{userId}", async (string userId, IAuthService authService, HttpContext httpContext) =>
 {
-    var currentUsername = httpContext.User.Identity?.Name ?? "admin";
+    var currentUserId = httpContext.Request.Headers["currentUserId"].ToString();
+
+    if (string.IsNullOrEmpty(currentUserId))
+    {
+        return Results.BadRequest(new { message = "Thiếu userId của người thực hiện thao tác!" });
+    }
+
     try
     {
-        await authService.DeleteUserAsync(userId, currentUsername);
+        await authService.DeactivateUserAsync(userId, currentUserId);
         return Results.NoContent();
+    }
+    catch (UnauthorizedAccessException)
+    {
+        return Results.Forbid();
     }
     catch (ArgumentException ex)
     {
-        return Results.BadRequest(new { message = ex.Message });
+        return Results.NotFound(new { message = ex.Message });
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine($"Lỗi khi vô hiệu hóa user: {ex.Message}");
+        return Results.BadRequest(new { message = "Đã xảy ra lỗi khi vô hiệu hóa user." });
     }
 });
+
+app.MapGet("/api/auth/all-users", async (IAuthService authService, HttpContext httpContext) =>
+{
+    var currentUserId = httpContext.Request.Headers["currentUserId"].ToString();
+
+    if (string.IsNullOrEmpty(currentUserId))
+    {
+        return Results.BadRequest(new { message = "Thiếu userId của người thực hiện thao tác!" });
+    }
+
+    try
+    {
+        var users = await authService.GetAllUsersAsync(currentUserId);
+        return Results.Ok(users);
+    }
+    catch (UnauthorizedAccessException)
+    {
+        return Results.Forbid();
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine($"Lỗi khi lấy danh sách user: {ex.Message}");
+        return Results.StatusCode(500);
+    }
+});
+
 
 // ===== IMPORT ENDPOINTS =====
 app.MapPost("/api/imports", async (WarehouseImportDto importDto, IImportService importService) =>
