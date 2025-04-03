@@ -4,8 +4,10 @@
     "\\Bookstore-Inventory",
     "\\Bookstore-Inventory\\Bookstore.API",
     "\\Bookstore-Inventory\\Bookstore.Application",
-    "\\Bookstore-Inventory\\Bookstore.Application\\Services"
+    "\\Bookstore-Inventory\\Bookstore.Application\\Services",
+    "\\Bookstore-Inventory\\Bookstore.Domain",
+    "\\Bookstore-Inventory\\Bookstore.Domain\\Entities"
   ],
-  "SelectedNode": "\\Bookstore-Inventory\\Bookstore.API\\Program.cs",
+  "SelectedNode": "\\Bookstore-Inventory\\Bookstore.Domain\\Entities\\WarehouseImportBook.cs",
   "PreviewInSolutionExplorer": false
 }

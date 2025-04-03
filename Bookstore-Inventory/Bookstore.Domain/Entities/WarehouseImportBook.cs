@@ -10,7 +10,6 @@ namespace Bookstore.Domain.Entities
 {
     public class WarehouseImportBook
     {
-        [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
         public string WarehouseImportId { get; set; }
         

@@ -15,5 +15,6 @@ namespace Bookstore.Application.Dtos
     {
         public string BookId { get; set; }
         public int ImportQuantity { get; set; }
+        public decimal Price { get; set; }
     }
 }
