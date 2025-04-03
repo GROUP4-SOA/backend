@@ -1,12 +1,12 @@
-﻿using System;
+﻿using Bookstore.Application.Dtos;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
-namespace Bookstore.Application.InterfaceApp.Services
+namespace Bookstore.Application.Interfaces.Services
 {
-    internal class IImportService
+    public interface IImportService
     {
+        Task<WarehouseImportDto> CreateImportAsync(WarehouseImportDto importDto);
+        Task<List<WarehouseImportDto>> GetAllImportsAsync();
     }
 }

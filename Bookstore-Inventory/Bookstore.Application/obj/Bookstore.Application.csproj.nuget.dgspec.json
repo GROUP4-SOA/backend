@@ -1,36 +1,42 @@
 {
   "format": 1,
   "restore": {
-    "/Users/ngochuynh/RiderProjects/backend/Bookstore-Inventory/Bookstore.Application/Bookstore.Application.csproj": {}
+    "C:\\Nam3\\SOA\\Do_an\\Do_an15\\backend\\Bookstore-Inventory\\Bookstore.Application\\Bookstore.Application.csproj": {}
   },
   "projects": {
-    "/Users/ngochuynh/RiderProjects/backend/Bookstore-Inventory/Bookstore.Application/Bookstore.Application.csproj": {
+    "C:\\Nam3\\SOA\\Do_an\\Do_an15\\backend\\Bookstore-Inventory\\Bookstore.Application\\Bookstore.Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/ngochuynh/RiderProjects/backend/Bookstore-Inventory/Bookstore.Application/Bookstore.Application.csproj",
+        "projectUniqueName": "C:\\Nam3\\SOA\\Do_an\\Do_an15\\backend\\Bookstore-Inventory\\Bookstore.Application\\Bookstore.Application.csproj",
         "projectName": "Bookstore.Application",
-        "projectPath": "/Users/ngochuynh/RiderProjects/backend/Bookstore-Inventory/Bookstore.Application/Bookstore.Application.csproj",
-        "packagesPath": "/Users/ngochuynh/.nuget/packages/",
-        "outputPath": "/Users/ngochuynh/RiderProjects/backend/Bookstore-Inventory/Bookstore.Application/obj/",
+        "projectPath": "C:\\Nam3\\SOA\\Do_an\\Do_an15\\backend\\Bookstore-Inventory\\Bookstore.Application\\Bookstore.Application.csproj",
+        "packagesPath": "C:\\Users\\Truc\\.nuget\\packages\\",
+        "outputPath": "C:\\Nam3\\SOA\\Do_an\\Do_an15\\backend\\Bookstore-Inventory\\Bookstore.Application\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "/Users/ngochuynh/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\Truc\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "/Users/ngochuynh/RiderProjects/backend/Bookstore-Inventory/Bookstore.Domain/Bookstore.Domain.csproj": {
-                "projectPath": "/Users/ngochuynh/RiderProjects/backend/Bookstore-Inventory/Bookstore.Domain/Bookstore.Domain.csproj"
+              "C:\\Nam3\\SOA\\Do_an\\Do_an15\\backend\\Bookstore-Inventory\\Bookstore.Domain\\Bookstore.Domain.csproj": {
+                "projectPath": "C:\\Nam3\\SOA\\Do_an\\Do_an15\\backend\\Bookstore-Inventory\\Bookstore.Domain\\Bookstore.Domain.csproj"
               },
-              "/Users/ngochuynh/RiderProjects/backend/Bookstore-Inventory/Bookstore.Infrastructure/Bookstore.Infrastructure.csproj": {
-                "projectPath": "/Users/ngochuynh/RiderProjects/backend/Bookstore-Inventory/Bookstore.Infrastructure/Bookstore.Infrastructure.csproj"
+              "C:\\Nam3\\SOA\\Do_an\\Do_an15\\backend\\Bookstore-Inventory\\Bookstore.Infrastructure\\Bookstore.Infrastructure.csproj": {
+                "projectPath": "C:\\Nam3\\SOA\\Do_an\\Do_an15\\backend\\Bookstore-Inventory\\Bookstore.Infrastructure\\Bookstore.Infrastructure.csproj"
               }
             }
           }
@@ -45,7 +51,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.100"
+        "SdkAnalysisLevel": "9.0.200"
       },
       "frameworks": {
         "net8.0": {
@@ -83,41 +89,37 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[8.0.12, 8.0.12]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Ref",
-              "version": "[8.0.12, 8.0.12]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.102/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.201/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "/Users/ngochuynh/RiderProjects/backend/Bookstore-Inventory/Bookstore.Domain/Bookstore.Domain.csproj": {
+    "C:\\Nam3\\SOA\\Do_an\\Do_an15\\backend\\Bookstore-Inventory\\Bookstore.Domain\\Bookstore.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/ngochuynh/RiderProjects/backend/Bookstore-Inventory/Bookstore.Domain/Bookstore.Domain.csproj",
+        "projectUniqueName": "C:\\Nam3\\SOA\\Do_an\\Do_an15\\backend\\Bookstore-Inventory\\Bookstore.Domain\\Bookstore.Domain.csproj",
         "projectName": "Bookstore.Domain",
-        "projectPath": "/Users/ngochuynh/RiderProjects/backend/Bookstore-Inventory/Bookstore.Domain/Bookstore.Domain.csproj",
-        "packagesPath": "/Users/ngochuynh/.nuget/packages/",
-        "outputPath": "/Users/ngochuynh/RiderProjects/backend/Bookstore-Inventory/Bookstore.Domain/obj/",
+        "projectPath": "C:\\Nam3\\SOA\\Do_an\\Do_an15\\backend\\Bookstore-Inventory\\Bookstore.Domain\\Bookstore.Domain.csproj",
+        "packagesPath": "C:\\Users\\Truc\\.nuget\\packages\\",
+        "outputPath": "C:\\Nam3\\SOA\\Do_an\\Do_an15\\backend\\Bookstore-Inventory\\Bookstore.Domain\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "/Users/ngochuynh/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\Truc\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -136,7 +138,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.100"
+        "SdkAnalysisLevel": "9.0.200"
       },
       "frameworks": {
         "net8.0": {
@@ -174,49 +176,45 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[8.0.12, 8.0.12]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Ref",
-              "version": "[8.0.12, 8.0.12]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.102/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.201/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "/Users/ngochuynh/RiderProjects/backend/Bookstore-Inventory/Bookstore.Infrastructure/Bookstore.Infrastructure.csproj": {
+    "C:\\Nam3\\SOA\\Do_an\\Do_an15\\backend\\Bookstore-Inventory\\Bookstore.Infrastructure\\Bookstore.Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/ngochuynh/RiderProjects/backend/Bookstore-Inventory/Bookstore.Infrastructure/Bookstore.Infrastructure.csproj",
+        "projectUniqueName": "C:\\Nam3\\SOA\\Do_an\\Do_an15\\backend\\Bookstore-Inventory\\Bookstore.Infrastructure\\Bookstore.Infrastructure.csproj",
         "projectName": "Bookstore.Infrastructure",
-        "projectPath": "/Users/ngochuynh/RiderProjects/backend/Bookstore-Inventory/Bookstore.Infrastructure/Bookstore.Infrastructure.csproj",
-        "packagesPath": "/Users/ngochuynh/.nuget/packages/",
-        "outputPath": "/Users/ngochuynh/RiderProjects/backend/Bookstore-Inventory/Bookstore.Infrastructure/obj/",
+        "projectPath": "C:\\Nam3\\SOA\\Do_an\\Do_an15\\backend\\Bookstore-Inventory\\Bookstore.Infrastructure\\Bookstore.Infrastructure.csproj",
+        "packagesPath": "C:\\Users\\Truc\\.nuget\\packages\\",
+        "outputPath": "C:\\Nam3\\SOA\\Do_an\\Do_an15\\backend\\Bookstore-Inventory\\Bookstore.Infrastructure\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "/Users/ngochuynh/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\Truc\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "/Users/ngochuynh/RiderProjects/backend/Bookstore-Inventory/Bookstore.Domain/Bookstore.Domain.csproj": {
-                "projectPath": "/Users/ngochuynh/RiderProjects/backend/Bookstore-Inventory/Bookstore.Domain/Bookstore.Domain.csproj"
+              "C:\\Nam3\\SOA\\Do_an\\Do_an15\\backend\\Bookstore-Inventory\\Bookstore.Domain\\Bookstore.Domain.csproj": {
+                "projectPath": "C:\\Nam3\\SOA\\Do_an\\Do_an15\\backend\\Bookstore-Inventory\\Bookstore.Domain\\Bookstore.Domain.csproj"
               }
             }
           }
@@ -231,7 +229,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.100"
+        "SdkAnalysisLevel": "9.0.200"
       },
       "frameworks": {
         "net8.0": {
@@ -269,22 +267,12 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[8.0.12, 8.0.12]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Ref",
-              "version": "[8.0.12, 8.0.12]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.102/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.201/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
