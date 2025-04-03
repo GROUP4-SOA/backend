@@ -1,4 +1,4 @@
-using Bookstore.Application.Dtos;
+﻿using Bookstore.Application.Dtos;
 using Bookstore.Application.Interfaces.Services;
 using Bookstore.Application.Services;
 using Bookstore.Infrastructure.Data;
@@ -31,7 +31,8 @@ builder.Services.AddSingleton<ICategoryRepository, CategoryRepository>();
 builder.Services.AddSingleton<CategoryService>();
 builder.Services.AddSingleton<IWarehouseExportRepository, WarehouseExportRepository>();
 builder.Services.AddSingleton<ExportService>();
-builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddSingleton<IImportService, ImportService>();  // Import Service
+builder.Services.AddScoped<IAuthService, AuthService>();  // Auth Service
 
 // Add CORS policy
 builder.Services.AddCors(options =>
@@ -150,6 +151,68 @@ app.MapPost("/api/warehouse-exports", async (WarehouseExportDto exportDto, Expor
 {
     var createdExport = await service.CreateExportAsync(exportDto);
     return Results.Created($"/api/warehouse-exports/{createdExport.ExportId}", createdExport);
+});
+
+// ===== AUTH ENDPOINTS =====
+app.MapPost("/api/auth/login", async (LoginRequestDto loginRequest, IAuthService authService) =>
+{
+    try
+    {
+        var user = await authService.LoginAsync(loginRequest);
+        return Results.Ok(user);
+    }
+    catch (ArgumentException ex)
+    {
+        return Results.BadRequest(new { message = ex.Message });
+    }
+});
+
+app.MapPut("/api/auth/{userId}", async (string userId, UpdateUserDto updateUser, IAuthService authService, HttpContext httpContext) =>
+{
+    var currentUsername = httpContext.User.Identity?.Name ?? "admin"; // Thay thế bằng cách lấy username thực tế
+    try
+    {
+        var updatedUser = await authService.UpdateUserAsync(userId, updateUser, currentUsername);
+        return Results.Ok(updatedUser);
+    }
+    catch (ArgumentException ex)
+    {
+        return Results.BadRequest(new { message = ex.Message });
+    }
+});
+
+app.MapDelete("/api/auth/{userId}", async (string userId, IAuthService authService, HttpContext httpContext) =>
+{
+    var currentUsername = httpContext.User.Identity?.Name ?? "admin";
+    try
+    {
+        await authService.DeleteUserAsync(userId, currentUsername);
+        return Results.NoContent();
+    }
+    catch (ArgumentException ex)
+    {
+        return Results.BadRequest(new { message = ex.Message });
+    }
+});
+
+// ===== IMPORT ENDPOINTS =====
+app.MapPost("/api/imports", async (WarehouseImportDto importDto, IImportService importService) =>
+{
+    try
+    {
+        var createdImport = await importService.CreateImportAsync(importDto);
+        return Results.Created($"/api/imports/{createdImport.ImportId}", createdImport);
+    }
+    catch (ArgumentException ex)
+    {
+        return Results.BadRequest(new { message = ex.Message });
+    }
+});
+
+app.MapGet("/api/imports", async (IImportService importService) =>
+{
+    var imports = await importService.GetAllImportsAsync();
+    return Results.Ok(imports);
 });
 
 // Map Controllers

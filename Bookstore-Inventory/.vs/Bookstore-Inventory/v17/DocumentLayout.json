@@ -7,12 +7,20 @@
       "RelativeMoniker": "D:0:0:{8A02E70B-8A3E-4E12-987E-6C8A801B59E2}|Bookstore.API\\Bookstore.API.csproj|solutionrelative:bookstore.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{776C469E-917F-4288-9AD7-39163E12E293}|Bookstore.Application\\Bookstore.Application.csproj|c:\\nam3\\soa\\do_an\\do_an15\\backend\\bookstore-inventory\\bookstore.application\\services\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{776C469E-917F-4288-9AD7-39163E12E293}|Bookstore.Application\\Bookstore.Application.csproj|solutionrelative:bookstore.application\\services\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{776C469E-917F-4288-9AD7-39163E12E293}|Bookstore.Application\\Bookstore.Application.csproj|c:\\nam3\\soa\\do_an\\do_an15\\backend\\bookstore-inventory\\bookstore.application\\dtos\\registerrequestdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{776C469E-917F-4288-9AD7-39163E12E293}|Bookstore.Application\\Bookstore.Application.csproj|solutionrelative:bookstore.application\\dtos\\registerrequestdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{776C469E-917F-4288-9AD7-39163E12E293}|Bookstore.Application\\Bookstore.Application.csproj|c:\\nam3\\soa\\do_an\\do_an15\\backend\\bookstore-inventory\\bookstore.application\\dtos\\loginrequestdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{776C469E-917F-4288-9AD7-39163E12E293}|Bookstore.Application\\Bookstore.Application.csproj|solutionrelative:bookstore.application\\dtos\\loginrequestdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{776C469E-917F-4288-9AD7-39163E12E293}|Bookstore.Application\\Bookstore.Application.csproj|c:\\nam3\\soa\\do_an\\do_an15\\backend\\bookstore-inventory\\bookstore.application\\interfaceapp\\services\\iauthservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{776C469E-917F-4288-9AD7-39163E12E293}|Bookstore.Application\\Bookstore.Application.csproj|solutionrelative:bookstore.application\\interfaceapp\\services\\iauthservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{776C469E-917F-4288-9AD7-39163E12E293}|Bookstore.Application\\Bookstore.Application.csproj|c:\\nam3\\soa\\do_an\\do_an15\\backend\\bookstore-inventory\\bookstore.application\\services\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{776C469E-917F-4288-9AD7-39163E12E293}|Bookstore.Application\\Bookstore.Application.csproj|solutionrelative:bookstore.application\\services\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{8A02E70B-8A3E-4E12-987E-6C8A801B59E2}|Bookstore.API\\Bookstore.API.csproj|c:\\nam3\\soa\\do_an\\do_an15\\backend\\bookstore-inventory\\bookstore.api\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -41,14 +49,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{776C469E-917F-4288-9AD7-39163E12E293}|Bookstore.Application\\Bookstore.Application.csproj|c:\\nam3\\soa\\do_an\\do_an15\\backend\\bookstore-inventory\\bookstore.application\\dtos\\updateuserdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{776C469E-917F-4288-9AD7-39163E12E293}|Bookstore.Application\\Bookstore.Application.csproj|solutionrelative:bookstore.application\\dtos\\updateuserdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{776C469E-917F-4288-9AD7-39163E12E293}|Bookstore.Application\\Bookstore.Application.csproj|c:\\nam3\\soa\\do_an\\do_an15\\backend\\bookstore-inventory\\bookstore.application\\dtos\\registerrequestdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{776C469E-917F-4288-9AD7-39163E12E293}|Bookstore.Application\\Bookstore.Application.csproj|solutionrelative:bookstore.application\\dtos\\registerrequestdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{776C469E-917F-4288-9AD7-39163E12E293}|Bookstore.Application\\Bookstore.Application.csproj|c:\\nam3\\soa\\do_an\\do_an15\\backend\\bookstore-inventory\\bookstore.application\\dtos\\loginrequestdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{776C469E-917F-4288-9AD7-39163E12E293}|Bookstore.Application\\Bookstore.Application.csproj|solutionrelative:bookstore.application\\dtos\\loginrequestdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -68,14 +68,14 @@
               "RelativeDocumentMoniker": "Bookstore.API\\Program.cs",
               "ToolTip": "C:\\Nam3\\SOA\\Do_an\\Do_an15\\backend\\Bookstore-Inventory\\Bookstore.API\\Program.cs",
               "RelativeToolTip": "Bookstore.API\\Program.cs",
-              "ViewState": "AgIAAC4AAAAAAAAAAAAowDgAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAJEAAAAAAAAAAAAAwKMAAAAgAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-03T04:41:57Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 6,
               "Title": "appsettings.json",
               "DocumentMoniker": "C:\\Nam3\\SOA\\Do_an\\Do_an15\\backend\\Bookstore-Inventory\\Bookstore.API\\appsettings.json",
               "RelativeDocumentMoniker": "Bookstore.API\\appsettings.json",
@@ -83,12 +83,11 @@
               "RelativeToolTip": "Bookstore.API\\appsettings.json",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-04-03T04:39:11.641Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-03T04:39:11.641Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 7,
               "Title": "launchSettings.json",
               "DocumentMoniker": "C:\\Nam3\\SOA\\Do_an\\Do_an15\\backend\\Bookstore-Inventory\\Bookstore.API\\Properties\\launchSettings.json",
               "RelativeDocumentMoniker": "Bookstore.API\\Properties\\launchSettings.json",
@@ -96,12 +95,11 @@
               "RelativeToolTip": "Bookstore.API\\Properties\\launchSettings.json",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-04-03T04:39:08.034Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-03T04:39:08.034Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 8,
               "Title": "Staff.cs",
               "DocumentMoniker": "C:\\Nam3\\SOA\\Do_an\\Do_an15\\backend\\Bookstore-Inventory\\Bookstore.Domain\\Entities\\Staff.cs",
               "RelativeDocumentMoniker": "Bookstore.Domain\\Entities\\Staff.cs",
@@ -109,12 +107,11 @@
               "RelativeToolTip": "Bookstore.Domain\\Entities\\Staff.cs",
               "ViewState": "AgIAAAYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-03T04:34:41.841Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-03T04:34:41.841Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 9,
               "Title": "UserRole.cs",
               "DocumentMoniker": "C:\\Nam3\\SOA\\Do_an\\Do_an15\\backend\\Bookstore-Inventory\\Bookstore.Domain\\Entities\\UserRole.cs",
               "RelativeDocumentMoniker": "Bookstore.Domain\\Entities\\UserRole.cs",
@@ -122,12 +119,11 @@
               "RelativeToolTip": "Bookstore.Domain\\Entities\\UserRole.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-03T04:34:37.028Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-03T04:34:37.028Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 4,
               "Title": "AuthService.cs",
               "DocumentMoniker": "C:\\Nam3\\SOA\\Do_an\\Do_an15\\backend\\Bookstore-Inventory\\Bookstore.Application\\Services\\AuthService.cs",
               "RelativeDocumentMoniker": "Bookstore.Application\\Services\\AuthService.cs",
@@ -135,25 +131,24 @@
               "RelativeToolTip": "Bookstore.Application\\Services\\AuthService.cs",
               "ViewState": "AgIAAFoAAAAAAAAAAAAowGkAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-03T04:34:14.85Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-03T04:34:14.85Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "IAuthService.cs",
               "DocumentMoniker": "C:\\Nam3\\SOA\\Do_an\\Do_an15\\backend\\Bookstore-Inventory\\Bookstore.Application\\InterfaceApp\\Services\\IAuthService.cs",
               "RelativeDocumentMoniker": "Bookstore.Application\\InterfaceApp\\Services\\IAuthService.cs",
               "ToolTip": "C:\\Nam3\\SOA\\Do_an\\Do_an15\\backend\\Bookstore-Inventory\\Bookstore.Application\\InterfaceApp\\Services\\IAuthService.cs",
               "RelativeToolTip": "Bookstore.Application\\InterfaceApp\\Services\\IAuthService.cs",
-              "ViewState": "AgIAAAkAAAAAAAAAAAAgwAsAAAABAAAAAAAAAA==",
+              "ViewState": "AgIAAAEAAAAAAAAAAAAAAAsAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-03T04:34:08.181Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 10,
               "Title": "UserDto.cs",
               "DocumentMoniker": "C:\\Nam3\\SOA\\Do_an\\Do_an15\\backend\\Bookstore-Inventory\\Bookstore.Application\\Dtos\\UserDto.cs",
               "RelativeDocumentMoniker": "Bookstore.Application\\Dtos\\UserDto.cs",
@@ -161,12 +156,11 @@
               "RelativeToolTip": "Bookstore.Application\\Dtos\\UserDto.cs",
               "ViewState": "AgIAAAoAAAAAAAAAAAA7wBMAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-03T04:33:48.064Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-03T04:33:48.064Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 11,
               "Title": "UpdateUserDto.cs",
               "DocumentMoniker": "C:\\Nam3\\SOA\\Do_an\\Do_an15\\backend\\Bookstore-Inventory\\Bookstore.Application\\Dtos\\UpdateUserDto.cs",
               "RelativeDocumentMoniker": "Bookstore.Application\\Dtos\\UpdateUserDto.cs",
@@ -174,12 +168,11 @@
               "RelativeToolTip": "Bookstore.Application\\Dtos\\UpdateUserDto.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-03T04:33:40.912Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-03T04:33:40.912Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 1,
               "Title": "RegisterRequestDto.cs",
               "DocumentMoniker": "C:\\Nam3\\SOA\\Do_an\\Do_an15\\backend\\Bookstore-Inventory\\Bookstore.Application\\Dtos\\RegisterRequestDto.cs",
               "RelativeDocumentMoniker": "Bookstore.Application\\Dtos\\RegisterRequestDto.cs",
@@ -192,7 +185,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 2,
               "Title": "LoginRequestDto.cs",
               "DocumentMoniker": "C:\\Nam3\\SOA\\Do_an\\Do_an15\\backend\\Bookstore-Inventory\\Bookstore.Application\\Dtos\\LoginRequestDto.cs",
               "RelativeDocumentMoniker": "Bookstore.Application\\Dtos\\LoginRequestDto.cs",
@@ -205,7 +198,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 5,
               "Title": "AuthController.cs",
               "DocumentMoniker": "C:\\Nam3\\SOA\\Do_an\\Do_an15\\backend\\Bookstore-Inventory\\Bookstore.API\\Controllers\\AuthController.cs",
               "RelativeDocumentMoniker": "Bookstore.API\\Controllers\\AuthController.cs",
@@ -213,8 +206,7 @@
               "RelativeToolTip": "Bookstore.API\\Controllers\\AuthController.cs",
               "ViewState": "AgIAAA4AAAAAAAAAAAA1wFkAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-03T04:32:45.52Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-03T04:32:45.52Z"
             }
           ]
         }
