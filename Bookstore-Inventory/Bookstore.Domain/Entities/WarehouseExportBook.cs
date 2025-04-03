@@ -10,12 +10,12 @@ namespace Bookstore.Domain.Entities
 {
     public class WarehouseExportBook
     {
-        [BsonId]
+     
         [BsonRepresentation(BsonType.ObjectId)]
         public string WarehouseExportId { get; set; }
 
         [BsonRepresentation(BsonType.ObjectId)]
-        public string BookId { get; set; }
+        public string BookId { get; set; } = null!; 
         public int ExportQuantity { get; set; }
         public decimal Price { get; set; }
     }

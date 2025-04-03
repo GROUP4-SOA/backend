@@ -14,12 +14,14 @@ namespace Bookstore.Application.Services
         private readonly IMongoCollection<WarehouseExport> _exportsCollection;
         private readonly IMongoCollection<Book> _booksCollection;
         private readonly IMongoCollection<User> _usersCollection;
+        private readonly IMongoCollection<WarehouseExportBook> _exportsbookCollection;
 
         public ExportService(IMongoDatabase database)
         {
             _exportsCollection = database.GetCollection<WarehouseExport>("WarehouseExport");
             _booksCollection = database.GetCollection<Book>("Book");
             _usersCollection = database.GetCollection<User>("User");
+            _exportsbookCollection = database.GetCollection<WarehouseExportBook>("WarehouseExportBook");
         }
 
         public async Task<WarehouseExportDto> CreateExportAsync(WarehouseExportDto exportDto)

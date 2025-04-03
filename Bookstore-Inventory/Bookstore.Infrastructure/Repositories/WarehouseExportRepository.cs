@@ -1,4 +1,6 @@
 using Bookstore.Application.Interfaces;
+using Bookstore.Infrastructure.Data;
+using Bookstore.Infrastructure.Interfaces.Repositories;
 using Bookstore.Domain.Entities;
 using MongoDB.Driver;
 using System.Collections.Generic;
@@ -10,9 +12,9 @@ namespace Bookstore.Infrastructure.Repositories
     {
         private readonly IMongoCollection<WarehouseExport> _collection;
 
-        public WarehouseExportRepository(IMongoDatabase database)
+        public WarehouseExportRepository(MongoDbContext dbContext)
         {
-            _collection = database.GetCollection<WarehouseExport>("WarehouseExport");
+            _collection = dbContext.GetCollection<WarehouseExport>("WarehouseExport");
         }
 
         public async Task<IEnumerable<WarehouseExport>> GetAllAsync()

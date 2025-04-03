@@ -13,11 +13,11 @@ namespace Bookstore.Domain.Entities
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
         public string ExportId { get; set; } = ObjectId.GenerateNewId().ToString();
-
+        [BsonElement("ExportDate")]
         public DateTime ExportDate { get; set; }
         [BsonRepresentation(BsonType.ObjectId)]
         public string UserId { get; set; }
-
+        [BsonElement("WarehouseExportBooks")]
         public List<WarehouseExportBook> WarehouseExportBooks { get; set; } = new();
     }
 }

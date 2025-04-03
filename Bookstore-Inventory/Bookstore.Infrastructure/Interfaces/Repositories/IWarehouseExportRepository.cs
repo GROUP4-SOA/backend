@@ -2,7 +2,7 @@ using Bookstore.Domain.Entities;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Bookstore.Application.Interfaces
+namespace Bookstore.Infrastructure.Interfaces.Repositories
 {
     public interface IWarehouseExportRepository
     {
