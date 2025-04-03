@@ -13,7 +13,9 @@ namespace Bookstore.Domain.Entities
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
-        public string Id { get; set; } // MongoDB sử dụng Id thay vì CategoryId
+        public string Id { get; set; } = ObjectId.GenerateNewId().ToString();
+    
+        public string CategoryId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
     }

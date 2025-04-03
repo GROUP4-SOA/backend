@@ -5,23 +5,19 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Bookstore.API.Controllers
 {
-    [Route("api/categories")]
+    [Route("api/[controller]")]
     [ApiController]
     public class CategoryController : ControllerBase
     {
         private readonly ICategoryService _categoryService;
-        private readonly ILogger<CategoryController> _logger;
 
-        public CategoryController(ICategoryService categoryService, ILogger<CategoryController> logger)
+        public CategoryController(ICategoryService categoryService)
         {
-            _categoryService = categoryService ?? throw new ArgumentNullException(nameof(categoryService));
-            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            _categoryService = categoryService;
         }
 
         [HttpGet]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<CategoryDto>))]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<IEnumerable<CategoryDto>>> GetAllCategories()
+        public async Task<IActionResult> GetAllCategories()
         {
             try
             {
@@ -30,7 +26,6 @@ namespace Bookstore.API.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Lỗi khi lấy danh sách danh mục");
                 return StatusCode(500, new ProblemDetails
                 {
                     Status = 500,
@@ -40,43 +35,26 @@ namespace Bookstore.API.Controllers
             }
         }
 
-        [HttpGet("{id}")]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(CategoryDto))]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<CategoryDto>> GetCategoryById(string id)
+        [HttpGet("{categoryid}")]
+        public async Task<IActionResult> GetCategoryById(string categoryid)
         {
             try
             {
-                var category = await _categoryService.GetCategoryByIdAsync(id);
+                var category = await _categoryService.GetCategoryByIdAsync(categoryid);
                 return Ok(category);
             }
             catch (ArgumentException ex)
             {
-                return NotFound(new ProblemDetails
-                {
-                    Status = 404,
-                    Title = "Không tìm thấy danh mục",
-                    Detail = ex.Message
-                });
+                return BadRequest(new { message = ex.Message });
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Lỗi khi lấy danh mục với ID: {Id}", id);
-                return StatusCode(500, new ProblemDetails
-                {
-                    Status = 500,
-                    Title = "Đã xảy ra lỗi khi lấy thông tin danh mục",
-                    Detail = ex.Message
-                });
+                return StatusCode(500, new { message = "Lỗi khi lấy sách", error = ex.Message });
             }
         }
 
         [HttpPost]
-        [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(CategoryDto))]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<CategoryDto>> CreateCategory([FromBody] CategoryCreateDto categoryCreateDto)
+        public async Task<IActionResult> CreateCategory([FromBody] CategoryCreateDto categoryCreateDto)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -85,12 +63,15 @@ namespace Bookstore.API.Controllers
             {
                 var createdCategory = await _categoryService.CreateCategoryAsync(categoryCreateDto);
                 return CreatedAtAction(nameof(GetCategoryById), 
-                    new { id = createdCategory.CategoryId }, 
+                    new { categoryid = createdCategory.CategoryId }, 
                     createdCategory);
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(new { message = ex.Message });
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Lỗi khi tạo danh mục mới");
                 return StatusCode(500, new ProblemDetails
                 {
                     Status = 500,
@@ -100,33 +81,23 @@ namespace Bookstore.API.Controllers
             }
         }
 
-        [HttpPut("{id}")]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(CategoryDto))]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<CategoryDto>> UpdateCategory(string id, [FromBody] CategoryUpdateDto categoryUpdateDto)
+        [HttpPut("{categoryid}")]
+        public async Task<IActionResult> UpdateCategory(string categoryid, [FromBody] CategoryUpdateDto categoryUpdateDto)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
             try
             {
-                var updatedCategory = await _categoryService.UpdateCategoryAsync(id, categoryUpdateDto);
+                var updatedCategory = await _categoryService.UpdateCategoryAsync(categoryid, categoryUpdateDto);
                 return Ok(updatedCategory);
             }
             catch (ArgumentException ex)
             {
-                return NotFound(new ProblemDetails
-                {
-                    Status = 404,
-                    Title = "Không tìm thấy danh mục",
-                    Detail = ex.Message
-                });
+                return BadRequest(new { message = ex.Message });
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Lỗi khi cập nhật danh mục với ID: {Id}", id);
                 return StatusCode(500, new ProblemDetails
                 {
                     Status = 500,
@@ -136,37 +107,28 @@ namespace Bookstore.API.Controllers
             }
         }
 
-        [HttpDelete("{id}")]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> DeleteCategory(string id)
+        [HttpDelete("{categoryid}")]
+        public async Task<IActionResult> DeleteCategory(string categoryid)
         {
             try
             {
-                var result = await _categoryService.DeleteCategoryAsync(id);
+                var result = await _categoryService.DeleteCategoryAsync(categoryid);
                 if (!result)
                     return NotFound(new ProblemDetails
                     {
                         Status = 404,
                         Title = "Không tìm thấy danh mục",
-                        Detail = $"Danh mục với ID {id} không tồn tại"
+                        Detail = $"Danh mục với ID {categoryid} không tồn tại"
                     });
 
                 return NoContent();
             }
             catch (ArgumentException ex)
             {
-                return NotFound(new ProblemDetails
-                {
-                    Status = 404,
-                    Title = "Không tìm thấy danh mục",
-                    Detail = ex.Message
-                });
+                return BadRequest(new { message = ex.Message });
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Lỗi khi xóa danh mục với ID: {Id}", id);
                 return StatusCode(500, new ProblemDetails
                 {
                     Status = 500,

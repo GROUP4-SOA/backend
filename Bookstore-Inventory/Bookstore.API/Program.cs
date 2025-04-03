@@ -195,7 +195,7 @@ app.MapGet("/api/categories", async (CategoryService service) =>
         return Results.Problem(
             statusCode: 500,
             detail: ex.Message,
-            title: "Lỗi khi lấy danh sách danh mục"
+            title: "Lỗi khi lấy danh sách sách"
         );
     }
 });

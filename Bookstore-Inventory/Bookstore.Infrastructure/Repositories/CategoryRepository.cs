@@ -15,18 +15,18 @@ namespace Bookstore.Infrastructure.Repositories
         }
 
         public async Task<List<Category>> GetAllCategoriesAsync() =>
-            await _categories.Find(_ => true).ToListAsync();
+            await _categories.Find(category => true).ToListAsync();
 
         public async Task<Category> GetCategoryByIdAsync(string id) =>
-            await _categories.Find(category => category.Id == id).FirstOrDefaultAsync();
+            await _categories.Find(category => category.CategoryId == id).FirstOrDefaultAsync();
 
         public async Task AddCategoryAsync(Category category) =>
             await _categories.InsertOneAsync(category);
 
         public async Task UpdateCategoryAsync(Category category) =>
-            await _categories.ReplaceOneAsync(c => c.Id == category.Id, category);
+            await _categories.ReplaceOneAsync(c => c.CategoryId == category.CategoryId, category);
 
         public async Task DeleteCategoryAsync(string id) =>
-            await _categories.DeleteOneAsync(category => category.Id == id);
+            await _categories.DeleteOneAsync(category => category.CategoryId == id);
     }
 }

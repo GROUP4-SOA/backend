@@ -11,6 +11,7 @@ namespace Bookstore.Infrastructure.Interfaces.Repositories
         Task AddCategoryAsync(Category category);
         Task UpdateCategoryAsync(Category category);
         Task DeleteCategoryAsync(string id);
+        
     }
 }
 

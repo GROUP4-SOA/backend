@@ -2285,48 +2285,41 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Hi\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "/Users/ngochuynh/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\SOA_KienTrucPM\\Backend\\backend\\Bookstore-Inventory\\Bookstore.Tests\\Bookstore.Tests.csproj",
+      "projectUniqueName": "/Users/ngochuynh/RiderProjects/backend/Bookstore-Inventory/Bookstore.Tests/Bookstore.Tests.csproj",
       "projectName": "Bookstore.Tests",
-      "projectPath": "E:\\SOA_KienTrucPM\\Backend\\backend\\Bookstore-Inventory\\Bookstore.Tests\\Bookstore.Tests.csproj",
-      "packagesPath": "C:\\Users\\Hi\\.nuget\\packages\\",
-      "outputPath": "E:\\SOA_KienTrucPM\\Backend\\backend\\Bookstore-Inventory\\Bookstore.Tests\\obj\\",
+      "projectPath": "/Users/ngochuynh/RiderProjects/backend/Bookstore-Inventory/Bookstore.Tests/Bookstore.Tests.csproj",
+      "packagesPath": "/Users/ngochuynh/.nuget/packages/",
+      "outputPath": "/Users/ngochuynh/RiderProjects/backend/Bookstore-Inventory/Bookstore.Tests/obj/",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\Hi\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "/Users/ngochuynh/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net9.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net9.0": {
           "targetAlias": "net9.0",
           "projectReferences": {
-            "E:\\SOA_KienTrucPM\\Backend\\backend\\Bookstore-Inventory\\Bookstore.API\\Bookstore.API.csproj": {
-              "projectPath": "E:\\SOA_KienTrucPM\\Backend\\backend\\Bookstore-Inventory\\Bookstore.API\\Bookstore.API.csproj"
+            "/Users/ngochuynh/RiderProjects/backend/Bookstore-Inventory/Bookstore.API/Bookstore.API.csproj": {
+              "projectPath": "/Users/ngochuynh/RiderProjects/backend/Bookstore-Inventory/Bookstore.API/Bookstore.API.csproj"
             },
-            "E:\\SOA_KienTrucPM\\Backend\\backend\\Bookstore-Inventory\\Bookstore.Application\\Bookstore.Application.csproj": {
-              "projectPath": "E:\\SOA_KienTrucPM\\Backend\\backend\\Bookstore-Inventory\\Bookstore.Application\\Bookstore.Application.csproj"
+            "/Users/ngochuynh/RiderProjects/backend/Bookstore-Inventory/Bookstore.Application/Bookstore.Application.csproj": {
+              "projectPath": "/Users/ngochuynh/RiderProjects/backend/Bookstore-Inventory/Bookstore.Application/Bookstore.Application.csproj"
             },
-            "E:\\SOA_KienTrucPM\\Backend\\backend\\Bookstore-Inventory\\Bookstore.Domain\\Bookstore.Domain.csproj": {
-              "projectPath": "E:\\SOA_KienTrucPM\\Backend\\backend\\Bookstore-Inventory\\Bookstore.Domain\\Bookstore.Domain.csproj"
+            "/Users/ngochuynh/RiderProjects/backend/Bookstore-Inventory/Bookstore.Domain/Bookstore.Domain.csproj": {
+              "projectPath": "/Users/ngochuynh/RiderProjects/backend/Bookstore-Inventory/Bookstore.Domain/Bookstore.Domain.csproj"
             },
-            "E:\\SOA_KienTrucPM\\Backend\\backend\\Bookstore-Inventory\\Bookstore.Infrastructure\\Bookstore.Infrastructure.csproj": {
-              "projectPath": "E:\\SOA_KienTrucPM\\Backend\\backend\\Bookstore-Inventory\\Bookstore.Infrastructure\\Bookstore.Infrastructure.csproj"
+            "/Users/ngochuynh/RiderProjects/backend/Bookstore-Inventory/Bookstore.Infrastructure/Bookstore.Infrastructure.csproj": {
+              "projectPath": "/Users/ngochuynh/RiderProjects/backend/Bookstore-Inventory/Bookstore.Infrastructure/Bookstore.Infrastructure.csproj"
             }
           }
         }
@@ -2392,7 +2385,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.102/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.102/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
