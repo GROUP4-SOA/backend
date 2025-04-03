@@ -167,19 +167,19 @@ app.MapPut("/api/auth/{userId}", async (string userId, UpdateUserDto updateUser,
     }
 });
 
-app.MapDelete("/api/auth/{userId}", async (string userId, IAuthService authService, HttpContext httpContext) =>
-{
-    var currentUsername = httpContext.User.Identity?.Name ?? "admin";
-    try
-    {
-        await authService.DeleteUserAsync(userId, currentUsername);
-        return Results.NoContent();
-    }
-    catch (ArgumentException ex)
-    {
-        return Results.BadRequest(new { message = ex.Message });
-    }
-});
+//app.MapDelete("/api/auth/{userId}", async (string userId, IAuthService authService, HttpContext httpContext) =>
+//{
+//    var currentUsername = httpContext.User.Identity?.Name ?? "admin";
+//    try
+//    {
+//        await authService.DeleteUserAsync(userId, currentUsername);
+//        return Results.NoContent();
+//    }
+//    catch (ArgumentException ex)
+//    {
+//        return Results.BadRequest(new { message = ex.Message });
+//    }
+//});
 // Warehouse Export
 app.MapGet("/api/warehouse-exports", async (ExportService service) =>
 {
