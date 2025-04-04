@@ -6,8 +6,10 @@
     "\\Bookstore-Inventory\\Bookstore.Application",
     "\\Bookstore-Inventory\\Bookstore.Application\\Services",
     "\\Bookstore-Inventory\\Bookstore.Domain",
-    "\\Bookstore-Inventory\\Bookstore.Domain\\Entities"
+    "\\Bookstore-Inventory\\Bookstore.Domain\\Entities",
+    "\\Bookstore-Inventory\\Bookstore.Tests",
+    "\\Bookstore-Inventory\\Bookstore.Tests\\RepositoriesTests"
   ],
-  "SelectedNode": "\\Bookstore-Inventory\\Bookstore.Domain\\Entities\\WarehouseImportBook.cs",
+  "SelectedNode": "\\Bookstore-Inventory\\Bookstore.Tests\\RepositoriesTests\\WarehouseExportRepositoryTests.cs",
   "PreviewInSolutionExplorer": false
 }

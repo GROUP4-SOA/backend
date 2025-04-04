@@ -44,7 +44,7 @@ namespace Bookstore.Application.Services
                     WarehouseImportId = importDto.ImportId,
                     BookId = ib.BookId,
                     ImportQuantity = ib.ImportQuantity,
-                    Price = ib.Price  // Thêm giá nếu cần
+                    Price = ib.Price  
                 }).ToList()
             };
 
@@ -78,7 +78,8 @@ namespace Bookstore.Application.Services
                 WarehouseImportBooks = i.WarehouseImportBooks.Select(ib => new WarehouseImportBookDto
                 {
                     BookId = ib.BookId,
-                    ImportQuantity = ib.ImportQuantity
+                    ImportQuantity = ib.ImportQuantity,
+                    Price = ib.Price
                 }).ToList()
             }).ToList();
         }

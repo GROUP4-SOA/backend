@@ -41,7 +41,8 @@ namespace Bookstore.Application.Services
                 {
                     WarehouseExportId = exportDto.ExportId,
                     BookId = eb.BookId,
-                    ExportQuantity = eb.ExportQuantity
+                    ExportQuantity = eb.ExportQuantity,
+                    Price = eb.Price
                 }).ToList()
             };
 
@@ -79,7 +80,8 @@ namespace Bookstore.Application.Services
                 WarehouseExportBooks = e.WarehouseExportBooks.Select(eb => new WarehouseExportBookDto
                 {
                     BookId = eb.BookId,
-                    ExportQuantity = eb.ExportQuantity
+                    ExportQuantity = eb.ExportQuantity,
+                    Price = eb.Price
                 }).ToList()
             }).ToList();
         }
