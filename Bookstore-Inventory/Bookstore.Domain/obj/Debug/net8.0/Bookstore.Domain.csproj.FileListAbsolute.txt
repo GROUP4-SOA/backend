@@ -89,3 +89,16 @@ C:\Nam3\SOA\Do_an\Do_an18\backend\Bookstore-Inventory\Bookstore.Domain\obj\Debug
 C:\Nam3\SOA\Do_an\Do_an18\backend\Bookstore-Inventory\Bookstore.Domain\obj\Debug\net8.0\refint\Bookstore.Domain.dll
 C:\Nam3\SOA\Do_an\Do_an18\backend\Bookstore-Inventory\Bookstore.Domain\obj\Debug\net8.0\Bookstore.Domain.pdb
 C:\Nam3\SOA\Do_an\Do_an18\backend\Bookstore-Inventory\Bookstore.Domain\obj\Debug\net8.0\ref\Bookstore.Domain.dll
+C:\Nam3\SOA\Do_an\Do_an19\backend\Bookstore-Inventory\Bookstore.Domain\bin\Debug\net8.0\Bookstore.Domain.deps.json
+C:\Nam3\SOA\Do_an\Do_an19\backend\Bookstore-Inventory\Bookstore.Domain\bin\Debug\net8.0\Bookstore.Domain.dll
+C:\Nam3\SOA\Do_an\Do_an19\backend\Bookstore-Inventory\Bookstore.Domain\bin\Debug\net8.0\Bookstore.Domain.pdb
+C:\Nam3\SOA\Do_an\Do_an19\backend\Bookstore-Inventory\Bookstore.Domain\obj\Debug\net8.0\Bookstore.Domain.csproj.AssemblyReference.cache
+C:\Nam3\SOA\Do_an\Do_an19\backend\Bookstore-Inventory\Bookstore.Domain\obj\Debug\net8.0\Bookstore.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Nam3\SOA\Do_an\Do_an19\backend\Bookstore-Inventory\Bookstore.Domain\obj\Debug\net8.0\Bookstore.Domain.AssemblyInfoInputs.cache
+C:\Nam3\SOA\Do_an\Do_an19\backend\Bookstore-Inventory\Bookstore.Domain\obj\Debug\net8.0\Bookstore.Domain.AssemblyInfo.cs
+C:\Nam3\SOA\Do_an\Do_an19\backend\Bookstore-Inventory\Bookstore.Domain\obj\Debug\net8.0\Bookstore.Domain.csproj.CoreCompileInputs.cache
+C:\Nam3\SOA\Do_an\Do_an19\backend\Bookstore-Inventory\Bookstore.Domain\obj\Debug\net8.0\Bookstore.Domain.sourcelink.json
+C:\Nam3\SOA\Do_an\Do_an19\backend\Bookstore-Inventory\Bookstore.Domain\obj\Debug\net8.0\Bookstore.Domain.dll
+C:\Nam3\SOA\Do_an\Do_an19\backend\Bookstore-Inventory\Bookstore.Domain\obj\Debug\net8.0\refint\Bookstore.Domain.dll
+C:\Nam3\SOA\Do_an\Do_an19\backend\Bookstore-Inventory\Bookstore.Domain\obj\Debug\net8.0\Bookstore.Domain.pdb
+C:\Nam3\SOA\Do_an\Do_an19\backend\Bookstore-Inventory\Bookstore.Domain\obj\Debug\net8.0\ref\Bookstore.Domain.dll
