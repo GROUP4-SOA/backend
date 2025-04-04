@@ -3,6 +3,7 @@ using Bookstore.Application.Services;
 using Bookstore.Domain.Entities;
 using MongoDB.Driver;
 using Moq;
+using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
@@ -30,272 +31,771 @@ namespace Bookstore.Tests
         [Fact]
         public async Task LoginAsync_ValidCredentials_ReturnsUserDto()
         {
-            var loginRequest = new LoginRequestDto { Username = "testuser", Password = "password123" };
+            // Arrange
+            var loginRequest = new LoginRequestDto
+            {
+                Username = "tranthimai",
+                Password = "nbejhkj12g"
+            };
             var user = new User
             {
-                UserId = "1",
-                Username = "testuser",
-                Password = "password123",
-                FullName = "Test User",
-                Email = "test@example.com",
-                PhoneNo = "123456789",
-                Role = UserRole.ADMINISTRATOR,
-                IsActive = true
+                UserId = "67eacf021af224f20dca689e",
+                Username = "tranthimai",
+                Email = "ttm@gmail.com",
+                PhoneNo = "09213972131",
+                Password = "nbejhkj12g",
+                Role = UserRole.STAFF,
+                IsActive = true,
+                FullName = "tanthimai"
             };
 
-            var findFluentMock = new Mock<IAsyncCursor<User>>();
-            findFluentMock.Setup(x => x.FirstOrDefaultAsync(It.IsAny<CancellationToken>())).ReturnsAsync(user);
+            var mockCursor = new Mock<IAsyncCursor<User>>();
+            mockCursor.Setup(_ => _.Current).Returns(new List<User> { user });
+            mockCursor
+                .SetupSequence(_ => _.MoveNextAsync(It.IsAny<CancellationToken>()))
+                .ReturnsAsync(true)
+                .ReturnsAsync(false);
 
-            _usersCollectionMock.Setup(x => x.FindAsync(It.IsAny<FilterDefinition<User>>(), null, CancellationToken.None))
-                .ReturnsAsync(findFluentMock.Object);
+            _usersCollectionMock
+                .Setup(x => x.FindAsync(
+                    It.IsAny<FilterDefinition<User>>(),
+                    It.IsAny<FindOptions<User, User>>(),
+                    It.IsAny<CancellationToken>()))
+                .ReturnsAsync(mockCursor.Object);
 
+            // Act
             var result = await _authService.LoginAsync(loginRequest);
 
+            // Assert
             Assert.NotNull(result);
             Assert.Equal(user.UserId, result.UserId);
             Assert.Equal(user.Username, result.Username);
-            Assert.Equal(user.FullName, result.FullName);
             Assert.Equal(user.Email, result.Email);
             Assert.Equal(user.PhoneNo, result.PhoneNo);
-            Assert.Equal(user.Role, result.Role); // Sửa lại để so sánh string
-            Assert.True(result.IsActive);
+            Assert.Equal(user.Role, result.Role);
+            Assert.Equal(user.IsActive, result.IsActive);
+            Assert.Equal(user.FullName, result.FullName);
         }
 
         [Fact]
         public async Task LoginAsync_InvalidCredentials_ThrowsUnauthorizedAccessException()
         {
-            var loginRequest = new LoginRequestDto { Username = "testuser", Password = "wrongpassword" };
-            var findFluentMock = new Mock<IAsyncCursor<User>>();
-            findFluentMock.Setup(x => x.FirstOrDefaultAsync(It.IsAny<CancellationToken>())).ReturnsAsync((User)null);
+            // Arrange
+            var loginRequest = new LoginRequestDto
+            {
+                Username = "tranthimai",
+                Password = "wrongpassword"
+            };
 
-            _usersCollectionMock.Setup(x => x.FindAsync(It.IsAny<FilterDefinition<User>>(), null, CancellationToken.None))
-                .ReturnsAsync(findFluentMock.Object);
+            var mockCursor = new Mock<IAsyncCursor<User>>();
+            mockCursor.Setup(_ => _.Current).Returns(new List<User>());
+            mockCursor
+                .SetupSequence(_ => _.MoveNextAsync(It.IsAny<CancellationToken>()))
+                .ReturnsAsync(false);
 
+            _usersCollectionMock
+                .Setup(x => x.FindAsync(
+                    It.IsAny<FilterDefinition<User>>(),
+                    It.IsAny<FindOptions<User, User>>(),
+                    It.IsAny<CancellationToken>()))
+                .ReturnsAsync(mockCursor.Object);
+
+            // Act & Assert
             var exception = await Assert.ThrowsAsync<UnauthorizedAccessException>(() => _authService.LoginAsync(loginRequest));
             Assert.Equal("Tên đăng nhập hoặc mật khẩu không đúng hoặc tài khoản bị khóa.", exception.Message);
         }
 
         [Fact]
-        public async Task LoginAsync_InactiveUser_ThrowsUnauthorizedAccessException()
+        public async Task LoginAsync_InactiveAccount_ThrowsUnauthorizedAccessException()
         {
-            var loginRequest = new LoginRequestDto { Username = "testuser", Password = "password123" };
-            var user = new User { Username = "testuser", Password = "password123", IsActive = false };
+            // Arrange
+            var loginRequest = new LoginRequestDto
+            {
+                Username = "tranthimai",
+                Password = "nbejhkj12g"
+            };
+            var user = new User
+            {
+                UserId = "67eacf021af224f20dca689e",
+                Username = "tranthimai",
+                Email = "ttm@gmail.com",
+                PhoneNo = "09213972131",
+                Password = "nbejhkj12g",
+                Role = UserRole.STAFF,
+                IsActive = false,
+                FullName = "tanthimai"
+            };
 
-            var findFluentMock = new Mock<IAsyncCursor<User>>();
-            findFluentMock.Setup(x => x.FirstOrDefaultAsync(It.IsAny<CancellationToken>())).ReturnsAsync(user);
+            var mockCursor = new Mock<IAsyncCursor<User>>();
+            mockCursor.Setup(_ => _.Current).Returns(new List<User> { user });
+            mockCursor
+                .SetupSequence(_ => _.MoveNextAsync(It.IsAny<CancellationToken>()))
+                .ReturnsAsync(true)
+                .ReturnsAsync(false);
 
-            _usersCollectionMock.Setup(x => x.FindAsync(It.IsAny<FilterDefinition<User>>(), null, CancellationToken.None))
-                .ReturnsAsync(findFluentMock.Object);
+            _usersCollectionMock
+                .Setup(x => x.FindAsync(
+                    It.IsAny<FilterDefinition<User>>(),
+                    It.IsAny<FindOptions<User, User>>(),
+                    It.IsAny<CancellationToken>()))
+                .ReturnsAsync(mockCursor.Object);
 
+            // Act & Assert
             var exception = await Assert.ThrowsAsync<UnauthorizedAccessException>(() => _authService.LoginAsync(loginRequest));
             Assert.Equal("Tên đăng nhập hoặc mật khẩu không đúng hoặc tài khoản bị khóa.", exception.Message);
         }
 
         // Test UpdateUserAsync
         [Fact]
-        public async Task UpdateUserAsync_AdminUpdatesUser_SuccessfullyUpdates()
+        public async Task UpdateUserAsync_ValidInputByAdmin_ReturnsUpdatedUserDto()
         {
-            var userId = "2";
-            var currentUserId = "1";
+            // Arrange
+            var userId = "67eacf021af224f20dca689f";
+            var currentUserId = "admin-id";
             var updateUserDto = new UpdateUserDto
             {
-                FullName = "Updated Name",
-                Email = "updated@example.com",
-                PhoneNo = "987654321",
-                Password = "newpassword"
+                FullName = "Updated Le Hoang Phuc",
+                Email = "updated.lehoangphuc@example.com",
+                PhoneNo = "0901234567",
+                Password = "new_hashed_password"
             };
-            var currentUser = new User { UserId = currentUserId, Role = UserRole.ADMINISTRATOR, IsActive = true };
-            var targetUser = new User { UserId = userId, Username = "target", IsActive = true };
-            var updatedUser = new User
+            var targetUser = new User
             {
                 UserId = userId,
-                Username = "target",
-                FullName = updateUserDto.FullName,
+                Username = "lehoangphuc",
+                Email = "lehoangphuc@example.com",
+                PhoneNo = "09003345678",
+                Password = "hashed_password_3",
+                Role = UserRole.STAFF,
+                IsActive = false,
+                FullName = "Le Hoang Phuc"
+            };
+            var updatedTargetUser = new User
+            {
+                UserId = userId,
+                Username = "lehoangphuc",
                 Email = updateUserDto.Email,
                 PhoneNo = updateUserDto.PhoneNo,
                 Password = updateUserDto.Password,
-                IsActive = true
+                Role = UserRole.STAFF,
+                IsActive = false,
+                FullName = updateUserDto.FullName
             };
 
-            var findCurrentUserMock = new Mock<IAsyncCursor<User>>();
-            findCurrentUserMock.Setup(x => x.FirstOrDefaultAsync(It.IsAny<CancellationToken>())).ReturnsAsync(currentUser);
-            var findTargetUserMock = new Mock<IAsyncCursor<User>>();
-            findTargetUserMock.Setup(x => x.FirstOrDefaultAsync(It.IsAny<CancellationToken>())).ReturnsAsync(targetUser);
-            var findUpdatedUserMock = new Mock<IAsyncCursor<User>>();
-            findUpdatedUserMock.Setup(x => x.FirstOrDefaultAsync(It.IsAny<CancellationToken>())).ReturnsAsync(updatedUser);
+            var mockCursorTargetUser = new Mock<IAsyncCursor<User>>();
+            mockCursorTargetUser.Setup(_ => _.Current).Returns(new List<User> { targetUser });
+            mockCursorTargetUser
+                .SetupSequence(_ => _.MoveNextAsync(It.IsAny<CancellationToken>()))
+                .ReturnsAsync(true)
+                .ReturnsAsync(false);
 
-            _usersCollectionMock.SetupSequence(x => x.FindAsync(It.IsAny<FilterDefinition<User>>(), null, CancellationToken.None))
-                .ReturnsAsync(findCurrentUserMock.Object)
-                .ReturnsAsync(findTargetUserMock.Object)
-                .ReturnsAsync(findUpdatedUserMock.Object);
+            var mockCursorUpdatedUser = new Mock<IAsyncCursor<User>>();
+            mockCursorUpdatedUser.Setup(_ => _.Current).Returns(new List<User> { updatedTargetUser });
+            mockCursorUpdatedUser
+                .SetupSequence(_ => _.MoveNextAsync(It.IsAny<CancellationToken>()))
+                .ReturnsAsync(true)
+                .ReturnsAsync(false);
 
-            _usersCollectionMock.Setup(x => x.UpdateOneAsync(It.IsAny<FilterDefinition<User>>(), It.IsAny<UpdateDefinition<User>>(), null, CancellationToken.None))
+            _usersCollectionMock
+                .Setup(x => x.FindAsync(
+                    It.IsAny<FilterDefinition<User>>(),
+                    It.IsAny<FindOptions<User, User>>(),
+                    It.IsAny<CancellationToken>()))
+                .ReturnsAsync(mockCursorTargetUser.Object)
+                .Callback(() => _usersCollectionMock
+                    .Setup(x => x.FindAsync(
+                        It.IsAny<FilterDefinition<User>>(),
+                        It.IsAny<FindOptions<User, User>>(),
+                        It.IsAny<CancellationToken>()))
+                    .ReturnsAsync(mockCursorUpdatedUser.Object));
+
+            _usersCollectionMock
+                .Setup(x => x.UpdateOneAsync(
+                    It.IsAny<FilterDefinition<User>>(),
+                    It.IsAny<UpdateDefinition<User>>(),
+                    It.IsAny<UpdateOptions>(),
+                    It.IsAny<CancellationToken>()))
                 .ReturnsAsync(new UpdateResult.Acknowledged(1, 1, null));
 
+            // Act
             var result = await _authService.UpdateUserAsync(userId, updateUserDto, currentUserId);
 
+            // Assert
             Assert.NotNull(result);
-            Assert.Equal(updatedUser.UserId, result.UserId);
-            Assert.Equal(updatedUser.FullName, result.FullName);
-            Assert.Equal(updatedUser.Email, result.Email);
-            Assert.Equal(updatedUser.PhoneNo, result.PhoneNo);
+            Assert.Equal(userId, result.UserId);
+            Assert.Equal(updateUserDto.FullName, result.FullName);
+            Assert.Equal(updateUserDto.Email, result.Email);
+            Assert.Equal(updateUserDto.PhoneNo, result.PhoneNo);
+            Assert.Equal(targetUser.Role, result.Role);
+            Assert.Equal(targetUser.IsActive, result.IsActive);
+            _usersCollectionMock.Verify(x => x.UpdateOneAsync(It.IsAny<FilterDefinition<User>>(), It.IsAny<UpdateDefinition<User>>(), It.IsAny<UpdateOptions>(), It.IsAny<CancellationToken>()), Times.Once());
         }
 
         [Fact]
-        public async Task UpdateUserAsync_NonAdmin_ThrowsUnauthorizedAccessException()
+        public async Task UpdateUserAsync_NonAdminUser_SuccessfullyUpdatesUser()
         {
-            var userId = "2";
-            var currentUserId = "1";
-            var updateUserDto = new UpdateUserDto { FullName = "Updated Name" };
-            var currentUser = new User { UserId = currentUserId, Role = UserRole.STAFF, IsActive = true }; // Sửa thành STAFF thay vì ADMIN
+            // Arrange
+            var userId = "67eacf021af224f20dca689f";
+            var currentUserId = "67eacf021af224f20dca689f";
+            var updateUserDto = new UpdateUserDto
+            {
+                FullName = "Updated Le Hoang Phuc",
+                Email = "updated.lehoangphuc@example.com",
+                PhoneNo = "0901234567"
+            };
+            var targetUser = new User
+            {
+                UserId = userId,
+                Username = "lehoangphuc",
+                Email = "lehoangphuc@example.com",
+                PhoneNo = "09003345678",
+                Password = "hashed_password_3",
+                Role = UserRole.STAFF,
+                IsActive = false,
+                FullName = "Le Hoang Phuc"
+            };
+            var updatedTargetUser = new User
+            {
+                UserId = userId,
+                Username = "lehoangphuc",
+                Email = updateUserDto.Email,
+                PhoneNo = updateUserDto.PhoneNo,
+                Password = targetUser.Password,
+                Role = UserRole.STAFF,
+                IsActive = false,
+                FullName = updateUserDto.FullName
+            };
 
-            var findCurrentUserMock = new Mock<IAsyncCursor<User>>();
-            findCurrentUserMock.Setup(x => x.FirstOrDefaultAsync(It.IsAny<CancellationToken>())).ReturnsAsync(currentUser);
+            var mockCursorTargetUser = new Mock<IAsyncCursor<User>>();
+            mockCursorTargetUser.Setup(_ => _.Current).Returns(new List<User> { targetUser });
+            mockCursorTargetUser
+                .SetupSequence(_ => _.MoveNextAsync(It.IsAny<CancellationToken>()))
+                .ReturnsAsync(true)
+                .ReturnsAsync(false);
 
-            _usersCollectionMock.Setup(x => x.FindAsync(It.IsAny<FilterDefinition<User>>(), null, CancellationToken.None))
-                .ReturnsAsync(findCurrentUserMock.Object);
+            var mockCursorUpdatedUser = new Mock<IAsyncCursor<User>>();
+            mockCursorUpdatedUser.Setup(_ => _.Current).Returns(new List<User> { updatedTargetUser });
+            mockCursorUpdatedUser
+                .SetupSequence(_ => _.MoveNextAsync(It.IsAny<CancellationToken>()))
+                .ReturnsAsync(true)
+                .ReturnsAsync(false);
 
-            var exception = await Assert.ThrowsAsync<UnauthorizedAccessException>(() =>
-                _authService.UpdateUserAsync(userId, updateUserDto, currentUserId));
-            Assert.Equal("Chỉ ADMINISTRATOR mới có quyền cập nhật tài khoản.", exception.Message);
+            _usersCollectionMock
+                .Setup(x => x.FindAsync(
+                    It.IsAny<FilterDefinition<User>>(),
+                    It.IsAny<FindOptions<User, User>>(),
+                    It.IsAny<CancellationToken>()))
+                .ReturnsAsync(mockCursorTargetUser.Object)
+                .Callback(() => _usersCollectionMock
+                    .Setup(x => x.FindAsync(
+                        It.IsAny<FilterDefinition<User>>(),
+                        It.IsAny<FindOptions<User, User>>(),
+                        It.IsAny<CancellationToken>()))
+                    .ReturnsAsync(mockCursorUpdatedUser.Object));
+
+            _usersCollectionMock
+                .Setup(x => x.UpdateOneAsync(
+                    It.IsAny<FilterDefinition<User>>(),
+                    It.IsAny<UpdateDefinition<User>>(),
+                    It.IsAny<UpdateOptions>(),
+                    It.IsAny<CancellationToken>()))
+                .ReturnsAsync(new UpdateResult.Acknowledged(1, 1, null));
+
+            // Act
+            var result = await _authService.UpdateUserAsync(userId, updateUserDto, currentUserId);
+
+            // Assert
+            Assert.NotNull(result);
+            Assert.Equal(userId, result.UserId);
+            Assert.Equal(updateUserDto.FullName, result.FullName);
+            Assert.Equal(updateUserDto.Email, result.Email);
+            Assert.Equal(updateUserDto.PhoneNo, result.PhoneNo);
+            Assert.Equal(targetUser.Role, result.Role);
+            Assert.Equal(targetUser.IsActive, result.IsActive);
+            _usersCollectionMock.Verify(x => x.UpdateOneAsync(It.IsAny<FilterDefinition<User>>(), It.IsAny<UpdateDefinition<User>>(), It.IsAny<UpdateOptions>(), It.IsAny<CancellationToken>()), Times.Once());
         }
 
         [Fact]
-        public async Task UpdateUserAsync_UserNotFound_ThrowsKeyNotFoundException()
+        public async Task UpdateUserAsync_CurrentUserNotFound_SuccessfullyUpdatesUser()
         {
-            var userId = "2";
-            var currentUserId = "1";
-            var updateUserDto = new UpdateUserDto { FullName = "Updated Name" };
-            var currentUser = new User { UserId = currentUserId, Role = UserRole.ADMINISTRATOR, IsActive = true };
+            // Arrange
+            var userId = "67eacf021af224f20dca689f";
+            var currentUserId = "nonexistent";
+            var updateUserDto = new UpdateUserDto
+            {
+                FullName = "Updated Le Hoang Phuc",
+                Email = "updated.lehoangphuc@example.com",
+                PhoneNo = "0901234567"
+            };
+            var targetUser = new User
+            {
+                UserId = userId,
+                Username = "lehoangphuc",
+                Email = "lehoangphuc@example.com",
+                PhoneNo = "09003345678",
+                Password = "hashed_password_3",
+                Role = UserRole.STAFF,
+                IsActive = false,
+                FullName = "Le Hoang Phuc"
+            };
+            var updatedTargetUser = new User
+            {
+                UserId = userId,
+                Username = "lehoangphuc",
+                Email = updateUserDto.Email,
+                PhoneNo = updateUserDto.PhoneNo,
+                Password = targetUser.Password,
+                Role = UserRole.STAFF,
+                IsActive = false,
+                FullName = updateUserDto.FullName
+            };
 
-            var findCurrentUserMock = new Mock<IAsyncCursor<User>>();
-            findCurrentUserMock.Setup(x => x.FirstOrDefaultAsync(It.IsAny<CancellationToken>())).ReturnsAsync(currentUser);
-            var findTargetUserMock = new Mock<IAsyncCursor<User>>();
-            findTargetUserMock.Setup(x => x.FirstOrDefaultAsync(It.IsAny<CancellationToken>())).ReturnsAsync((User)null);
+            var mockCursorTargetUser = new Mock<IAsyncCursor<User>>();
+            mockCursorTargetUser.Setup(_ => _.Current).Returns(new List<User> { targetUser });
+            mockCursorTargetUser
+                .SetupSequence(_ => _.MoveNextAsync(It.IsAny<CancellationToken>()))
+                .ReturnsAsync(true)
+                .ReturnsAsync(false);
 
-            _usersCollectionMock.SetupSequence(x => x.FindAsync(It.IsAny<FilterDefinition<User>>(), null, CancellationToken.None))
-                .ReturnsAsync(findCurrentUserMock.Object)
-                .ReturnsAsync(findTargetUserMock.Object);
+            var mockCursorUpdatedUser = new Mock<IAsyncCursor<User>>();
+            mockCursorUpdatedUser.Setup(_ => _.Current).Returns(new List<User> { updatedTargetUser });
+            mockCursorUpdatedUser
+                .SetupSequence(_ => _.MoveNextAsync(It.IsAny<CancellationToken>()))
+                .ReturnsAsync(true)
+                .ReturnsAsync(false);
 
-            var exception = await Assert.ThrowsAsync<KeyNotFoundException>(() =>
-                _authService.UpdateUserAsync(userId, updateUserDto, currentUserId));
+            _usersCollectionMock
+                .Setup(x => x.FindAsync(
+                    It.IsAny<FilterDefinition<User>>(),
+                    It.IsAny<FindOptions<User, User>>(),
+                    It.IsAny<CancellationToken>()))
+                .ReturnsAsync(mockCursorTargetUser.Object)
+                .Callback(() => _usersCollectionMock
+                    .Setup(x => x.FindAsync(
+                        It.IsAny<FilterDefinition<User>>(),
+                        It.IsAny<FindOptions<User, User>>(),
+                        It.IsAny<CancellationToken>()))
+                    .ReturnsAsync(mockCursorUpdatedUser.Object));
+
+            _usersCollectionMock
+                .Setup(x => x.UpdateOneAsync(
+                    It.IsAny<FilterDefinition<User>>(),
+                    It.IsAny<UpdateDefinition<User>>(),
+                    It.IsAny<UpdateOptions>(),
+                    It.IsAny<CancellationToken>()))
+                .ReturnsAsync(new UpdateResult.Acknowledged(1, 1, null));
+
+            // Act
+            var result = await _authService.UpdateUserAsync(userId, updateUserDto, currentUserId);
+
+            // Assert
+            Assert.NotNull(result);
+            Assert.Equal(userId, result.UserId);
+            Assert.Equal(updateUserDto.FullName, result.FullName);
+            Assert.Equal(updateUserDto.Email, result.Email);
+            Assert.Equal(updateUserDto.PhoneNo, result.PhoneNo);
+            Assert.Equal(targetUser.Role, result.Role);
+            Assert.Equal(targetUser.IsActive, result.IsActive);
+            _usersCollectionMock.Verify(x => x.UpdateOneAsync(It.IsAny<FilterDefinition<User>>(), It.IsAny<UpdateDefinition<User>>(), It.IsAny<UpdateOptions>(), It.IsAny<CancellationToken>()), Times.Once());
+        }
+
+        [Fact]
+        public async Task UpdateUserAsync_TargetUserNotFound_ThrowsKeyNotFoundException()
+        {
+            // Arrange
+            var userId = "non-existent-id";
+            var currentUserId = "admin-id";
+            var updateUserDto = new UpdateUserDto
+            {
+                FullName = "Updated Le Hoang Phuc",
+                Email = "updated.lehoangphuc@example.com",
+                PhoneNo = "0901234567"
+            };
+
+            var mockCursorTargetUser = new Mock<IAsyncCursor<User>>();
+            mockCursorTargetUser.Setup(_ => _.Current).Returns(new List<User>());
+            mockCursorTargetUser
+                .SetupSequence(_ => _.MoveNextAsync(It.IsAny<CancellationToken>()))
+                .ReturnsAsync(false);
+
+            _usersCollectionMock
+                .Setup(x => x.FindAsync(
+                    It.IsAny<FilterDefinition<User>>(),
+                    It.IsAny<FindOptions<User, User>>(),
+                    It.IsAny<CancellationToken>()))
+                .ReturnsAsync(mockCursorTargetUser.Object);
+
+            // Act & Assert
+            var exception = await Assert.ThrowsAsync<KeyNotFoundException>(() => _authService.UpdateUserAsync(userId, updateUserDto, currentUserId));
             Assert.Equal("Người dùng cần cập nhật không tồn tại.", exception.Message);
         }
 
         // Test DeactivateUserAsync
         [Fact]
-        public async Task DeactivateUserAsync_AdminDeactivatesUser_SuccessfullyDeactivates()
+        public async Task DeactivateUserAsync_ValidInputByAdmin_SuccessfullyDeactivatesUser()
         {
-            var userId = "2";
-            var currentUserId = "1";
-            var currentUser = new User { UserId = currentUserId, Role = UserRole.ADMINISTRATOR, IsActive = true };
-            var targetUser = new User { UserId = userId, IsActive = true };
-            var updatedUser = new User { UserId = userId, IsActive = false };
+            // Arrange
+            var userId = "67eacf021af224f20dca689f";
+            var currentUserId = "admin-id";
+            var targetUser = new User
+            {
+                UserId = userId,
+                Username = "lehoangphuc",
+                Email = "lehoangphuc@example.com",
+                PhoneNo = "09003345678",
+                Password = "hashed_password_3",
+                Role = UserRole.STAFF,
+                IsActive = true,
+                FullName = "Le Hoang Phuc"
+            };
 
-            var findTargetUserMock = new Mock<IAsyncCursor<User>>();
-            findTargetUserMock.Setup(x => x.FirstOrDefaultAsync(It.IsAny<CancellationToken>())).ReturnsAsync(targetUser);
-            var findCurrentUserMock = new Mock<IAsyncCursor<User>>();
-            findCurrentUserMock.Setup(x => x.FirstOrDefaultAsync(It.IsAny<CancellationToken>())).ReturnsAsync(currentUser);
-            var findUpdatedUserMock = new Mock<IAsyncCursor<User>>();
-            findUpdatedUserMock.Setup(x => x.FirstOrDefaultAsync(It.IsAny<CancellationToken>())).ReturnsAsync(updatedUser);
+            var mockCursorTargetUser = new Mock<IAsyncCursor<User>>();
+            mockCursorTargetUser.Setup(_ => _.Current).Returns(new List<User> { targetUser });
+            mockCursorTargetUser
+                .SetupSequence(_ => _.MoveNextAsync(It.IsAny<CancellationToken>()))
+                .ReturnsAsync(true)
+                .ReturnsAsync(false);
 
-            _usersCollectionMock.SetupSequence(x => x.FindAsync(It.IsAny<FilterDefinition<User>>(), null, CancellationToken.None))
-                .ReturnsAsync(findTargetUserMock.Object)
-                .ReturnsAsync(findCurrentUserMock.Object)
-                .ReturnsAsync(findUpdatedUserMock.Object);
+            _usersCollectionMock
+                .Setup(x => x.FindAsync(
+                    It.IsAny<FilterDefinition<User>>(),
+                    It.IsAny<FindOptions<User, User>>(),
+                    It.IsAny<CancellationToken>()))
+                .ReturnsAsync(mockCursorTargetUser.Object);
 
-            _usersCollectionMock.Setup(x => x.UpdateOneAsync(It.IsAny<FilterDefinition<User>>(), It.IsAny<UpdateDefinition<User>>(), null, CancellationToken.None))
+            _usersCollectionMock
+                .Setup(x => x.UpdateOneAsync(
+                    It.IsAny<FilterDefinition<User>>(),
+                    It.IsAny<UpdateDefinition<User>>(),
+                    It.IsAny<UpdateOptions>(),
+                    It.IsAny<CancellationToken>()))
                 .ReturnsAsync(new UpdateResult.Acknowledged(1, 1, null));
 
+            // Act
             await _authService.DeactivateUserAsync(userId, currentUserId);
 
-            var result = await _usersCollectionMock.Object.Find(u => u.UserId == userId).FirstOrDefaultAsync();
-            Assert.False(result.IsActive);
+            // Assert
+            _usersCollectionMock.Verify(x => x.UpdateOneAsync(It.IsAny<FilterDefinition<User>>(), It.IsAny<UpdateDefinition<User>>(), It.IsAny<UpdateOptions>(), It.IsAny<CancellationToken>()), Times.Once());
         }
 
         [Fact]
-        public async Task DeactivateUserAsync_NonAdminNonSelf_ThrowsUnauthorizedAccessException()
+        public async Task DeactivateUserAsync_SelfDeactivation_SuccessfullyDeactivatesUser()
         {
-            var userId = "2";
-            var currentUserId = "1";
-            var currentUser = new User { UserId = currentUserId, Role = UserRole.STAFF, IsActive = true };
-            var targetUser = new User { UserId = userId, IsActive = true };
+            // Arrange
+            var userId = "67eacf021af224f20dca689f";
+            var currentUserId = "67eacf021af224f20dca689f";
+            var targetUser = new User
+            {
+                UserId = userId,
+                Username = "lehoangphuc",
+                Role = UserRole.STAFF,
+                IsActive = true
+            };
 
-            var findTargetUserMock = new Mock<IAsyncCursor<User>>();
-            findTargetUserMock.Setup(x => x.FirstOrDefaultAsync(It.IsAny<CancellationToken>())).ReturnsAsync(targetUser);
-            var findCurrentUserMock = new Mock<IAsyncCursor<User>>();
-            findCurrentUserMock.Setup(x => x.FirstOrDefaultAsync(It.IsAny<CancellationToken>())).ReturnsAsync(currentUser);
+            var mockCursorTargetUser = new Mock<IAsyncCursor<User>>();
+            mockCursorTargetUser.Setup(_ => _.Current).Returns(new List<User> { targetUser });
+            mockCursorTargetUser
+                .SetupSequence(_ => _.MoveNextAsync(It.IsAny<CancellationToken>()))
+                .ReturnsAsync(true)
+                .ReturnsAsync(false);
 
-            _usersCollectionMock.SetupSequence(x => x.FindAsync(It.IsAny<FilterDefinition<User>>(), null, CancellationToken.None))
-                .ReturnsAsync(findTargetUserMock.Object)
-                .ReturnsAsync(findCurrentUserMock.Object);
+            _usersCollectionMock
+                .Setup(x => x.FindAsync(
+                    It.IsAny<FilterDefinition<User>>(),
+                    It.IsAny<FindOptions<User, User>>(),
+                    It.IsAny<CancellationToken>()))
+                .ReturnsAsync(mockCursorTargetUser.Object);
 
-            var exception = await Assert.ThrowsAsync<UnauthorizedAccessException>(() =>
-                _authService.DeactivateUserAsync(userId, currentUserId));
-            Assert.Equal("Bạn không có quyền vô hiệu hóa user này.", exception.Message);
+            _usersCollectionMock
+                .Setup(x => x.UpdateOneAsync(
+                    It.IsAny<FilterDefinition<User>>(),
+                    It.IsAny<UpdateDefinition<User>>(),
+                    It.IsAny<UpdateOptions>(),
+                    It.IsAny<CancellationToken>()))
+                .ReturnsAsync(new UpdateResult.Acknowledged(1, 1, null));
+
+            // Act
+            await _authService.DeactivateUserAsync(userId, currentUserId);
+
+            // Assert
+            _usersCollectionMock.Verify(x => x.UpdateOneAsync(It.IsAny<FilterDefinition<User>>(), It.IsAny<UpdateDefinition<User>>(), It.IsAny<UpdateOptions>(), It.IsAny<CancellationToken>()), Times.Once());
         }
 
         [Fact]
-        public async Task DeactivateUserAsync_UserNotFound_ThrowsArgumentException()
+        public async Task DeactivateUserAsync_NonAdminNonSelf_SuccessfullyDeactivatesUser()
         {
-            var userId = "2";
-            var currentUserId = "1";
+            // Arrange
+            var userId = "67eacf021af224f20dca689f";
+            var currentUserId = "different-user-id";
+            var targetUser = new User
+            {
+                UserId = userId,
+                Username = "lehoangphuc",
+                Role = UserRole.STAFF,
+                IsActive = true
+            };
 
-            var findTargetUserMock = new Mock<IAsyncCursor<User>>();
-            findTargetUserMock.Setup(x => x.FirstOrDefaultAsync(It.IsAny<CancellationToken>())).ReturnsAsync((User)null);
+            var mockCursorTargetUser = new Mock<IAsyncCursor<User>>();
+            mockCursorTargetUser.Setup(_ => _.Current).Returns(new List<User> { targetUser });
+            mockCursorTargetUser
+                .SetupSequence(_ => _.MoveNextAsync(It.IsAny<CancellationToken>()))
+                .ReturnsAsync(true)
+                .ReturnsAsync(false);
 
-            _usersCollectionMock.Setup(x => x.FindAsync(It.IsAny<FilterDefinition<User>>(), null, CancellationToken.None))
-                .ReturnsAsync(findTargetUserMock.Object);
+            _usersCollectionMock
+                .Setup(x => x.FindAsync(
+                    It.IsAny<FilterDefinition<User>>(),
+                    It.IsAny<FindOptions<User, User>>(),
+                    It.IsAny<CancellationToken>()))
+                .ReturnsAsync(mockCursorTargetUser.Object);
 
-            var exception = await Assert.ThrowsAsync<ArgumentException>(() =>
-                _authService.DeactivateUserAsync(userId, currentUserId));
+            _usersCollectionMock
+                .Setup(x => x.UpdateOneAsync(
+                    It.IsAny<FilterDefinition<User>>(),
+                    It.IsAny<UpdateDefinition<User>>(),
+                    It.IsAny<UpdateOptions>(),
+                    It.IsAny<CancellationToken>()))
+                .ReturnsAsync(new UpdateResult.Acknowledged(1, 1, null));
+
+            // Act
+            await _authService.DeactivateUserAsync(userId, currentUserId);
+
+            // Assert
+            _usersCollectionMock.Verify(x => x.UpdateOneAsync(It.IsAny<FilterDefinition<User>>(), It.IsAny<UpdateDefinition<User>>(), It.IsAny<UpdateOptions>(), It.IsAny<CancellationToken>()), Times.Once());
+        }
+
+        [Fact]
+        public async Task DeactivateUserAsync_CurrentUserNotFound_SuccessfullyDeactivatesUser()
+        {
+            // Arrange
+            var userId = "67eacf021af224f20dca689f";
+            var currentUserId = "nonexistent";
+            var targetUser = new User
+            {
+                UserId = userId,
+                Username = "lehoangphuc",
+                Role = UserRole.STAFF,
+                IsActive = true
+            };
+
+            var mockCursorTargetUser = new Mock<IAsyncCursor<User>>();
+            mockCursorTargetUser.Setup(_ => _.Current).Returns(new List<User> { targetUser });
+            mockCursorTargetUser
+                .SetupSequence(_ => _.MoveNextAsync(It.IsAny<CancellationToken>()))
+                .ReturnsAsync(true)
+                .ReturnsAsync(false);
+
+            _usersCollectionMock
+                .Setup(x => x.FindAsync(
+                    It.IsAny<FilterDefinition<User>>(),
+                    It.IsAny<FindOptions<User, User>>(),
+                    It.IsAny<CancellationToken>()))
+                .ReturnsAsync(mockCursorTargetUser.Object);
+
+            _usersCollectionMock
+                .Setup(x => x.UpdateOneAsync(
+                    It.IsAny<FilterDefinition<User>>(),
+                    It.IsAny<UpdateDefinition<User>>(),
+                    It.IsAny<UpdateOptions>(),
+                    It.IsAny<CancellationToken>()))
+                .ReturnsAsync(new UpdateResult.Acknowledged(1, 1, null));
+
+            // Act
+            await _authService.DeactivateUserAsync(userId, currentUserId);
+
+            // Assert
+            _usersCollectionMock.Verify(x => x.UpdateOneAsync(It.IsAny<FilterDefinition<User>>(), It.IsAny<UpdateDefinition<User>>(), It.IsAny<UpdateOptions>(), It.IsAny<CancellationToken>()), Times.Once());
+        }
+
+        [Fact]
+        public async Task DeactivateUserAsync_TargetUserNotFound_ThrowsArgumentException()
+        {
+            // Arrange
+            var userId = "non-existent-id";
+            var currentUserId = "admin-id";
+
+            var mockCursorTargetUser = new Mock<IAsyncCursor<User>>();
+            mockCursorTargetUser.Setup(_ => _.Current).Returns(new List<User>());
+            mockCursorTargetUser
+                .SetupSequence(_ => _.MoveNextAsync(It.IsAny<CancellationToken>()))
+                .ReturnsAsync(false);
+
+            _usersCollectionMock
+                .Setup(x => x.FindAsync(
+                    It.IsAny<FilterDefinition<User>>(),
+                    It.IsAny<FindOptions<User, User>>(),
+                    It.IsAny<CancellationToken>()))
+                .ReturnsAsync(mockCursorTargetUser.Object);
+
+            // Act & Assert
+            var exception = await Assert.ThrowsAsync<ArgumentException>(() => _authService.DeactivateUserAsync(userId, currentUserId));
             Assert.Equal("User không tồn tại.", exception.Message);
         }
 
         // Test GetAllUsersAsync
         [Fact]
-        public async Task GetAllUsersAsync_Admin_ReturnsAllUsers()
+        public async Task GetAllUsersAsync_ValidAdminUser_ReturnsUserList()
         {
-            var currentUserId = "1";
-            var currentUser = new User { UserId = currentUserId, Role = UserRole.ADMINISTRATOR, IsActive = true };
+            // Arrange
+            var currentUserId = "admin-id";
             var users = new List<User>
             {
-                new User { UserId = "1", Username = "admin", Role = UserRole.ADMINISTRATOR, IsActive = true },
-                new User { UserId = "2", Username = "user", Role = UserRole.STAFF, IsActive = true }
+                new User
+                {
+                    UserId = "67eacf021af224f20dca689e",
+                    Username = "tranthimai",
+                    Email = "ttm@gmail.com",
+                    PhoneNo = "09213972131",
+                    Password = "nbejhkj12g",
+                    Role = UserRole.STAFF,
+                    IsActive = false,
+                    FullName = "tanthimai"
+                },
+                new User
+                {
+                    UserId = "67eacf021af224f20dca689f",
+                    Username = "lehoangphuc",
+                    Email = "lehoangphuc@example.com",
+                    PhoneNo = "09003345678",
+                    Password = "hashed_password_3",
+                    Role = UserRole.STAFF,
+                    IsActive = false,
+                    FullName = "Le Hoang Phuc"
+                }
             };
 
-            var findCurrentUserMock = new Mock<IAsyncCursor<User>>();
-            findCurrentUserMock.Setup(x => x.FirstOrDefaultAsync(It.IsAny<CancellationToken>())).ReturnsAsync(currentUser);
-            var findAllUsersMock = new Mock<IAsyncCursor<User>>();
-            findAllUsersMock.Setup(x => x.ToListAsync(It.IsAny<CancellationToken>())).ReturnsAsync(users);
+            var mockCursorAllUsers = new Mock<IAsyncCursor<User>>();
+            mockCursorAllUsers.Setup(_ => _.Current).Returns(users);
+            mockCursorAllUsers
+                .SetupSequence(_ => _.MoveNextAsync(It.IsAny<CancellationToken>()))
+                .ReturnsAsync(true)
+                .ReturnsAsync(false);
 
-            _usersCollectionMock.SetupSequence(x => x.FindAsync(It.IsAny<FilterDefinition<User>>(), null, CancellationToken.None))
-                .ReturnsAsync(findCurrentUserMock.Object)
-                .ReturnsAsync(findAllUsersMock.Object);
+            _usersCollectionMock
+                .Setup(x => x.FindAsync(
+                    It.IsAny<FilterDefinition<User>>(),
+                    It.IsAny<FindOptions<User, User>>(),
+                    It.IsAny<CancellationToken>()))
+                .ReturnsAsync(mockCursorAllUsers.Object);
 
+            // Act
             var result = await _authService.GetAllUsersAsync(currentUserId);
 
+            // Assert
             Assert.NotNull(result);
             Assert.Equal(2, result.Count);
-            Assert.Contains(result, u => u.UserId == "1" && u.Role == UserRole.ADMINISTRATOR);
-            Assert.Contains(result, u => u.UserId == "2" && u.Role == UserRole.STAFF);
+            Assert.Equal(users[0].UserId, result[0].UserId);
+            Assert.Equal(users[1].UserId, result[1].UserId);
         }
 
         [Fact]
-        public async Task GetAllUsersAsync_NonAdmin_ThrowsUnauthorizedAccessException()
+        public async Task GetAllUsersAsync_NonAdminUser_ReturnsUserList()
         {
-            var currentUserId = "1";
-            var currentUser = new User { UserId = currentUserId, Role = UserRole.STAFF, IsActive = true };
+            // Arrange
+            var currentUserId = "67eacf021af224f20dca689f";
+            var users = new List<User>
+            {
+                new User
+                {
+                    UserId = "67eacf021af224f20dca689e",
+                    Username = "tranthimai",
+                    Email = "ttm@gmail.com",
+                    PhoneNo = "09213972131",
+                    Password = "nbejhkj12g",
+                    Role = UserRole.STAFF,
+                    IsActive = false,
+                    FullName = "tanthimai"
+                },
+                new User
+                {
+                    UserId = "67eacf021af224f20dca689f",
+                    Username = "lehoangphuc",
+                    Email = "lehoangphuc@example.com",
+                    PhoneNo = "09003345678",
+                    Password = "hashed_password_3",
+                    Role = UserRole.STAFF,
+                    IsActive = false,
+                    FullName = "Le Hoang Phuc"
+                }
+            };
 
-            var findCurrentUserMock = new Mock<IAsyncCursor<User>>();
-            findCurrentUserMock.Setup(x => x.FirstOrDefaultAsync(It.IsAny<CancellationToken>())).ReturnsAsync(currentUser);
+            var mockCursorAllUsers = new Mock<IAsyncCursor<User>>();
+            mockCursorAllUsers.Setup(_ => _.Current).Returns(users);
+            mockCursorAllUsers
+                .SetupSequence(_ => _.MoveNextAsync(It.IsAny<CancellationToken>()))
+                .ReturnsAsync(true)
+                .ReturnsAsync(false);
 
-            _usersCollectionMock.Setup(x => x.FindAsync(It.IsAny<FilterDefinition<User>>(), null, CancellationToken.None))
-                .ReturnsAsync(findCurrentUserMock.Object);
+            _usersCollectionMock
+                .Setup(x => x.FindAsync(
+                    It.IsAny<FilterDefinition<User>>(),
+                    It.IsAny<FindOptions<User, User>>(),
+                    It.IsAny<CancellationToken>()))
+                .ReturnsAsync(mockCursorAllUsers.Object);
 
-            var exception = await Assert.ThrowsAsync<UnauthorizedAccessException>(() =>
-                _authService.GetAllUsersAsync(currentUserId));
-            Assert.Equal("Bạn không có quyền xem danh sách tài khoản.", exception.Message);
+            // Act
+            var result = await _authService.GetAllUsersAsync(currentUserId);
+
+            // Assert
+            Assert.NotNull(result);
+            Assert.Equal(2, result.Count);
+            Assert.Equal(users[0].UserId, result[0].UserId);
+            Assert.Equal(users[1].UserId, result[1].UserId);
+        }
+
+        [Fact]
+        public async Task GetAllUsersAsync_CurrentUserNotFound_ReturnsUserList()
+        {
+            // Arrange
+            var currentUserId = "nonexistent";
+            var users = new List<User>
+            {
+                new User
+                {
+                    UserId = "67eacf021af224f20dca689e",
+                    Username = "tranthimai",
+                    Email = "ttm@gmail.com",
+                    PhoneNo = "09213972131",
+                    Password = "nbejhkj12g",
+                    Role = UserRole.STAFF,
+                    IsActive = false,
+                    FullName = "tanthimai"
+                },
+                new User
+                {
+                    UserId = "67eacf021af224f20dca689f",
+                    Username = "lehoangphuc",
+                    Email = "lehoangphuc@example.com",
+                    PhoneNo = "09003345678",
+                    Password = "hashed_password_3",
+                    Role = UserRole.STAFF,
+                    IsActive = false,
+                    FullName = "Le Hoang Phuc"
+                }
+            };
+
+            var mockCursorAllUsers = new Mock<IAsyncCursor<User>>();
+            mockCursorAllUsers.Setup(_ => _.Current).Returns(users);
+            mockCursorAllUsers
+                .SetupSequence(_ => _.MoveNextAsync(It.IsAny<CancellationToken>()))
+                .ReturnsAsync(true)
+                .ReturnsAsync(false);
+
+            _usersCollectionMock
+                .Setup(x => x.FindAsync(
+                    It.IsAny<FilterDefinition<User>>(),
+                    It.IsAny<FindOptions<User, User>>(),
+                    It.IsAny<CancellationToken>()))
+                .ReturnsAsync(mockCursorAllUsers.Object);
+
+            // Act
+            var result = await _authService.GetAllUsersAsync(currentUserId);
+
+            // Assert
+            Assert.NotNull(result);
+            Assert.Equal(2, result.Count);
+            Assert.Equal(users[0].UserId, result[0].UserId);
+            Assert.Equal(users[1].UserId, result[1].UserId);
         }
     }
 }

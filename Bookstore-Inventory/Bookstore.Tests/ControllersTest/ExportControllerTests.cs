@@ -1,8 +1,7 @@
 ﻿using Bookstore.Application.Dtos;
-using Bookstore.Application.Services;
+using Bookstore.Application.Interfaces.Services; // Assuming IExportService is defined here
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
-using MongoDB.Driver;
 using Moq;
 using Xunit;
 
@@ -10,20 +9,20 @@ namespace Bookstore.Tests.Controllers
 {
     public class ExportControllerTests
     {
-        private readonly Mock<ExportService> _exportServiceMock;
+        private readonly Mock<IExportService> _exportServiceMock;
 
         public ExportControllerTests()
         {
-            _exportServiceMock = new Mock<ExportService>(Mock.Of<IMongoDatabase>());
+            _exportServiceMock = new Mock<IExportService>();
         }
 
         [Fact]
         public async Task GetAllExports_ReturnsOk_WithExports()
         {
             // Arrange
-            var exports = new List<WarehouseExportDto> { new() { ExportId = "exp1", UserId = "user1", ExportDate = DateTime.UtcNow } };
+            var exports = new List<WarehouseExportDto> { new() { ExportId = "67eae55c1af224f20dca6929", UserId = "67eacf021af224f20dca689e", ExportDate = DateTime.UtcNow } };
             _exportServiceMock.Setup(s => s.GetAllExportsAsync()).ReturnsAsync(exports);
-            Func<ExportService, Task<IResult>> getAllExports = async (service) => Results.Ok(await service.GetAllExportsAsync());
+            Func<IExportService, Task<IResult>> getAllExports = async (service) => Results.Ok(await service.GetAllExportsAsync());
 
             // Act
             var result = await getAllExports(_exportServiceMock.Object);
@@ -37,12 +36,19 @@ namespace Bookstore.Tests.Controllers
         public async Task CreateExport_ReturnsCreated_WithValidDto()
         {
             // Arrange
-            var dto = new WarehouseExportDto { ExportId = "exp1", UserId = "user1", ExportDate = DateTime.UtcNow, WarehouseExportBooks = new List<WarehouseExportBookDto> { new() { BookId = "1", ExportQuantity = 5 } } };
+            var dto = new WarehouseExportDto { ExportId = "exp1", UserId = "67eacf021af224f20dca689e", ExportDate = DateTime.UtcNow, WarehouseExportBooks = new List<WarehouseExportBookDto> { new() { BookId = "1", ExportQuantity = 5 } } };
             _exportServiceMock.Setup(s => s.CreateExportAsync(dto)).ReturnsAsync(dto);
-            Func<WarehouseExportDto, ExportService, Task<IResult>> createExport = async (dto, service) =>
+            Func<WarehouseExportDto, IExportService, Task<IResult>> createExport = async (dto, service) =>
             {
-                var created = await service.CreateExportAsync(dto);
-                return Results.Created($"/api/warehouse-exports/{created.ExportId}", created);
+                try
+                {
+                    var created = await service.CreateExportAsync(dto);
+                    return Results.Created($"/api/warehouse-exports/{created.ExportId}", created);
+                }
+                catch (ArgumentException ex)
+                {
+                    return Results.BadRequest(new { message = ex.Message });
+                }
             };
 
             // Act
@@ -53,5 +59,6 @@ namespace Bookstore.Tests.Controllers
             Assert.Equal($"/api/warehouse-exports/{dto.ExportId}", createdResult.Location);
             Assert.Equal(dto, createdResult.Value);
         }
+
     }
 }

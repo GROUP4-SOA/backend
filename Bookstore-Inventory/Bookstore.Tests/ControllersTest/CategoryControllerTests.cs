@@ -1,106 +1,220 @@
-﻿using Bookstore.Application.Dtos;
-using Bookstore.Application.Services;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.HttpResults;
-using MongoDB.Driver;
+﻿using Bookstore.API.Controllers;
+using Bookstore.Application.Dtos;
+using Bookstore.Application.Interfaces.Services;
+using Microsoft.AspNetCore.Mvc;
 using Moq;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace Bookstore.Tests.Controllers
 {
     public class CategoryControllerTests
     {
-        private readonly Mock<CategoryService> _categoryServiceMock;
+        private readonly Mock<ICategoryService> _categoryServiceMock;
+        private readonly CategoryController _controller;
 
         public CategoryControllerTests()
         {
-            _categoryServiceMock = new Mock<CategoryService>(Mock.Of<IMongoDatabase>());
+            // Khởi tạo mock cho ICategoryService
+            _categoryServiceMock = new Mock<ICategoryService>();
+
+            // Khởi tạo controller
+            _controller = new CategoryController(_categoryServiceMock.Object);
         }
 
         [Fact]
         public async Task GetAllCategories_ReturnsOk_WithCategories()
         {
             // Arrange
-            var categories = new List<CategoryDto> { new() { CategoryId = "cat1", Name = "Fiction", Description = "Fiction books" } };
+            var categories = new List<CategoryDto>
+            {
+                new CategoryDto { CategoryId = "67eacc121af224f20dca6884", Name = "Machine Learning" },
+                new CategoryDto { CategoryId = "67eacc121af224f20dca688d", Name = "Web Development" },
+                new CategoryDto { CategoryId = "67eacc121af224f20dca6881", Name = "Computer Science" }
+            };
             _categoryServiceMock.Setup(s => s.GetAllCategoriesAsync()).ReturnsAsync(categories);
-            Func<CategoryService, Task<IResult>> getAllCategories = async (service) => Results.Ok(await service.GetAllCategoriesAsync());
 
             // Act
-            var result = await getAllCategories(_categoryServiceMock.Object);
+            var result = await _controller.GetAllCategories();
 
             // Assert
-            var okResult = Assert.IsType<Ok<List<CategoryDto>>>(result);
-            Assert.Equal(categories, okResult.Value);
+            var okResult = Assert.IsType<OkObjectResult>(result);
+            var returnedCategories = Assert.IsType<List<CategoryDto>>(okResult.Value);
+            Assert.Equal(3, returnedCategories.Count);
+            Assert.Equal("Machine Learning", returnedCategories[0].Name);
+            Assert.Equal("Web Development", returnedCategories[1].Name);
+            Assert.Equal("Computer Science", returnedCategories[2].Name);
+        }
+
+        [Fact]
+        public async Task GetAllCategories_ReturnsStatusCode500_WhenExceptionThrown()
+        {
+            // Arrange
+            _categoryServiceMock.Setup(s => s.GetAllCategoriesAsync())
+                .ThrowsAsync(new Exception("Database error"));
+
+            // Act
+            var result = await _controller.GetAllCategories();
+
+            // Assert
+            var statusCodeResult = Assert.IsType<ObjectResult>(result);
+            Assert.Equal(500, statusCodeResult.StatusCode);
+            var problemDetails = Assert.IsType<ProblemDetails>(statusCodeResult.Value);
+            Assert.Equal("Đã xảy ra lỗi khi lấy danh sách danh mục", problemDetails.Title);
+            Assert.Equal("Database error", problemDetails.Detail);
         }
 
         [Fact]
         public async Task GetCategoryById_ReturnsOk_WithCategory()
         {
             // Arrange
-            var category = new CategoryDto { CategoryId = "cat1", Name = "Fiction", Description = "Fiction books" };
-            _categoryServiceMock.Setup(s => s.GetCategoryByIdAsync("cat1")).ReturnsAsync(category);
-            Func<string, CategoryService, Task<IResult>> getCategoryById = async (categoryId, service) => Results.Ok(await service.GetCategoryByIdAsync(categoryId));
+            var categoryId = "67eacc121af224f20dca6884";
+            var category = new CategoryDto { CategoryId = categoryId, Name = "Machine Learning" };
+            _categoryServiceMock.Setup(s => s.GetCategoryByIdAsync(categoryId)).ReturnsAsync(category);
 
             // Act
-            var result = await getCategoryById("cat1", _categoryServiceMock.Object);
+            var result = await _controller.GetCategoryById(categoryId);
 
             // Assert
-            var okResult = Assert.IsType<Ok<CategoryDto>>(result);
-            Assert.Equal(category, okResult.Value);
+            var okResult = Assert.IsType<OkObjectResult>(result);
+            var returnedCategory = Assert.IsType<CategoryDto>(okResult.Value);
+            Assert.Equal(categoryId, returnedCategory.CategoryId);
+            Assert.Equal("Machine Learning", returnedCategory.Name);
         }
+
 
         [Fact]
         public async Task CreateCategory_ReturnsCreated_WithValidDto()
         {
             // Arrange
-            var dto = new CategoryCreateDto { Name = "Fiction", Description = "Fiction books" };
-            var createdCategory = new CategoryDto { CategoryId = "cat1", Name = "Fiction", Description = "Fiction books" };
+            var dto = new CategoryCreateDto { Name = "New Category" };
+            var createdCategory = new CategoryDto { CategoryId = "67eacc121af224f20dca6890", Name = "New Category" };
             _categoryServiceMock.Setup(s => s.CreateCategoryAsync(dto)).ReturnsAsync(createdCategory);
-            Func<CategoryCreateDto, CategoryService, Task<IResult>> createCategory = async (dto, service) =>
-            {
-                var created = await service.CreateCategoryAsync(dto);
-                return Results.Created($"/api/categories/{created.CategoryId}", created);
-            };
 
             // Act
-            var result = await createCategory(dto, _categoryServiceMock.Object);
+            var result = await _controller.CreateCategory(dto);
 
             // Assert
-            var createdResult = Assert.IsType<Created<CategoryDto>>(result);
-            Assert.Equal($"/api/categories/{createdCategory.CategoryId}", createdResult.Location);
-            Assert.Equal(createdCategory, createdResult.Value);
+            var createdResult = Assert.IsType<CreatedAtActionResult>(result);
+            Assert.Equal("GetCategoryById", createdResult.ActionName);
+            Assert.Equal(createdCategory.CategoryId, createdResult.RouteValues["categoryid"]);
+            var returnedCategory = Assert.IsType<CategoryDto>(createdResult.Value);
+            Assert.Equal(createdCategory.CategoryId, returnedCategory.CategoryId);
+            Assert.Equal("New Category", returnedCategory.Name);
+        }
+
+
+        [Fact]
+        public async Task CreateCategory_ReturnsStatusCode500_WhenExceptionThrown()
+        {
+            // Arrange
+            var dto = new CategoryCreateDto { Name = "New Category" };
+            _categoryServiceMock.Setup(s => s.CreateCategoryAsync(dto))
+                .ThrowsAsync(new Exception("Database error"));
+
+            // Act
+            var result = await _controller.CreateCategory(dto);
+
+            // Assert
+            var statusCodeResult = Assert.IsType<ObjectResult>(result);
+            Assert.Equal(500, statusCodeResult.StatusCode);
+            var problemDetails = Assert.IsType<ProblemDetails>(statusCodeResult.Value);
+            Assert.Equal("Đã xảy ra lỗi khi tạo danh mục", problemDetails.Title);
+            Assert.Equal("Database error", problemDetails.Detail);
         }
 
         [Fact]
         public async Task UpdateCategory_ReturnsOk_WithValidInput()
         {
             // Arrange
-            var dto = new CategoryUpdateDto { Name = "Updated Fiction", Description = "Updated desc" };
-            var updatedCategory = new CategoryDto { CategoryId = "cat1", Name = "Updated Fiction", Description = "Updated desc" };
-            _categoryServiceMock.Setup(s => s.UpdateCategoryAsync("cat1", dto)).ReturnsAsync(updatedCategory);
-            Func<string, CategoryUpdateDto, CategoryService, Task<IResult>> updateCategory = async (categoryId, dto, service) => Results.Ok(await service.UpdateCategoryAsync(categoryId, dto));
+            var categoryId = "67eacc121af224f20dca6884";
+            var dto = new CategoryUpdateDto { Name = "Updated Machine Learning" };
+            var updatedCategory = new CategoryDto { CategoryId = categoryId, Name = "Updated Machine Learning" };
+            _categoryServiceMock.Setup(s => s.UpdateCategoryAsync(categoryId, dto)).ReturnsAsync(updatedCategory);
 
             // Act
-            var result = await updateCategory("cat1", dto, _categoryServiceMock.Object);
+            var result = await _controller.UpdateCategory(categoryId, dto);
 
             // Assert
-            var okResult = Assert.IsType<Ok<CategoryDto>>(result);
-            Assert.Equal(updatedCategory, okResult.Value);
+            var okResult = Assert.IsType<OkObjectResult>(result);
+            var returnedCategory = Assert.IsType<CategoryDto>(okResult.Value);
+            Assert.Equal(categoryId, returnedCategory.CategoryId);
+            Assert.Equal("Updated Machine Learning", returnedCategory.Name);
+        }
+
+
+
+        [Fact]
+        public async Task UpdateCategory_ReturnsStatusCode500_WhenExceptionThrown()
+        {
+            // Arrange
+            var categoryId = "67eacc121af224f20dca6884";
+            var dto = new CategoryUpdateDto { Name = "Updated Machine Learning" };
+            _categoryServiceMock.Setup(s => s.UpdateCategoryAsync(categoryId, dto))
+                .ThrowsAsync(new Exception("Database error"));
+
+            // Act
+            var result = await _controller.UpdateCategory(categoryId, dto);
+
+            // Assert
+            var statusCodeResult = Assert.IsType<ObjectResult>(result);
+            Assert.Equal(500, statusCodeResult.StatusCode);
+            var problemDetails = Assert.IsType<ProblemDetails>(statusCodeResult.Value);
+            Assert.Equal("Đã xảy ra lỗi khi cập nhật danh mục", problemDetails.Title);
+            Assert.Equal("Database error", problemDetails.Detail);
         }
 
         [Fact]
         public async Task DeleteCategory_ReturnsNoContent_WhenSuccessful()
         {
             // Arrange
-            _categoryServiceMock.Setup(s => s.DeleteCategoryAsync("cat1")).ReturnsAsync(true);
-            Func<string, CategoryService, Task<IResult>> deleteCategory = async (categoryId, service) =>
-                await service.DeleteCategoryAsync(categoryId) ? Results.NoContent() : Results.NotFound();
+            var categoryId = "67eacc121af224f20dca6884";
+            _categoryServiceMock.Setup(s => s.DeleteCategoryAsync(categoryId)).ReturnsAsync(true);
 
             // Act
-            var result = await deleteCategory("cat1", _categoryServiceMock.Object);
+            var result = await _controller.DeleteCategory(categoryId);
 
             // Assert
-            Assert.IsType<NoContent>(result);
+            Assert.IsType<NoContentResult>(result);
+        }
+
+        [Fact]
+        public async Task DeleteCategory_ReturnsNotFound_WhenCategoryDoesNotExist()
+        {
+            // Arrange
+            var categoryId = "non-existent-id";
+            _categoryServiceMock.Setup(s => s.DeleteCategoryAsync(categoryId)).ReturnsAsync(false);
+
+            // Act
+            var result = await _controller.DeleteCategory(categoryId);
+
+            // Assert
+            var notFoundResult = Assert.IsType<NotFoundObjectResult>(result);
+            var problemDetails = Assert.IsType<ProblemDetails>(notFoundResult.Value);
+            Assert.Equal("Không tìm thấy danh mục", problemDetails.Title);
+            Assert.Equal($"Danh mục với ID {categoryId} không tồn tại", problemDetails.Detail);
+        }
+
+
+        [Fact]
+        public async Task DeleteCategory_ReturnsStatusCode500_WhenExceptionThrown()
+        {
+            // Arrange
+            var categoryId = "67eacc121af224f20dca6884";
+            _categoryServiceMock.Setup(s => s.DeleteCategoryAsync(categoryId))
+                .ThrowsAsync(new Exception("Database error"));
+
+            // Act
+            var result = await _controller.DeleteCategory(categoryId);
+
+            // Assert
+            var statusCodeResult = Assert.IsType<ObjectResult>(result);
+            Assert.Equal(500, statusCodeResult.StatusCode);
+            var problemDetails = Assert.IsType<ProblemDetails>(statusCodeResult.Value);
+            Assert.Equal("Đã xảy ra lỗi khi xóa danh mục", problemDetails.Title);
+            Assert.Equal("Database error", problemDetails.Detail);
         }
     }
 }

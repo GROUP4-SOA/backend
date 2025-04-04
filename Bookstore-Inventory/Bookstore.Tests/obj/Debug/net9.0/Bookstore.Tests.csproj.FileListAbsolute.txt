@@ -264,3 +264,9 @@ C:\Nam3\SOA\Do_an\Do_an19\backend\Bookstore-Inventory\Bookstore.Tests\obj\Debug\
 C:\Nam3\SOA\Do_an\Do_an19\backend\Bookstore-Inventory\Bookstore.Tests\obj\Debug\net9.0\Bookstore.Tests.pdb
 C:\Nam3\SOA\Do_an\Do_an19\backend\Bookstore-Inventory\Bookstore.Tests\obj\Debug\net9.0\Bookstore.Tests.genruntimeconfig.cache
 C:\Nam3\SOA\Do_an\Do_an19\backend\Bookstore-Inventory\Bookstore.Tests\obj\Debug\net9.0\ref\Bookstore.Tests.dll
+C:\Nam3\SOA\Do_an\Do_an19\backend\Bookstore-Inventory\Bookstore.Tests\bin\Debug\net9.0\Bookstore.Application.deps.json
+C:\Nam3\SOA\Do_an\Do_an19\backend\Bookstore-Inventory\Bookstore.Tests\bin\Debug\net9.0\Bookstore.Application.runtimeconfig.json
+C:\Nam3\SOA\Do_an\Do_an19\backend\Bookstore-Inventory\Bookstore.Tests\bin\Debug\net9.0\Bookstore.Infrastructure.deps.json
+C:\Nam3\SOA\Do_an\Do_an19\backend\Bookstore-Inventory\Bookstore.Tests\bin\Debug\net9.0\Bookstore.Infrastructure.runtimeconfig.json
+C:\Nam3\SOA\Do_an\Do_an19\backend\Bookstore-Inventory\Bookstore.Tests\bin\Debug\net9.0\Bookstore.Domain.deps.json
+C:\Nam3\SOA\Do_an\Do_an19\backend\Bookstore-Inventory\Bookstore.Tests\bin\Debug\net9.0\Bookstore.Domain.runtimeconfig.json

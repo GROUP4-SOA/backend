@@ -1,10 +1,12 @@
 ﻿using Bookstore.Application.Dtos;
 using Bookstore.Application.Interfaces.Services;
-using Bookstore.Application.Services;
-using Bookstore.Domain.Entities;
+using Bookstore.API.Controllers;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Mvc;
 using Moq;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace Bookstore.Tests.Controllers
@@ -12,146 +14,193 @@ namespace Bookstore.Tests.Controllers
     public class AuthControllerTests
     {
         private readonly Mock<IAuthService> _authServiceMock;
+        private readonly AuthController _controller; // Add this field
 
         public AuthControllerTests()
         {
             _authServiceMock = new Mock<IAuthService>();
+            _controller = new AuthController(_authServiceMock.Object); // Initialize the controller
         }
 
         [Fact]
         public async Task Login_ReturnsOk_WithValidCredentials()
         {
             // Arrange
-            var loginRequest = new LoginRequestDto { Username = "user", Password = "pass" };
-            var user = new UserDto { UserId = "1", Username = "user", FullName = "John Doe", Email = "john@example.com", PhoneNo = "123", IsActive = true };
+            var loginRequest = new LoginRequestDto { Username = "dinhkhoanam", Password = "hashed_password_10" };
+            var user = new UserDto { UserId = "67eacf021af224f20dca68a6", Username = "dinhkhoanam", FullName = "Dinh Khoa Nam", Email = "dinhkhoanam@example.com", PhoneNo = "0910012345", IsActive = true };
             _authServiceMock.Setup(s => s.LoginAsync(loginRequest)).ReturnsAsync(user);
-            Func<LoginRequestDto, IAuthService, Task<IResult>> login = async (request, service) =>
-            {
-                try
-                {
-                    var result = await service.LoginAsync(request);
-                    return Results.Ok(result);
-                }
-                catch (ArgumentException ex)
-                {
-                    return Results.BadRequest(new { message = ex.Message });
-                }
-            };
 
             // Act
-            var result = await login(loginRequest, _authServiceMock.Object);
+            var result = await _controller.Login(loginRequest);
 
             // Assert
-            var okResult = Assert.IsType<Ok<UserDto>>(result);
-            Assert.Equal(user, okResult.Value);
-        }
-
-        [Fact]
-        public async Task Login_ReturnsBadRequest_WhenExceptionThrown()
-        {
-            // Arrange
-            var loginRequest = new LoginRequestDto { Username = "user", Password = "wrong" };
-            _authServiceMock.Setup(s => s.LoginAsync(loginRequest)).ThrowsAsync(new UnauthorizedAccessException("Invalid credentials"));
-            Func<LoginRequestDto, IAuthService, Task<IResult>> login = async (request, service) =>
-            {
-                try
-                {
-                    var result = await service.LoginAsync(request);
-                    return Results.Ok(result);
-                }
-                catch (ArgumentException ex)
-                {
-                    return Results.BadRequest(new { message = ex.Message });
-                }
-            };
-
-            // Act
-            var result = await login(loginRequest, _authServiceMock.Object);
-
-            // Assert
-            var badRequestResult = Assert.IsType<BadRequest<object>>(result);
-            Assert.Equal("Invalid credentials", ((dynamic)badRequestResult.Value).message);
+            var okResult = Assert.IsType<OkObjectResult>(result);
+            var returnedUser = Assert.IsType<UserDto>(okResult.Value);
+            Assert.Equal(user.UserId, returnedUser.UserId);
+            Assert.Equal(user.Username, returnedUser.Username);
+            Assert.Equal(user.FullName, returnedUser.FullName);
+            Assert.Equal(user.Email, returnedUser.Email);
+            Assert.Equal(user.PhoneNo, returnedUser.PhoneNo);
+            Assert.Equal(user.IsActive, returnedUser.IsActive);
         }
 
         [Fact]
         public async Task GetAllUsers_ReturnsOk_WithUsers()
         {
             // Arrange
-            var users = new List<UserDto> { new() { UserId = "1", Username = "user", FullName = "John Doe" } };
-            _authServiceMock.Setup(s => s.GetAllUsersAsync(null)).ReturnsAsync(users);
-            Func<IAuthService, Task<IResult>> getAllUsers = async (service) =>
+            var currentUsername = "admin";
+            var users = new List<UserDto> { new() { UserId = "67eacf021af224f20dca68a6", Username = "dinhkhoanam", FullName = "Dinh Khoa Nam" } };
+            _authServiceMock.Setup(s => s.GetAllUsersAsync(currentUsername)).ReturnsAsync(users);
+
+            _controller.ControllerContext = new ControllerContext
             {
-                try
-                {
-                    var result = await service.GetAllUsersAsync(null);
-                    return Results.Ok(result);
-                }
-                catch (Exception ex)
-                {
-                    return Results.BadRequest(new { message = ex.Message });
-                }
+                HttpContext = new DefaultHttpContext()
             };
+            _controller.Request.Headers["X-Username"] = currentUsername;
 
             // Act
-            var result = await getAllUsers(_authServiceMock.Object);
+            var result = await _controller.GetAllUsers();
 
             // Assert
-            var okResult = Assert.IsType<Ok<List<UserDto>>>(result);
-            Assert.Equal(users, okResult.Value);
+            var okResult = Assert.IsType<OkObjectResult>(result);
+            var returnedUsers = Assert.IsType<List<UserDto>>(okResult.Value);
+            Assert.Equal(users.Count, returnedUsers.Count);
+            for (int i = 0; i < users.Count; i++)
+            {
+                Assert.Equal(users[i].UserId, returnedUsers[i].UserId);
+                Assert.Equal(users[i].Username, returnedUsers[i].Username);
+                Assert.Equal(users[i].FullName, returnedUsers[i].FullName);
+            }
+        }
+
+        [Fact]
+        public async Task GetAllUsers_ReturnsForbid_WhenUnauthorized()
+        {
+            // Arrange
+            var currentUsername = "user";
+            _authServiceMock.Setup(s => s.GetAllUsersAsync(currentUsername))
+                .ThrowsAsync(new UnauthorizedAccessException());
+
+            _controller.ControllerContext = new ControllerContext
+            {
+                HttpContext = new DefaultHttpContext()
+            };
+            _controller.Request.Headers["X-Username"] = currentUsername;
+
+            // Act
+            var result = await _controller.GetAllUsers();
+
+            // Assert
+            Assert.IsType<ForbidResult>(result);
         }
 
         [Fact]
         public async Task UpdateUser_ReturnsOk_WithValidInput()
         {
             // Arrange
+            var userId = "67eacf021af224f20dca689e";
+            var currentUserId = "admin";
             var dto = new UpdateUserDto { FullName = "John Updated", Email = "john.updated@example.com", PhoneNo = "12345" };
-            var updatedUser = new UserDto { UserId = "1", Username = "user", FullName = "John Updated", Email = "john.updated@example.com", PhoneNo = "12345" };
-            _authServiceMock.Setup(s => s.UpdateUserAsync("1", dto, null)).ReturnsAsync(updatedUser);
-            Func<string, UpdateUserDto, IAuthService, Task<IResult>> updateUser = async (userId, dto, service) =>
+            var updatedUser = new UserDto { UserId = userId, Username = "tranthimai", FullName = "John Updated", Email = "john.updated@example.com", PhoneNo = "12345" };
+            _authServiceMock.Setup(s => s.UpdateUserAsync(userId, dto, currentUserId)).ReturnsAsync(updatedUser);
+
+            _controller.ControllerContext = new ControllerContext
             {
-                try
-                {
-                    var result = await service.UpdateUserAsync(userId, dto, null);
-                    return Results.Ok(result);
-                }
-                catch (Exception ex)
-                {
-                    return Results.BadRequest(new { message = ex.Message });
-                }
+                HttpContext = new DefaultHttpContext()
             };
+            _controller.Request.Headers["currentUserId"] = currentUserId;
 
             // Act
-            var result = await updateUser("1", dto, _authServiceMock.Object);
+            var result = await _controller.Update(userId, dto);
 
             // Assert
-            var okResult = Assert.IsType<Ok<UserDto>>(result);
-            Assert.Equal(updatedUser, okResult.Value);
+            var okResult = Assert.IsType<OkObjectResult>(result);
+            var returnedUser = Assert.IsType<UserDto>(okResult.Value);
+            Assert.Equal(updatedUser.UserId, returnedUser.UserId);
+            Assert.Equal(updatedUser.Username, returnedUser.Username);
+            Assert.Equal(updatedUser.FullName, returnedUser.FullName);
+            Assert.Equal(updatedUser.Email, returnedUser.Email);
+            Assert.Equal(updatedUser.PhoneNo, returnedUser.PhoneNo);
+        }
+
+
+        [Fact]
+        public async Task DeactivateUser_ReturnsNoContent_WhenSuccessful()
+        {
+            // Arrange
+            var userId = "67eacf021af224f20dca689e";
+            var currentUsername = "admin";
+
+            _authServiceMock.Setup(s => s.DeactivateUserAsync(userId, currentUsername))
+                .Returns(Task.CompletedTask);
+
+            _controller.ControllerContext = new ControllerContext
+            {
+                HttpContext = new DefaultHttpContext()
+            };
+            _controller.Request.Headers["X-Username"] = currentUsername;
+
+            // Act
+            var result = await _controller.DeactivateUser(userId);
+
+            // Assert
+            Assert.IsType<NoContentResult>(result);
         }
 
         [Fact]
-        public async Task DeactivateUser_ReturnsOk_WhenSuccessful()
+        public async Task DeactivateUser_ReturnsForbid_WhenUnauthorized()
         {
             // Arrange
-            _authServiceMock.Setup(s => s.DeactivateUserAsync("1", null)).Returns(Task.CompletedTask);
-            Func<string, IAuthService, Task<IResult>> deactivateUser = async (userId, service) =>
+            var userId = "67eacf021af224f20dca689e";
+            var currentUsername = "user";
+
+            _authServiceMock.Setup(s => s.DeactivateUserAsync(userId, currentUsername))
+                .ThrowsAsync(new UnauthorizedAccessException());
+
+            _controller.ControllerContext = new ControllerContext
             {
-                try
-                {
-                    await service.DeactivateUserAsync(userId, null);
-                    return Results.Ok(new { message = "Tài khoản đã được vô hiệu hóa thành công" });
-                }
-                catch (Exception ex)
-                {
-                    return Results.BadRequest(new { message = ex.Message });
-                }
+                HttpContext = new DefaultHttpContext()
             };
+            _controller.Request.Headers["X-Username"] = currentUsername;
 
             // Act
-            var result = await deactivateUser("1", _authServiceMock.Object);
+            var result = await _controller.DeactivateUser(userId);
 
             // Assert
-            var okResult = Assert.IsType<Ok<object>>(result);
-            Assert.Equal("Tài khoản đã được vô hiệu hóa thành công", ((dynamic)okResult.Value).message);
+            Assert.IsType<ForbidResult>(result);
+        }
+
+        [Fact]
+        public async Task DeactivateUser_ReturnsNotFound_WhenUserDoesNotExist()
+        {
+            // Arrange
+            var userId = "non-existent-id";
+            var currentUsername = "admin";
+            var exceptionMessage = "User không tồn tại.";
+
+            _authServiceMock.Setup(s => s.DeactivateUserAsync(userId, currentUsername))
+                .ThrowsAsync(new ArgumentException(exceptionMessage));
+
+            _controller.ControllerContext = new ControllerContext
+            {
+                HttpContext = new DefaultHttpContext()
+            };
+            _controller.Request.Headers["X-Username"] = currentUsername;
+
+            // Act
+            var result = await _controller.DeactivateUser(userId);
+
+            // Assert
+            var notFoundResult = Assert.IsType<NotFoundObjectResult>(result);
+            Assert.NotNull(notFoundResult.Value);
+
+            // Use reflection to access the 'message' property
+            var valueType = notFoundResult.Value.GetType();
+            var messageProperty = valueType.GetProperty("message");
+            Assert.NotNull(messageProperty);
+
+            var actualMessage = messageProperty.GetValue(notFoundResult.Value)?.ToString();
+            Assert.Equal(exceptionMessage, actualMessage);
         }
     }
 }

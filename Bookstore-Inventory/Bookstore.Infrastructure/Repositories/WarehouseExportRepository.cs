@@ -12,9 +12,9 @@ namespace Bookstore.Infrastructure.Repositories
     {
         private readonly IMongoCollection<WarehouseExport> _collection;
 
-        public WarehouseExportRepository(MongoDbContext dbContext)
+        public WarehouseExportRepository(MongoDbContext database)
         {
-            _collection = dbContext.GetCollection<WarehouseExport>("WarehouseExport");
+            _collection = database.GetCollection<WarehouseExport>("WarehouseExport");
         }
 
         public async Task<IEnumerable<WarehouseExport>> GetAllAsync()
