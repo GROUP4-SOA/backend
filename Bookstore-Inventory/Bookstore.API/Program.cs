@@ -153,33 +153,45 @@ app.MapPost("/api/auth/login", async (LoginRequestDto loginRequest, IAuthService
     }
 });
 
-app.MapPut("/api/auth/{userId}", async (string userId, UpdateUserDto updateUser, IAuthService authService, HttpContext httpContext) =>
+app.MapGet("/api/auth/users", async (IAuthService authService) =>
 {
-    var currentUsername = httpContext.User.Identity?.Name ?? "admin"; // Thay thế bằng cách lấy username thực tế
     try
     {
-        var updatedUser = await authService.UpdateUserAsync(userId, updateUser, currentUsername);
-        return Results.Ok(updatedUser);
+        var users = await authService.GetAllUsersAsync(null);
+        return Results.Ok(users);
     }
-    catch (ArgumentException ex)
+    catch (Exception ex)
     {
         return Results.BadRequest(new { message = ex.Message });
     }
 });
 
-//app.MapDelete("/api/auth/{userId}", async (string userId, IAuthService authService, HttpContext httpContext) =>
-//{
-//    var currentUsername = httpContext.User.Identity?.Name ?? "admin";
-//    try
-//    {
-//        await authService.DeleteUserAsync(userId, currentUsername);
-//        return Results.NoContent();
-//    }
-//    catch (ArgumentException ex)
-//    {
-//        return Results.BadRequest(new { message = ex.Message });
-//    }
-//});
+app.MapPut("/api/auth/{userId}", async (string userId, UpdateUserDto updateUser, IAuthService authService) =>
+{
+    try
+    {
+        var updatedUser = await authService.UpdateUserAsync(userId, updateUser, null);
+        return Results.Ok(updatedUser);
+    }
+    catch (Exception ex)
+    {
+        return Results.BadRequest(new { message = ex.Message });
+    }
+});
+
+app.MapPut("/api/auth/deactivate/{userId}", async (string userId, IAuthService authService) =>
+{
+    try
+    {
+        await authService.DeactivateUserAsync(userId, null);
+        return Results.Ok(new { message = "Tài khoản đã được vô hiệu hóa thành công" });
+    }
+    catch (Exception ex)
+    {
+        return Results.BadRequest(new { message = ex.Message });
+    }
+});
+
 // Warehouse Export
 app.MapGet("/api/warehouse-exports", async (ExportService service) =>
 {

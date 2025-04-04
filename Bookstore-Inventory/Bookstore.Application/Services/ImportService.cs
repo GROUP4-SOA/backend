@@ -27,19 +27,24 @@ namespace Bookstore.Application.Services
             if (importDto.WarehouseImportBooks == null || !importDto.WarehouseImportBooks.Any())
                 throw new ArgumentException("Danh sách sách nhập không được để trống");
 
-            var user = await _usersCollection.Find(u => u.UserId == importDto.UserId).FirstOrDefaultAsync();
+            // Sử dụng Builders.Filter để tạo filter với UserId string
+            var userFilter = Builders<User>.Filter.Eq(u => u.UserId, importDto.UserId);
+            var user = await _usersCollection.Find(userFilter).FirstOrDefaultAsync();
+        
             if (user == null)
                 throw new ArgumentException($"Người dùng với UserId {importDto.UserId} không tồn tại");
 
             var import = new WarehouseImport
             {
+                ImportId = importDto.ImportId,  // Đảm bảo ImportId được gán
                 ImportDate = importDto.ImportDate,
                 UserId = importDto.UserId,
                 WarehouseImportBooks = importDto.WarehouseImportBooks.Select(ib => new WarehouseImportBook
                 {
                     WarehouseImportId = importDto.ImportId,
                     BookId = ib.BookId,
-                    ImportQuantity = ib.ImportQuantity
+                    ImportQuantity = ib.ImportQuantity,
+                    Price = ib.Price  // Thêm giá nếu cần
                 }).ToList()
             };
 
@@ -50,6 +55,7 @@ namespace Bookstore.Application.Services
 
                 var bookFilter = Builders<Book>.Filter.Eq(b => b.BookId, importBook.BookId);
                 var book = await _booksCollection.Find(bookFilter).FirstOrDefaultAsync();
+            
                 if (book == null)
                     throw new ArgumentException($"Sách với ID {importBook.BookId} không tồn tại");
 
@@ -58,8 +64,6 @@ namespace Bookstore.Application.Services
             }
 
             await _importsCollection.InsertOneAsync(import);
-
-            importDto.ImportId = import.ImportId;
             return importDto;
         }
 

@@ -122,7 +122,7 @@ namespace Bookstore.API.Controllers
                 return StatusCode(500, new { message = "Đã xảy ra lỗi khi vô hiệu hóa user." });
             }
         }
-        [HttpGet("all-users")]
+        [HttpGet]
         public async Task<IActionResult> GetAllUsers()
         {
             Console.WriteLine("Received request to get all users.");

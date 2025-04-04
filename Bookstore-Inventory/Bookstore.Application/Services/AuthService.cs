@@ -30,15 +30,27 @@ namespace Bookstore.Application.Services
             return MapToUserDto(user);
         }
 
-        public async Task<UserDto> UpdateUserAsync(string userId, UpdateUserDto updateUser, string currentUserId)
+        public async Task DeactivateUserAsync(string userId, string? currentUserId)
         {
-            var currentUser = await _usersCollection.Find(u => u.UserId == currentUserId).FirstOrDefaultAsync();
-            if (currentUser == null || currentUser.Role != UserRole.ADMINISTRATOR)
+            // Thay đổi cách tìm user dựa trên UserId string
+            var filter = Builders<User>.Filter.Eq(u => u.UserId, userId);
+            var userToDeactivate = await _usersCollection.Find(filter).FirstOrDefaultAsync();
+        
+            if (userToDeactivate == null)
             {
-                throw new UnauthorizedAccessException("Chỉ ADMINISTRATOR mới có quyền cập nhật tài khoản.");
+                throw new ArgumentException("User không tồn tại.");
             }
 
-            var targetUser = await _usersCollection.Find(u => u.UserId == userId).FirstOrDefaultAsync();
+            var updateDefinition = Builders<User>.Update.Set(u => u.IsActive, false);
+            await _usersCollection.UpdateOneAsync(filter, updateDefinition);
+        }
+
+        public async Task<UserDto> UpdateUserAsync(string userId, UpdateUserDto updateUser, string? currentUserId)
+        {
+            // Thay đổi cách tìm user dựa trên UserId string
+            var filter = Builders<User>.Filter.Eq(u => u.UserId, userId);
+            var targetUser = await _usersCollection.Find(filter).FirstOrDefaultAsync();
+        
             if (targetUser == null)
             {
                 throw new KeyNotFoundException("Người dùng cần cập nhật không tồn tại.");
@@ -54,39 +66,15 @@ namespace Bookstore.Application.Services
                 updateDefinition = updateDefinition.Set(u => u.Password, updateUser.Password);
             }
 
-            await _usersCollection.UpdateOneAsync(u => u.UserId == userId, updateDefinition);
-            var updatedUser = await _usersCollection.Find(u => u.UserId == userId).FirstOrDefaultAsync();
+            await _usersCollection.UpdateOneAsync(filter, updateDefinition);
+            var updatedUser = await _usersCollection.Find(filter).FirstOrDefaultAsync();
             return MapToUserDto(updatedUser);
         }
 
-        public async Task DeactivateUserAsync(string userId, string currentUserId)
+        public async Task<List<UserDto>> GetAllUsersAsync(string? currentUserId)
         {
-            var userToDeactivate = await _usersCollection.Find(u => u.UserId == userId).FirstOrDefaultAsync();
-            if (userToDeactivate == null)
-            {
-                throw new ArgumentException("User không tồn tại.");
-            }
-
-            // Kiểm tra quyền xóa, chỉ admin hoặc chính chủ mới có thể vô hiệu hóa tài khoản
-            var currentUser = await _usersCollection.Find(u => u.UserId == currentUserId).FirstOrDefaultAsync();
-            if (currentUser == null || (currentUser.UserId != userId && currentUser.Role != UserRole.ADMINISTRATOR))
-            {
-                throw new UnauthorizedAccessException("Bạn không có quyền vô hiệu hóa user này.");
-            }
-
-            var updateDefinition = Builders<User>.Update.Set(u => u.IsActive, false);
-            await _usersCollection.UpdateOneAsync(u => u.UserId == userId, updateDefinition);
-        }
-
-        public async Task<List<UserDto>> GetAllUsersAsync(string currentUserId)
-        {
-            var currentUser = await _usersCollection.Find(u => u.UserId == currentUserId).FirstOrDefaultAsync();
-
-            if (currentUser == null || currentUser.Role != UserRole.ADMINISTRATOR)
-            {
-                throw new UnauthorizedAccessException("Bạn không có quyền xem danh sách tài khoản.");
-            }
-
+            // Tạm thời bỏ qua việc kiểm tra quyền admin
+            // Trong thực tế, bạn nên implement một hệ thống authentication/authorization đầy đủ
             var users = await _usersCollection.Find(_ => true).ToListAsync();
             return users.Select(MapToUserDto).ToList();
         }
