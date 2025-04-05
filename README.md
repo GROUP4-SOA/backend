@@ -59,7 +59,6 @@ Hệ thống Quản lý Cửa hàng Sách là một ứng dụng web được ph
 - Nhập kho
 - Xuất kho
 - Xem lịch sử nhập/xuất
-- Báo cáo tồn kho
 
 ### 4. Quản lý Người dùng
 - Đăng nhập
