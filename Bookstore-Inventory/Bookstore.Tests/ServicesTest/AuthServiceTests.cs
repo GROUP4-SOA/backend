@@ -157,7 +157,7 @@ namespace Bookstore.Tests
                 FullName = "Updated Le Hoang Phuc",
                 Email = "updated.lehoangphuc@example.com",
                 PhoneNo = "0901234567",
-                Password = "new_hashed_password"
+           
             };
             var targetUser = new User
             {
@@ -176,7 +176,6 @@ namespace Bookstore.Tests
                 Username = "lehoangphuc",
                 Email = updateUserDto.Email,
                 PhoneNo = updateUserDto.PhoneNo,
-                Password = updateUserDto.Password,
                 Role = UserRole.STAFF,
                 IsActive = false,
                 FullName = updateUserDto.FullName

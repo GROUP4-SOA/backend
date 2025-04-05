@@ -110,7 +110,7 @@ namespace Bookstore.Tests
         public async Task CreateCategoryAsync_ValidCategory_CreatesCategory()
         {
             // Arrange
-            var categoryCreateDto = new CategoryCreateDto { Name = "New Category", Description = "New category description" };
+            var categoryCreateDto = new CategoryCreateDto { Name = "New Category" };
 
             _categoriesCollectionMock
                 .Setup(x => x.InsertOneAsync(
@@ -130,7 +130,6 @@ namespace Bookstore.Tests
             Assert.NotNull(result);
             Assert.Equal("67eacc121af224f20dca6890", result.CategoryId);
             Assert.Equal(categoryCreateDto.Name, result.Name);
-            Assert.Equal(categoryCreateDto.Description, result.Description);
             _categoriesCollectionMock.Verify(x => x.InsertOneAsync(It.IsAny<Category>(), null, CancellationToken.None), Times.Once());
         }
 
@@ -140,8 +139,8 @@ namespace Bookstore.Tests
         {
             // Arrange
             var categoryId = "67eacc121af224f20dca6884";
-            var categoryUpdateDto = new CategoryUpdateDto { Name = "Updated Machine Learning", Description = "Updated description" };
-            var existingCategory = new Category { Id = categoryId, Name = "Machine Learning", Description = "Books about machine learning" };
+            var categoryUpdateDto = new CategoryUpdateDto { Name = "Updated Machine Learning" };
+            var existingCategory = new Category { Id = categoryId, Name = "Machine Learning" };
 
             // Mock FindAsync để trả về existingCategory
             var mockCursor = new Mock<IAsyncCursor<Category>>();
@@ -161,7 +160,7 @@ namespace Bookstore.Tests
             _categoriesCollectionMock
                 .Setup(x => x.ReplaceOneAsync(
                     It.IsAny<FilterDefinition<Category>>(),
-                    It.Is<Category>(c => c.Id == categoryId && c.Name == categoryUpdateDto.Name && c.Description == categoryUpdateDto.Description),
+                    It.Is<Category>(c => c.Id == categoryId && c.Name == categoryUpdateDto.Name),
                     It.IsAny<ReplaceOptions>(),
                     It.IsAny<CancellationToken>()))
                 .ReturnsAsync(new ReplaceOneResult.Acknowledged(1, 1, null));
@@ -173,7 +172,6 @@ namespace Bookstore.Tests
             Assert.NotNull(result);
             Assert.Equal(categoryId, result.CategoryId);
             Assert.Equal(categoryUpdateDto.Name, result.Name);
-            Assert.Equal(categoryUpdateDto.Description, result.Description);
             _categoriesCollectionMock.Verify(x => x.ReplaceOneAsync(
                 It.IsAny<FilterDefinition<Category>>(),
                 It.IsAny<Category>(),
@@ -185,7 +183,7 @@ namespace Bookstore.Tests
         public async Task UpdateCategoryAsync_NullOrEmptyId_ThrowsArgumentException()
         {
             // Arrange
-            var categoryUpdateDto = new CategoryUpdateDto { Name = "Updated Machine Learning", Description = "Updated description" };
+            var categoryUpdateDto = new CategoryUpdateDto { Name = "Updated Machine Learning" };
 
             // Act & Assert
             var exception = await Assert.ThrowsAsync<ArgumentException>(() => _categoryService.UpdateCategoryAsync("", categoryUpdateDto));

@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "E:\\SOA_KienTrucPM\\BackEnd_2\\backend\\Bookstore-Inventory\\Bookstore.Domain\\Bookstore.Domain.csproj": {}
+    "C:\\Nam3\\SOA\\Do_an\\Do_an20\\backend\\Bookstore-Inventory\\Bookstore.Domain\\Bookstore.Domain.csproj": {}
   },
   "projects": {
-    "E:\\SOA_KienTrucPM\\BackEnd_2\\backend\\Bookstore-Inventory\\Bookstore.Domain\\Bookstore.Domain.csproj": {
+    "C:\\Nam3\\SOA\\Do_an\\Do_an20\\backend\\Bookstore-Inventory\\Bookstore.Domain\\Bookstore.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\SOA_KienTrucPM\\BackEnd_2\\backend\\Bookstore-Inventory\\Bookstore.Domain\\Bookstore.Domain.csproj",
+        "projectUniqueName": "C:\\Nam3\\SOA\\Do_an\\Do_an20\\backend\\Bookstore-Inventory\\Bookstore.Domain\\Bookstore.Domain.csproj",
         "projectName": "Bookstore.Domain",
-        "projectPath": "E:\\SOA_KienTrucPM\\BackEnd_2\\backend\\Bookstore-Inventory\\Bookstore.Domain\\Bookstore.Domain.csproj",
-        "packagesPath": "C:\\Users\\Hi\\.nuget\\packages\\",
-        "outputPath": "E:\\SOA_KienTrucPM\\BackEnd_2\\backend\\Bookstore-Inventory\\Bookstore.Domain\\obj\\",
+        "projectPath": "C:\\Nam3\\SOA\\Do_an\\Do_an20\\backend\\Bookstore-Inventory\\Bookstore.Domain\\Bookstore.Domain.csproj",
+        "packagesPath": "C:\\Users\\Truc\\.nuget\\packages\\",
+        "outputPath": "C:\\Nam3\\SOA\\Do_an\\Do_an20\\backend\\Bookstore-Inventory\\Bookstore.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Hi\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Truc\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -44,7 +44,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.100"
+        "SdkAnalysisLevel": "9.0.200"
       },
       "frameworks": {
         "net8.0": {
@@ -111,7 +111,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.102/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.201/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
