@@ -1,7 +1,7 @@
-# Quản lý Cửa hàng Sách (Bookstore Inventory)
+# Quản lý kho Sách (Bookstore Inventory)
 
 ## Giới thiệu
-Hệ thống Quản lý Cửa hàng Sách là một ứng dụng web được phát triển bằng .NET 8 Minimal API, MongoDB và kiến trúc phân lớp. Hệ thống hỗ trợ các chức năng quản lý sách, danh mục, kho hàng và người dùng.
+Hệ thống Quản lý kho Sách là một ứng dụng web được phát triển bằng .NET 8 Minimal API, MongoDB và kiến trúc phân lớp. Hệ thống hỗ trợ các chức năng quản lý sách, danh mục, kho hàng và người dùng.
 
 ## Công nghệ sử dụng
 - .NET 8.0
