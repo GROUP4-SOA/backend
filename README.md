@@ -1,44 +1,173 @@
-# Bookstore Inventory Management System
+# Quản lý Cửa hàng Sách (Bookstore Inventory)
 
-## Overview
-The **Bookstore Inventory Management System** is a robust and scalable solution designed to streamline book inventory management, user authentication, and category organization within a bookstore. Built on **.NET 8 Minimal API** with **MongoDB**, this system follows a **Layered Architecture**, ensuring modularity, maintainability, and scalability.
+## 📝 Giới thiệu
+Ứng dụng web API quản lý cửa hàng sách, phát triển bằng ASP.NET Core, hỗ trợ quản lý thông tin sách và kho hàng hiệu quả.
 
-## System Architecture
-The project is structured into four primary layers:
+## 🚀 Công nghệ
+- ASP.NET Core (.NET 8.0, .NET 9.0)
+- C# 12.0, C# 13.0
+- Entity Framework Core
+- SQL Server
+- Docker
+- Swagger/OpenAPI
+- JWT Authentication
 
-1. **Bookstore.API (Presentation Layer)**
-   - Manages HTTP requests and responses.
-   - Implements controllers for books, categories, and authentication.
-   - Integrates middleware for exception handling and authentication.
-   
-2. **Bookstore.Application (Business Logic Layer)**
-   - Encapsulates core business logic via services and interfaces.
-   - Utilizes Data Transfer Objects (DTOs) for structured data management.
-   
-3. **Bookstore.Infrastructure (Data Access Layer)**
-   - Implements repository patterns for MongoDB interactions.
-   - Defines database context and seed data mechanisms.
-   
-4. **Bookstore.Domain (Domain Layer)**
-   - Defines core domain entities, including `Book`, `Category`, and `User`.
+## 🏗️ Kiến trúc
+Layered Architecture với 4 layer
 
-## Key Features
-- **Book Management**: Supports CRUD operations for books.
-- **Category Management**: Enables book categorization.
-- **User Authentication**: Implements role-based authentication (Admin, Storekeeper) with secure password hashing.
-- **RESTful API**: Provides endpoints for seamless frontend integration.
-- **Middleware Support**: Handles authentication and exception management.
+## ✨ Tính năng
+- 📚 **Quản lý Sách**
+    - CRUD operations
+    - Tìm kiếm nâng cao
+    - Xem chi tiết
+    - Import/Export danh sách
 
-## Technology Stack
-- **Backend**: C# .NET 8 Minimal API
-- **Database**: MongoDB
-- **Authentication**: JWT-based authentication
-- **Dependency Injection**: Built-in .NET DI
-- **Version Control**: Git & GitHub
+- 📑 **Quản lý Danh mục**
+    - Thêm/sửa/xóa danh mục
+    - Phân cấp danh mục
+    - Gán sách vào danh mục
 
-## Installation & Setup
-### Prerequisites
-- **.NET 8 SDK**
-- **MongoDB** (or MongoDB Atlas for cloud-based database hosting)
+- 📦 **Quản lý Kho**
+    - Theo dõi tồn kho
+    - Nhập/xuất kho
+    - Lịch sử nhập xuất
 
-### updating...
+- 👥 **Quản lý User**
+    - Authentication
+    - Authorization
+    - Profile management
+    - Phân quyền chi tiết
+
+## ⚙️ Cài đặt
+
+### Yêu cầu
+- .NET SDK 8.0+
+- SQL Server
+- Docker (optional)
+
+### Local Setup
+```bash
+# Clone repo
+git clone [url]
+
+# Restore 
+dotnet restore
+
+# Update DB
+dotnet ef database update
+
+# Run
+dotnet run
+```
+
+### Docker
+```bash
+docker build -t bookstore-api .
+docker run -p 8080:80 bookstore-api
+```
+
+## 🔧 Cấu hình
+```json
+{
+  "ConnectionStrings": {
+    "DefaultConnection": "Server=...;"
+  },
+  "JwtSettings": {
+    "SecretKey": "your-secret-key",
+    "Issuer": "your-issuer",
+    "Audience": "your-audience"
+  },
+  "CategorySettings": {
+    "MaxLevel": 3,
+    "AllowMultipleParents": false
+  }
+}
+```
+
+## 📚 API Documentation
+- Swagger UI: `http://localhost:8080/swagger`
+- Endpoints:
+    - Books:
+        - `GET /api/books` - Lấy danh sách sách
+        - `POST /api/books` - Thêm sách mới
+        - `PUT /api/books/{id}` - Cập nhật sách
+        - `DELETE /api/books/{id}` - Xóa sách
+
+    - Categories:
+        - `GET /api/categories` - Lấy danh sách danh mục
+        - `GET /api/categories/{id}/books` - Lấy sách theo danh mục
+        - `POST /api/categories` - Thêm danh mục mới
+        - `PUT /api/categories/{id}` - Cập nhật danh mục
+        - `DELETE /api/categories/{id}` - Xóa danh mục
+        - `POST /api/categories/{id}/books` - Thêm sách vào danh mục
+
+## 🎯 Design Patterns
+- Repository Pattern
+- Unit of Work
+- Dependency Injection
+- CQRS
+- Mediator
+- DTO
+- Factory
+- Singleton
+
+## 🧪 Testing
+- Unit Tests
+- Integration Tests
+- API Tests
+- E2E Tests
+
+## 🔄 CI/CD
+- GitHub Actions
+- Docker Hub
+- Render Deployment
+
+## 🤝 Đóng góp
+1. Fork repo
+2. Tạo nhánh feature
+3. Commit thay đổi
+4. Push
+5. Tạo Pull Request
+
+## ❗ Xử lý lỗi thường gặp
+1. **Database Connection**
+    - Check connection string
+    - SQL Server status
+
+2. **Authentication**
+    - JWT config
+    - Token validation
+
+3. **Category Management**
+    - Kiểm tra quan hệ cha-con
+    - Xử lý xung đột khi xóa
+    - Giới hạn độ sâu danh mục
+
+## 👤 Tác giả
+- Huynh Nhu Ngoc
+- Le My Truc
+- Phan Tran Thien Huong
+
+## 📝 Changelog
+
+### v1.0.0 (2024-03-xx)
+- Initial release
+- Basic CRUD
+- Category management
+
+### v1.1.0 (Upcoming)
+- Reports
+- Performance optimization
+- Additional tests
+- Category import/export
+- Bulk operations
+
+## ⚠️ Lưu ý
+- Backup data trước khi update
+- Check .NET compatibility
+- Follow coding standards
+- Kiểm tra ràng buộc danh mục trước khi xóa
+- Đảm bảo tính nhất quán của dữ liệu
+
+---
+*Cập nhật: Tháng 4/2024*
