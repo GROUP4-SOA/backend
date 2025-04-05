@@ -109,6 +109,28 @@
         }
       }
     },
+    "/api/books/category/{categoryId}": {
+      "get": {
+        "tags": [
+          "Bookstore.API"
+        ],
+        "parameters": [
+          {
+            "name": "categoryId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/categories": {
       "get": {
         "tags": [

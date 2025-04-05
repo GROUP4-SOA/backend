@@ -107,6 +107,22 @@ app.MapDelete("/api/books/{bookId}", async (string bookId, BookService service) 
     var result = await service.DeleteBookAsync(bookId);
     return result ? Results.NoContent() : Results.NotFound();
 });
+app.MapGet("/api/books/category/{categoryId}", async (string categoryId, BookService bookService) =>
+{
+    try
+    {
+        // Lấy danh sách sách theo categoryId
+        var books = await bookService.GetBooksByCategoryAsync(categoryId);
+        return Results.Ok(books); // Trả về danh sách sách theo categoryId
+    }
+    catch (Exception ex)
+    {
+        // Nếu có lỗi, trả về lỗi BadRequest
+        return Results.BadRequest(new { message = ex.Message });
+    }
+});
+
+
 
 // Category
 app.MapGet("/api/categories", async (CategoryService service) =>

@@ -8,8 +8,8 @@
     "\\Bookstore-Inventory\\Bookstore.Domain",
     "\\Bookstore-Inventory\\Bookstore.Domain\\Entities",
     "\\Bookstore-Inventory\\Bookstore.Tests",
-    "\\Bookstore-Inventory\\Bookstore.Tests\\RepositoriesTests"
+    "\\Bookstore-Inventory\\Bookstore.Tests\\ControllersTest"
   ],
-  "SelectedNode": "\\Bookstore-Inventory\\Bookstore.Application\\Services\\ImportService.cs",
+  "SelectedNode": "\\Bookstore-Inventory\\Bookstore.Tests\\ControllersTest\\AuthControllerTests.cs",
   "PreviewInSolutionExplorer": false
 }
