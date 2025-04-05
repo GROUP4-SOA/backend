@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "5q0L8T+OSx8=",
+  "dgSpecHash": "445rWF0e8kI=",
   "success": true,
-  "projectFilePath": "C:\\Nam3\\SOA\\Do_an\\Do_an20\\backend\\Bookstore-Inventory\\Bookstore.Tests\\Bookstore.Tests.csproj",
+  "projectFilePath": "C:\\Nam3\\SOA\\Do_an\\Do_an_final\\backend\\Bookstore-Inventory\\Bookstore.Tests\\Bookstore.Tests.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Truc\\.nuget\\packages\\castle.core\\5.1.1\\castle.core.5.1.1.nupkg.sha512",
     "C:\\Users\\Truc\\.nuget\\packages\\coverlet.collector\\6.0.4\\coverlet.collector.6.0.4.nupkg.sha512",
