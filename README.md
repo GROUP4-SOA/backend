@@ -66,24 +66,6 @@ docker build -t bookstore-api .
 docker run -p 8080:80 bookstore-api
 ```
 
-## 🔧 Cấu hình
-```json
-{
-  "ConnectionStrings": {
-    "DefaultConnection": "Server=...;"
-  },
-  "JwtSettings": {
-    "SecretKey": "your-secret-key",
-    "Issuer": "your-issuer",
-    "Audience": "your-audience"
-  },
-  "CategorySettings": {
-    "MaxLevel": 3,
-    "AllowMultipleParents": false
-  }
-}
-```
-
 ## 📚 API Documentation
 - Swagger UI: `http://localhost:8080/swagger`
 - Endpoints:
