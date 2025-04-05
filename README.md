@@ -1,155 +1,242 @@
 # Quản lý Cửa hàng Sách (Bookstore Inventory)
 
-## 📝 Giới thiệu
-Ứng dụng web API quản lý cửa hàng sách, phát triển bằng ASP.NET Core, hỗ trợ quản lý thông tin sách và kho hàng hiệu quả.
+## Giới thiệu
+Hệ thống Quản lý Cửa hàng Sách là một ứng dụng web được phát triển bằng .NET 8 Minimal API, MongoDB và kiến trúc phân lớp. Hệ thống hỗ trợ các chức năng quản lý sách, danh mục, kho hàng và người dùng.
 
-## 🚀 Công nghệ
-- ASP.NET Core (.NET 8.0, .NET 9.0)
-- C# 12.0, C# 13.0
-- Entity Framework Core
-- SQL Server
-- Docker
+## Công nghệ sử dụng
+- .NET 8.0
+- C# 12.0
+- MongoDB
+- HTML/CSS/JavaScript
 - Swagger/OpenAPI
-- JWT Authentication
+- Docker
 
-## 🏗️ Kiến trúc
-Layered Architecture với 4 layer
+## Kiến trúc hệ thống
+### Kiến trúc phân lớp
+1. API Layer
+- Minimal API endpoints
+- Request/Response handling
+- Route configuration
 
-## ✨ Tính năng
-- 📚 **Quản lý Sách**
-    - CRUD operations
-    - Tìm kiếm nâng cao
-    - Xem chi tiết
-    - Import/Export danh sách
+2. Application Layer  
+- Business logic
+- Services
+- DTOs
+- Interfaces
 
-- 📑 **Quản lý Danh mục**
-    - Thêm/sửa/xóa danh mục
-    - Phân cấp danh mục
-    - Gán sách vào danh mục
+3. Infrastructure Layer
+- Data access
+- Repositories
+- Database context
+- External services
 
-- 📦 **Quản lý Kho**
-    - Theo dõi tồn kho
-    - Nhập/xuất kho
-    - Lịch sử nhập xuất
+4. Domain Layer
+- Business entities
+- Domain logic
+- Interfaces
 
-- 👥 **Quản lý User**
-    - Authentication
-    - Authorization
-    - Profile management
-    - Phân quyền chi tiết
+### Dependency Injection
+- Registered services
+- Repository pattern
+- Singleton lifecycle
 
-## ⚙️ Cài đặt
+## Tính năng
+### 1. Quản lý Sách
+- Xem danh sách sách
+- Thêm sách mới
+- Cập nhật thông tin sách
+- Xóa sách
+- Tìm kiếm theo danh mục
 
-### Yêu cầu
-- .NET SDK 8.0+
-- SQL Server
-- Docker (optional)
+### 2. Quản lý Danh mục
+- Xem danh sách danh mục
+- Thêm danh mục mới 
+- Cập nhật danh mục
+- Xóa danh mục
+- Phân cấp danh mục
 
-### Local Setup
+### 3. Quản lý Kho
+- Nhập kho
+- Xuất kho
+- Xem lịch sử nhập/xuất
+- Báo cáo tồn kho
+
+### 4. Quản lý Người dùng
+- Đăng nhập
+- Tạo tài khoản mới
+- Cập nhật thông tin
+- Vô hiệu hóa tài khoản
+- Phân quyền người dùng
+
+## API Endpoints
+
+### Quản lý Sách
+```http
+GET /api/books
+GET /api/books/{bookId}
+POST /api/books
+PUT /api/books/{bookId}
+DELETE /api/books/{bookId}
+GET /api/books/category/{categoryId}
+```
+
+### Quản lý Danh mục
+```http
+GET /api/categories
+GET /api/categories/{categoryId}
+POST /api/categories
+PUT /api/categories/{categoryId}
+DELETE /api/categories/{categoryId}
+```
+
+### Xác thực và Phân quyền
+```http
+POST /api/auth/login
+POST /api/users
+GET /api/auth/users
+PUT /api/auth/{userId}
+PUT /api/auth/deactivate/{userId}
+```
+
+### Quản lý Kho
+```http
+GET /api/warehouse-exports
+POST /api/warehouse-exports
+GET /api/imports
+POST /api/imports
+```
+
+## Cấu trúc Database
+### Collections
+- Book
+- Category  
+- User
+- Admin
+- Staff
+- WarehouseExport
+- WarehouseExportBook
+- WarehouseImport 
+- WarehouseImportBook
+
+## Cài đặt và Triển khai
+
+### Yêu cầu hệ thống
+- .NET SDK 8.0 trở lên
+- MongoDB
+- Docker (tùy chọn)
+
+### Cài đặt Local
 ```bash
-# Clone repo
-git clone [url]
+# Clone repository
+git clone [repository-url]
 
-# Restore 
+# Restore packages
 dotnet restore
 
-# Update DB
-dotnet ef database update
-
-# Run
+# Run application
 dotnet run
+```
+
+### Cấu hình
+Chỉnh sửa file appsettings.json:
+```json
+{
+    "DatabaseSettings": {
+        "ConnectionString": "mongodb connection string",
+        "DatabaseName": "BookstoreDB"
+    }
+}
 ```
 
 ### Docker
 ```bash
+# Build image
 docker build -t bookstore-api .
+
+# Run container
 docker run -p 8080:80 bookstore-api
 ```
 
-## 📚 API Documentation
-- Swagger UI: `http://localhost:8080/swagger`
-- Endpoints:
-    - Books:
-        - `GET /api/books` - Lấy danh sách sách
-        - `POST /api/books` - Thêm sách mới
-        - `PUT /api/books/{id}` - Cập nhật sách
-        - `DELETE /api/books/{id}` - Xóa sách
-
-    - Categories:
-        - `GET /api/categories` - Lấy danh sách danh mục
-        - `GET /api/categories/{id}/books` - Lấy sách theo danh mục
-        - `POST /api/categories` - Thêm danh mục mới
-        - `PUT /api/categories/{id}` - Cập nhật danh mục
-        - `DELETE /api/categories/{id}` - Xóa danh mục
-        - `POST /api/categories/{id}/books` - Thêm sách vào danh mục
-
-## 🎯 Design Patterns
-- Repository Pattern
-- Unit of Work
-- Dependency Injection
-- CQRS
-- Mediator
-- DTO
-- Factory
-- Singleton
-
-## 🧪 Testing
+## Testing
 - Unit Tests
-- Integration Tests
+- Integration Tests  
 - API Tests
-- E2E Tests
+- End-to-end Tests
 
-## 🔄 CI/CD
-- GitHub Actions
-- Docker Hub
-- Render Deployment
+## Bảo mật
+- Basic Authentication
+- Role-based Authorization
+- Input Validation
+- Error Handling
+- CORS Policy
 
-## 🤝 Đóng góp
-1. Fork repo
-2. Tạo nhánh feature
-3. Commit thay đổi
-4. Push
-5. Tạo Pull Request
+## Hiệu năng
+- MongoDB Indexing
+- Response Caching
+- Asynchronous Operations
+- Connection Pooling
 
-## ❗ Xử lý lỗi thường gặp
-1. **Database Connection**
-    - Check connection string
-    - SQL Server status
+## Logging và Giám sát
+- Console Logging
+- Error Tracking
+- Performance Metrics
+- Audit Trails
 
-2. **Authentication**
-    - JWT config
-    - Token validation
+## Quy trình phát triển
+- Git Flow
+- Code Review
+- Continuous Integration
+- Automated Testing
 
-3. **Category Management**
-    - Kiểm tra quan hệ cha-con
-    - Xử lý xung đột khi xóa
-    - Giới hạn độ sâu danh mục
+## Tài liệu liên quan
+- API Documentation
+- Database Schema
+- Deployment Guide
+- User Manual
 
-## 👤 Tác giả
-- Huynh Nhu Ngoc
-- Le My Truc
-- Phan Tran Thien Huong
+## Xử lý lỗi thường gặp
+1. Database Connection
+- Kiểm tra connection string
+- Xác nhận MongoDB service
+- Network connectivity
 
-## 📝 Changelog
+2. Authentication
+- Token validation
+- Role permissions
+- Session management
 
-### v1.0.0 (2024-03-xx)
-- Initial release
-- Basic CRUD
-- Category management
+3. Business Logic
+- Data validation
+- Business rules
+- State management
+
+## Hướng dẫn đóng góp
+1. Fork repository
+2. Create feature branch
+3. Commit changes
+4. Push to branch
+5. Create Pull Request
+
+## Phiên bản
+### v1.0.0
+- Tính năng cơ bản
+- CRUD operations
+- Basic authentication
 
 ### v1.1.0 (Upcoming)
-- Reports
-- Performance optimization
-- Additional tests
-- Category import/export
-- Bulk operations
+- Advanced reporting
+- Performance improvements
+- Enhanced security
 
-## ⚠️ Lưu ý
-- Backup data trước khi update
-- Check .NET compatibility
-- Follow coding standards
-- Kiểm tra ràng buộc danh mục trước khi xóa
-- Đảm bảo tính nhất quán của dữ liệu
+## Người đóng góp
+- Ngoc Huynh - Lead Developer
+
+## License
+MIT License
+
+## Liên hệ
+- Email: [email]
+- GitHub: [github-profile]
 
 ---
-*Cập nhật: Tháng 4/2024*
+*Cập nhật lần cuối: Tháng 3/2024*
