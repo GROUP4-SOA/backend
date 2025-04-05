@@ -235,6 +235,28 @@
         }
       }
     },
+    "/api/users": {
+      "post": {
+        "tags": [
+          "Bookstore.API"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUserDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/auth/users": {
       "get": {
         "tags": [
@@ -401,10 +423,6 @@
       "BookUpdateDto": {
         "type": "object",
         "properties": {
-          "bookId": {
-            "type": "string",
-            "nullable": true
-          },
           "title": {
             "type": "string",
             "nullable": true
@@ -431,15 +449,7 @@
       "CategoryCreateDto": {
         "type": "object",
         "properties": {
-          "categoryId": {
-            "type": "string",
-            "nullable": true
-          },
           "name": {
-            "type": "string",
-            "nullable": true
-          },
-          "description": {
             "type": "string",
             "nullable": true
           }
@@ -449,17 +459,54 @@
       "CategoryUpdateDto": {
         "type": "object",
         "properties": {
-          "categoryId": {
-            "type": "string",
-            "nullable": true
-          },
           "name": {
             "type": "string",
             "nullable": true
-          },
-          "description": {
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateUserDto": {
+        "required": [
+          "email",
+          "fullName",
+          "password",
+          "phoneNo",
+          "username"
+        ],
+        "type": "object",
+        "properties": {
+          "userId": {
             "type": "string",
             "nullable": true
+          },
+          "username": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "password": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "fullName": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "email": {
+            "minLength": 1,
+            "type": "string",
+            "format": "email"
+          },
+          "phoneNo": {
+            "minLength": 1,
+            "type": "string",
+            "format": "tel"
+          },
+          "role": {
+            "$ref": "#/components/schemas/UserRole"
+          },
+          "isActive": {
+            "type": "boolean"
           }
         },
         "additionalProperties": false
@@ -493,12 +540,27 @@
             "type": "string",
             "nullable": true
           },
-          "password": {
+          "role": {
+            "$ref": "#/components/schemas/UserRole"
+          },
+          "isActive": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "username": {
             "type": "string",
             "nullable": true
           }
         },
         "additionalProperties": false
+      },
+      "UserRole": {
+        "enum": [
+          0,
+          1
+        ],
+        "type": "integer",
+        "format": "int32"
       },
       "WarehouseExportBookDto": {
         "type": "object",

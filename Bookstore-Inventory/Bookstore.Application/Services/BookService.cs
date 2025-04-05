@@ -5,6 +5,7 @@ using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace Bookstore.Application.Services
@@ -51,6 +52,30 @@ namespace Bookstore.Application.Services
                 Quantity = book.Quantity
             };
         }
+        public async Task<List<BookDto>> GetBooksByCategoryAsync(string categoryId)
+        {
+            if (string.IsNullOrEmpty(categoryId))
+                throw new ArgumentException("CategoryId không được để trống");
+
+            // Log để kiểm tra categoryId
+            Console.WriteLine($"Fetching books for category: {categoryId}");
+
+            // Lấy danh sách sách thuộc categoryId từ cơ sở dữ liệu
+            var book = await _booksCollection
+                .Find(book => book.CategoryId == categoryId)
+                .ToListAsync();
+
+            return book.Select(book => new BookDto
+            {
+                BookId = book.BookId,
+                Title = book.Title,
+                Author = book.Author,
+                Price = book.Price,
+                Quantity = book.Quantity,
+                CategoryId = book.CategoryId
+            }).ToList();
+        }
+
 
         public async Task<BookDto> CreateBookAsync(BookCreateDto bookCreateDto)
         {

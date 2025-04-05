@@ -152,6 +152,19 @@ app.MapPost("/api/auth/login", async (LoginRequestDto loginRequest, IAuthService
         return Results.BadRequest(new { message = ex.Message });
     }
 });
+// Endpoint để tạo user mới
+app.MapPost("/api/users", async (CreateUserDto newUserDto, IAuthService authService) =>
+{
+    try
+    {
+        var createdUser = await authService.CreateUserAsync(newUserDto);
+        return Results.Created($"/users/{createdUser.UserId}", createdUser); // Trả về status 201 với đường dẫn của user vừa tạo
+    }
+    catch (Exception ex)
+    {
+        return Results.BadRequest(ex.Message); // Trả về lỗi nếu có lỗi
+    }
+});
 
 app.MapGet("/api/auth/users", async (IAuthService authService) =>
 {

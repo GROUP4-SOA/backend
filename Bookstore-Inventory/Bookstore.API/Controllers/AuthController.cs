@@ -1,5 +1,6 @@
 ﻿using Bookstore.Application.Dtos;
 using Bookstore.Application.Interfaces.Services;
+using Bookstore.Application.Services;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
@@ -150,5 +151,33 @@ namespace Bookstore.API.Controllers
                 return StatusCode(500, new { message = "Lỗi hệ thống", error = ex.Message });
             }
         }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateUser([FromBody] CreateUserDto newUserDto)
+        {
+            if (!ModelState.IsValid)
+            {
+                Console.WriteLine("ModelState is invalid.");
+                return BadRequest(ModelState);
+            }
+
+            try
+            {
+                var createdUser = await _authService.CreateUserAsync(newUserDto); // Passing CreateUserDto
+                Console.WriteLine("User created successfully.");
+                return Ok(createdUser);
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Lỗi khi tạo user: {ex.Message}");
+                return StatusCode(500, new { message = "Đã xảy ra lỗi khi tạo user.", error = ex.Message });
+            }
+        }
+
+
     }
 }

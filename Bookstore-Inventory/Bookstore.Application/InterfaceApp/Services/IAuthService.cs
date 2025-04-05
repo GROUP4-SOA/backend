@@ -9,7 +9,7 @@ namespace Bookstore.Application.Interfaces.Services
         Task<UserDto> UpdateUserAsync(string userId, UpdateUserDto updateUser, string currentUsername);
         Task DeactivateUserAsync(string userId, string currentUserId);
         Task<List<UserDto>> GetAllUsersAsync(string currentUserId);
-
+        Task<UserDto> CreateUserAsync(CreateUserDto newUserDto);
 
     }
 }

@@ -8,6 +8,7 @@ namespace Bookstore.Infrastructure.Interfaces.Repositories
     {
         Task<List<Book>> GetAllBooksAsync();
         Task<Book> GetBookByIdAsync(string id);
+        Task<List<Book>> GetBooksByCategoryAsync(string categoryId);
         Task AddBookAsync(Book book);
         Task UpdateBookAsync(Book book);
         Task DeleteBookAsync(string id);

@@ -50,26 +50,31 @@ namespace Bookstore.Application.Services
             // Thay đổi cách tìm user dựa trên UserId string
             var filter = Builders<User>.Filter.Eq(u => u.UserId, userId);
             var targetUser = await _usersCollection.Find(filter).FirstOrDefaultAsync();
-        
+
             if (targetUser == null)
             {
                 throw new KeyNotFoundException("Người dùng cần cập nhật không tồn tại.");
             }
 
+            // Tạo một định nghĩa cập nhật mới, bao gồm cả Role, IsActive và Username
             var updateDefinition = Builders<User>.Update
                 .Set(u => u.FullName, updateUser.FullName)
                 .Set(u => u.Email, updateUser.Email)
-                .Set(u => u.PhoneNo, updateUser.PhoneNo);
+                .Set(u => u.PhoneNo, updateUser.PhoneNo)
+                .Set(u => u.Role, updateUser.Role)  // Cập nhật Role
+                .Set(u => u.IsActive, updateUser.IsActive)  // Cập nhật IsActive
+                .Set(u => u.Username, updateUser.Username);  // Cập nhật Username
 
-            if (!string.IsNullOrEmpty(updateUser.Password))
-            {
-                updateDefinition = updateDefinition.Set(u => u.Password, updateUser.Password);
-            }
-
+            // Cập nhật người dùng trong cơ sở dữ liệu
             await _usersCollection.UpdateOneAsync(filter, updateDefinition);
+
+            // Lấy lại người dùng sau khi cập nhật
             var updatedUser = await _usersCollection.Find(filter).FirstOrDefaultAsync();
+
+            // Chuyển đổi sang DTO và trả về
             return MapToUserDto(updatedUser);
         }
+
 
         public async Task<List<UserDto>> GetAllUsersAsync(string? currentUserId)
         {
@@ -78,6 +83,32 @@ namespace Bookstore.Application.Services
             var users = await _usersCollection.Find(_ => true).ToListAsync();
             return users.Select(MapToUserDto).ToList();
         }
+        public async Task<UserDto> CreateUserAsync(CreateUserDto newUserDto)
+        {
+            var existingUser = await _usersCollection
+                .Find(u => u.UserId == newUserDto.UserId)
+                .FirstOrDefaultAsync();
+
+            if (existingUser != null)
+            {
+                throw new ArgumentException("Tên đăng nhập đã tồn tại.");
+            }
+
+            var newUser = new User
+            {
+                Username = newUserDto.Username,
+                Password = newUserDto.Password,
+                FullName = newUserDto.FullName,
+                Email = newUserDto.Email,
+                PhoneNo = newUserDto.PhoneNo,
+                Role = newUserDto.Role,
+                IsActive = newUserDto.IsActive
+            };
+
+            await _usersCollection.InsertOneAsync(newUser);
+            return MapToUserDto(newUser);
+        }
+
 
 
         private UserDto MapToUserDto(User user)

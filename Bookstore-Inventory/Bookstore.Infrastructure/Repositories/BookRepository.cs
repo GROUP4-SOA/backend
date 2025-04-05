@@ -21,6 +21,9 @@ namespace Bookstore.Infrastructure.Repositories
         public async Task<Book> GetBookByIdAsync(string id) =>
             await _books.Find(book => book.BookId == id).FirstOrDefaultAsync();
 
+        public async Task<List<Book>> GetBooksByCategoryAsync(string categoryId) =>
+            await _books.Find(book => book.CategoryId == categoryId).ToListAsync();
+
         public async Task AddBookAsync(Book book) =>
             await _books.InsertOneAsync(book);
 

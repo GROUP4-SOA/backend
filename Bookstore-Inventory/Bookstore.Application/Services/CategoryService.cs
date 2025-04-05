@@ -53,8 +53,7 @@ namespace Bookstore.Application.Services
             var category = new Category
             {
                 // Id sẽ được tạo tự động bởi MongoDB
-                Name = categoryCreateDto.Name,
-                Description = categoryCreateDto.Description
+                Name = categoryCreateDto.Name
             };
 
             await _categoriesCollection.InsertOneAsync(category);
@@ -78,7 +77,6 @@ namespace Bookstore.Application.Services
 
             // Không thay đổi Id vì đó là khóa chính
             category.Name = categoryUpdateDto.Name;
-            category.Description = categoryUpdateDto.Description;
 
             var filter = Builders<Category>.Filter.Eq(c => c.Id, categoryId);
             await _categoriesCollection.ReplaceOneAsync(filter, category);

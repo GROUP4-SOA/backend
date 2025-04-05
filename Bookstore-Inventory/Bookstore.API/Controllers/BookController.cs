@@ -49,6 +49,27 @@ namespace Bookstore.API.Controllers
             }
         }
 
+        // API để lấy sách theo categoryId
+        [HttpGet("category/{categoryId}")]
+        public async Task<IActionResult> GetBooksByCategory(string categoryId)
+        {
+            try
+            {
+                var books = await _bookService.GetBooksByCategoryAsync(categoryId);
+                return Ok(books);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new ProblemDetails
+                {
+                    Status = 500,
+                    Title = "Đã xảy ra lỗi khi lấy sách theo danh mục",
+                    Detail = ex.Message
+                });
+            }
+        }
+
+
         [HttpPost]
         public async Task<IActionResult> CreateBook([FromBody] BookCreateDto bookCreateDto)
         {
