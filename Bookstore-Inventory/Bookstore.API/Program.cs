@@ -122,8 +122,6 @@ app.MapGet("/api/books/category/{categoryId}", async (string categoryId, BookSer
     }
 });
 
-
-
 // Category
 app.MapGet("/api/categories", async (CategoryService service) =>
 {
